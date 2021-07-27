@@ -1,0 +1,1135 @@
+[
+  {
+    "name": "SEO - Page Titles",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Powered by Plug in SEO Plus"
+      },
+      {
+        "type": "paragraph",
+        "content": "Page titles are displayed in the web browser tab and as the blue underlined link text in search engines"
+      },
+      {
+        "type": "paragraph",
+        "content": "[Page titles help](https:\/\/help.pluginuseful.com\/hc\/en-us\/articles\/209539509-Page-titles)"
+      },
+      {
+        "type": "text",
+        "id": "pluginseo_pageTitleTruncateChars",
+        "label": "Maximum length (characters)",
+        "default": "999"
+      },
+      {
+        "type": "header",
+        "content": "Appender"
+      },
+      {
+        "type": "checkbox",
+        "id": "pluginseo_pageTitleEnableAppender",
+        "label": "Append to short page titles?",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "pluginseo_pageTitleAppenderTemplate",
+        "label": "Append",
+        "default": "| %% shop.name %%"
+      },
+      {
+        "type": "text",
+        "id": "pluginseo_pageTitleAppenderTargetLength",
+        "label": "Target length",
+        "default": "70"
+      },
+      {
+        "type": "header",
+        "content": "Page Title Templates"
+      },
+      {
+        "type": "checkbox",
+        "id": "pluginseo_pageTitleTemplateApplyToAll",
+        "label": "Also apply templates to manually entered page titles?",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "pluginseo_pageTitleDefaultTemplate",
+        "label": "Default",
+        "default": "%% page_title %%",
+        "info": "this template will apply to all blank page types below"
+      },
+      {
+        "type": "text",
+        "id": "pluginseo_pageTitleIndexTemplate",
+        "label": "Homepage"
+      },
+      {
+        "type": "text",
+        "id": "pluginseo_pageTitlePageTemplate",
+        "label": "Page",
+        "default": "%% page_title %%"
+      },
+      {
+        "type": "text",
+        "id": "pluginseo_pageTitleSearchTemplate",
+        "label": "Search",
+        "default": "Shop %% search.terms %% at %% shop.name %%"
+      },
+      {
+        "type": "text",
+        "id": "pluginseo_pageTitleProductTemplate",
+        "label": "Product",
+        "default": "%% product.title %%%% product.selected_variant.title || prepend_not_empty: ' ' %%"
+      },
+      {
+        "type": "text",
+        "id": "pluginseo_pageTitleCollectionTemplate",
+        "label": "Collection",
+        "default": "Shop %% current_tags || join: ', ' || append_not_empty: ' ' %%%% collection.title || escape %% at %% shop.name %%"
+      },
+      {
+        "type": "text",
+        "id": "pluginseo_pageTitleCatalogTemplate",
+        "label": "Catalog Page",
+        "default": "Browse %% collection.products || map: 'collections' || map: 'title' || uniq || take: '5' || join: ', ' || escape || remove: 'Home page, ' || remove: 'home page, '  || remove: 'Home page' || remove: 'Home page'  %% at %% shop.name %%"
+      },
+      {
+        "type": "text",
+        "id": "pluginseo_pageTitleBlogTemplate",
+        "label": "Blog",
+        "default": "%% shop.name %% %% blog.title %%%% blog.all_tags || take: '5' || join: ', ' || prepend_not_empty: ' blog: ' || append_not_empty: ' and more' %%"
+      },
+      {
+        "type": "text",
+        "id": "pluginseo_pageTitleArticleTemplate",
+        "label": "Article",
+        "default": "%% article.title %%%% article.tags || take: '3' || join: ', ' || prepend_not_empty: ' | ' || append_not_empty: ' and more' %% | %% shop.name %% %% blog.title %% blog"
+      },
+      {
+        "type": "text",
+        "id": "pluginseo_pageTitle404Template",
+        "label": "404",
+        "default": "404: Page Not Found - %% shop.name %%"
+      }
+    ]
+  },
+  {
+    "name": "SEO - Meta Descriptions",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Powered by Plug in SEO Plus"
+      },
+      {
+        "type": "paragraph",
+        "content": "Meta descriptions are displayed as the paragraph text in search engines"
+      },
+      {
+        "type": "paragraph",
+        "content": "[Meta descriptions help](https:\/\/help.pluginuseful.com\/hc\/en-us\/articles\/209542049-Meta-descriptions)"
+      },
+      {
+        "type": "text",
+        "id": "pluginseo_metaDescriptionTruncateChars",
+        "label": "Maximum length (characters)",
+        "default": "170"
+      },
+      {
+        "type": "header",
+        "content": "Meta Description Templates"
+      },
+      {
+        "type": "checkbox",
+        "id": "pluginseo_metaDescriptionTemplateApplyToAll",
+        "label": "Also apply templates to manually entered meta descriptions?",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "pluginseo_metaDescriptionDefaultTemplate",
+        "label": "Default",
+        "default": "%% page_description %%",
+        "info": "this template will apply to all blank page types below"
+      },
+      {
+        "type": "textarea",
+        "id": "pluginseo_metaDescriptionIndexTemplate",
+        "label": "Homepage"
+      },
+      {
+        "type": "textarea",
+        "id": "pluginseo_metaDescriptionPageTemplate",
+        "label": "Page",
+        "default": "%% page.content || strip_newlines || strip_html || escape || append_not_empty: '.' %% Visit %% shop.name %%"
+      },
+      {
+        "type": "textarea",
+        "id": "pluginseo_metaDescriptionSearchTemplate",
+        "label": "Search",
+        "default": "Find %% search.terms || default: 'it' %% here%% search.results || map: 'title' || take: '3' || join: ', ' || prepend_not_empty: ' including ' || append_not_empty: ' and more' %% at %% shop.name %%"
+      },
+      {
+        "type": "textarea",
+        "id": "pluginseo_metaDescriptionProductTemplate",
+        "label": "Product",
+        "default": "%% product.description || strip_newlines || replace: '.,', ',' || strip_html || escape %%"
+      },
+      {
+        "type": "textarea",
+        "id": "pluginseo_metaDescriptionCollectionTemplate",
+        "label": "Collection",
+        "default": "%% collection.all_tags || take: '3' || join: ', ' || prepend_not_empty: 'Shop ' || append_not_empty: ' and more ' %%%% collection.title || escape %% at %% shop.name %% %% collection.description || strip_html || strip_newlines || escape || strip %%"
+      },
+      {
+        "type": "textarea",
+        "id": "pluginseo_metaDescriptionCatalogTemplate",
+        "label": "Catalog Page",
+        "default": "Discover %% collection.products || map: 'title' || uniq || take: '3' || join: ', ' || escape %% and more."
+      },
+      {
+        "type": "textarea",
+        "id": "pluginseo_metaDescriptionBlogTemplate",
+        "label": "Blog",
+        "default": "%% blog.articles || map: 'title' || take: '3' || join: ', ' || prepend_not_empty: 'Read about ' || append_not_empty: ' and more on the '%%%% shop.name %% %% blog.title %% blog."
+      },
+      {
+        "type": "textarea",
+        "id": "pluginseo_metaDescriptionArticleTemplate",
+        "label": "Article",
+        "default": "%% article.excerpt_or_content || strip_newlines || strip_html || escape %%%% article.tags || take: '6' || join: ', ' || prepend_not_empty: ' Read about ' || append_not_empty: ' and more' %% %% article.title %% on the %% shop.name %% %% blog.title %% blog"
+      },
+      {
+        "type": "textarea",
+        "id": "pluginseo_metaDescription404Template",
+        "label": "404",
+        "default": "The page you requested can't be found, please visit %% shop.domain %% instead"
+      }
+    ]
+  },
+  {
+    "name": "SEO - Structured Data",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Powered by Plug in SEO Plus"
+      },
+      {
+        "type": "paragraph",
+        "content": "Structured data allows search engines to better understand the content of your pages, enabling your shop to be displayed in more prominent ways"
+      },
+      {
+        "type": "paragraph",
+        "content": "[Structured data help](https:\/\/help.pluginuseful.com\/article\/1938-how-do-i-set-up-my-json-ld-structured-data)"
+      },
+      {
+        "type": "image",
+        "id": "pluginseo_structuredDataLogo.png",
+        "label": "Logo"
+      },
+      {
+        "type": "checkbox",
+        "id": "pluginseo_structuredDataDisplayLogo",
+        "label": "Include logo?",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Social Profile Links"
+      },
+      {
+        "type": "textarea",
+        "id": "pluginseo_structuredDataSocialProfileLinks",
+        "label": "Social profile links - one URL per line"
+      },
+      {
+        "type": "header",
+        "content": "Reviews"
+      },
+      {
+        "type": "select",
+        "id": "pluginseo_structuredDataReviewApp",
+        "label": "Review App",
+        "default": "autodetect",
+        "options": [
+          {
+            "value": "autodetect",
+            "label": "Auto-Detect"
+          },
+          {
+            "value": "judgeme",
+            "label": "Judge.me"
+          },
+          {
+            "value": "loox",
+            "label": "Loox"
+          },
+          {
+            "value": "opinew",
+            "label": "Opinew"
+          },
+          {
+            "value": "shopify_product_reviews",
+            "label": "Shopify Product Reviews"
+          },
+          {
+            "value": "stamped",
+            "label": "Stamped.io"
+          },
+          {
+            "value": "rivyo",
+            "label": "Rivyo"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "theme_info",
+    "theme_name": "Warehouse",
+    "theme_author": "Maestrooo",
+    "theme_version": "1.6.5",
+    "theme_documentation_url": "http:\/\/support.maestrooo.com\/",
+    "theme_support_url": "https:\/\/support.maestrooo.com\/article\/203-contact-us"
+  },
+  {
+    "name": "Delivery estimation",
+    "settings": [
+      {
+        "type": "text",
+        "id": "service_zip_json_file",
+        "label": "Delivery date json",
+        "info": "Please upload JSON file, convert CSV to JSON using https:\/\/www.csvjson.com\/csv2json"
+      }
+    ]
+  },
+  {
+    "name": "Image loading",
+    "settings": [
+      {
+        "type": "checkbox",
+        "label": "Enable blur loading",
+        "id": "preload_src"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading",
+        "default": "#1c1b1b"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Body text",
+        "default": "#677279"
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Accent",
+        "default": "#00badb"
+      },
+      {
+        "type": "color",
+        "id": "secondary_accent_color",
+        "label": "Secondary accent",
+        "default": "#00badb"
+      },
+      {
+        "type": "color",
+        "id": "link_color",
+        "label": "Link color",
+        "default": "#838383"
+      },
+      {
+        "type": "color",
+        "id": "border_color",
+        "label": "Border",
+        "default": "#e1e3e4"
+      },
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Background",
+        "default": "#f3f5f6"
+      },
+      {
+        "type": "color",
+        "id": "secondary_background",
+        "label": "Secondary background",
+        "info": "For best results, secondary background must not be too far from primary background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "error_color",
+        "label": "Error messages",
+        "default": "#ff0000"
+      },
+      {
+        "type": "color",
+        "id": "success_color",
+        "label": "Success messages",
+        "default": "#00aa00"
+      },
+      {
+        "type": "header",
+        "content": "Price color"
+      },
+      {
+        "type": "color",
+        "id": "price_color",
+        "label": "Price color",
+        "default": "#222"
+      },
+      {
+        "type": "color",
+        "id": "comp_price_color",
+        "label": "Compare price color",
+        "default": "#7d7d7d"
+      },
+      {
+        "type": "color",
+        "id": "in_stock_color",
+        "label": "In stock color",
+        "default": "#3d8c41"
+      },
+      {
+        "type": "header",
+        "content": "Primary button"
+      },
+      {
+        "type": "color",
+        "id": "primary_button_background",
+        "label": "Background",
+        "default": "#00badb"
+      },
+      {
+        "type": "color",
+        "id": "primary_button_text_color",
+        "label": "Text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Secondary button"
+      },
+      {
+        "type": "color",
+        "id": "secondary_button_background",
+        "label": "Background",
+        "default": "#1e2d7d"
+      },
+      {
+        "type": "color",
+        "id": "secondary_button_text_color",
+        "label": "Text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Header"
+      },
+      {
+        "type": "color",
+        "id": "header_background",
+        "label": "Background",
+        "default": "#1e2d7d"
+      },
+      {
+        "type": "color",
+        "id": "header_text_color",
+        "label": "Text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "header_light_text_color",
+        "label": "Light text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "header_accent_color",
+        "label": "Accent",
+        "default": "#00badb"
+      },
+      {
+        "type": "color",
+        "id": "search_bar_border_color",
+        "label": "search bar border color",
+        "default": "#cfcfcf"
+      },
+      {
+        "type": "header",
+        "content": "Product"
+      },
+      {
+        "type": "color",
+        "id": "product_on_sale_accent",
+        "label": "On sale accent",
+        "default": "#ee0000"
+      },
+      {
+        "type": "color",
+        "id": "product_in_stock_color",
+        "label": "In stock",
+        "default": "#00a500"
+      },
+      {
+        "type": "color",
+        "id": "product_low_stock_color",
+        "label": "Low stock",
+        "default": "#ee0000"
+      },
+      {
+        "type": "color",
+        "id": "product_sold_out_color",
+        "label": "Sold out",
+        "default": "#8a9297"
+      },
+      {
+        "type": "color",
+        "id": "product_label_1_background",
+        "label": "Custom label 1 background",
+        "default": "#0774d7"
+      },
+      {
+        "type": "color",
+        "id": "product_label_2_background",
+        "label": "Custom label 2 background",
+        "default": "#00a500"
+      },
+      {
+        "type": "color",
+        "id": "product_star_color",
+        "label": "Review star",
+        "default": "#ffbd00"
+      },
+      {
+        "type": "color",
+        "id": "product_first_accent_color",
+        "label": "Product first accent color",
+        "default": "#a287be"
+      },
+      {
+        "type": "color",
+        "id": "product_second_accent_color",
+        "label": "Product second accent color",
+        "default": "#7f7f7f"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "range",
+        "id": "base_text_font_size",
+        "label": "Base size",
+        "info": "All texts, including headings, will scale accordingly.",
+        "min": 14,
+        "max": 17,
+        "unit": "px",
+        "default": 15
+      },
+      {
+        "type": "header",
+        "content": "Headings"
+      },
+      {
+        "type": "font_picker",
+        "id": "heading_font",
+        "label": "Font",
+        "default": "helvetica_n4"
+      },
+      {
+        "type": "header",
+        "content": "Body text"
+      },
+      {
+        "type": "font_picker",
+        "id": "text_font",
+        "label": "Font",
+        "default": "helvetica_n4"
+      },
+      {
+        "type": "checkbox",
+        "id": "underline_links",
+        "label": "Underline links",
+        "info": "Only applies to links defined in rich text fields.",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Animation",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "animation_image_zoom",
+        "label": "Enable image zoom on hover",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Currency conversion",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "If you have the multi-currency feature enabled in your Shopify admin, the settings below will be disabled and will not affect your store. [Learn more about multi-currency here](https:\/\/help.shopify.com\/en\/manual\/payments\/shopify-payments\/multi-currency)"
+      },
+      {
+        "type": "checkbox",
+        "id": "currency_conversion_enabled",
+        "label": "Enable currency conversion",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "currency_conversion_round_amounts",
+        "label": "Round converted amounts",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "currency_conversion_supported_currencies",
+        "label": "Supported currencies",
+        "info": "List of currencies to display. You must separate each currencies by an empty space, and use the ISO 4217 3-letter code. Example: USD CAD EUR. All the possible values are [listed here](http:\/\/bit.ly\/1C4cZ3w).",
+        "default": "USD CAD EUR GBP"
+      },
+      {
+        "type": "select",
+        "id": "currency_conversion_money_format",
+        "label": "Money format",
+        "options": [
+          {
+            "value": "money_format",
+            "label": "Money ($10)"
+          },
+          {
+            "value": "money_with_currency_format",
+            "label": "Money with currency ($10 USD)"
+          }
+        ],
+        "default": "money_format"
+      }
+    ]
+  },
+  {
+    "name": "Search",
+    "settings": [
+      {
+        "type": "select",
+        "id": "search_mode",
+        "label": "Search only...",
+        "options": [
+          {
+            "value": "product",
+            "label": "Products only"
+          },
+          {
+            "value": "product,page",
+            "label": "Products and pages"
+          },
+          {
+            "value": "product,article",
+            "label": "Products and blog posts"
+          },
+          {
+            "value": "product,article,page",
+            "label": "Products, blog posts and pages"
+          }
+        ],
+        "default": "product,article"
+      }
+    ]
+  },
+  {
+    "name": "Products grid",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show vendor",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_secondary_image",
+        "label": "Show secondary image on hover",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_discount",
+        "label": "Show discount label",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "discount_mode",
+        "label": "Show discount as...",
+        "options": [
+          {
+            "value": "percentage",
+            "label": "Percentage"
+          },
+          {
+            "value": "saving",
+            "label": "Saving"
+          }
+        ],
+        "default": "saving"
+      },
+      {
+        "type": "select",
+        "id": "product_price_position",
+        "label": "Price position",
+        "options": [
+          {
+            "value": "before_title",
+            "label": "Before product title"
+          },
+          {
+            "value": "after_title",
+            "label": "After product title"
+          }
+        ],
+        "default": "after_title"
+      },
+      {
+        "type": "select",
+        "id": "product_image_size",
+        "label": "Product image size",
+        "options": [
+          {
+            "value": "natural",
+            "label": "Natural"
+          },
+          {
+            "value": "short",
+            "label": "Short (4:3)"
+          },
+          {
+            "value": "square",
+            "label": "Square (1:1)"
+          },
+          {
+            "value": "tall",
+            "label": "Tall (2:3)"
+          }
+        ],
+        "default": "natural"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_color_swatch",
+        "label": "Show color swatch",
+        "info": "Colors appear white? [Learn more](http:\/\/support.maestrooo.com\/article\/80-product-uploading-custom-color-for-color-swatch)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_inventory_quantity",
+        "label": "Show inventory",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "low_inventory_threshold",
+        "label": "Low inventory threshold",
+        "info": "Show inventory quantity in red when quantity is below the threshold. Choose 0 to always show in stock if available.",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 0
+      },
+      {
+        "type": "checkbox",
+        "id": "show_reviews_badge",
+        "label": "Show reviews badge",
+        "info": "You need to install [Shopify's free Product Reviews](https:\/\/apps.shopify.com\/product-reviews) app before enabling this option.",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          {
+            "value": "drawer",
+            "label": "Drawer"
+          },
+          {
+            "value": "page",
+            "label": "Page"
+          }
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "checkbox",
+        "label": "Enable add cart popup",
+        "id": "add_cart_popup",
+        "default": true,
+        "info": "This popup will show only on product page"
+      },
+      {
+        "type": "url",
+        "label": "Product popup url",
+        "id": "continue_shop_url",
+        "info": "This url is for continue shop button for cart popup"
+      },
+      {
+        "type": "url",
+        "id": "cart_empty_button_link",
+        "label": "Empty button link",
+        "default": "\/collections\/all"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_free_shipping_threshold",
+        "label": "Show free shipping minimum amount",
+        "info": "Make sure that you have properly configured your [shipping rates](\/admin\/settings\/shipping).",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "cart_free_shipping_threshold",
+        "label": "Free shipping minimum amount",
+        "info": "Only write a number, no letters. Wording can be changed in [language settings](https:\/\/support.maestrooo.com\/article\/55-changing-themes-wording).",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Share image",
+        "info": "This image is used when you share pages such as home page. For product, collection or article pages, the featured image will be used instead."
+      },
+      {
+        "type": "header",
+        "content": "Accounts"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "info": "https:\/\/www.facebook.com\/shopify",
+        "label": "Facebook"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter",
+        "info": "https:\/\/twitter.com\/shopify",
+        "label": "Twitter"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "info": "https:\/\/www.pinterest.com\/shopify",
+        "label": "Pinterest"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "info": "https:\/\/instagram.com\/shopify",
+        "label": "Instagram"
+      },
+      {
+        "type": "text",
+        "id": "social_whatsapp",
+        "info": "https:\/\/web.whatsapp.com",
+        "label": "Whatsapp"
+      },
+      {
+        "type": "text",
+        "id": "social_vimeo",
+        "info": "https:\/\/vimeo.com\/shopify",
+        "label": "Vimeo"
+      },
+      {
+        "type": "text",
+        "id": "social_tumblr",
+        "info": "https:\/\/shopify.tumblr.com",
+        "label": "Tumblr"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube",
+        "info": "https:\/\/www.youtube.com\/user\/shopify",
+        "label": "YouTube"
+      },
+      {
+        "type": "text",
+        "id": "social_linkedin",
+        "info": "https:\/\/linkedin.com\/in\/shopify",
+        "label": "LinkedIn"
+      },
+      {
+        "type": "text",
+        "id": "social_snapchat",
+        "info": "https:\/\/snapchat.com\/add\/shopify",
+        "label": "Snapchat"
+      },
+      {
+        "type": "text",
+        "id": "social_fancy",
+        "info": "https:\/\/fancy.com\/Shopify",
+        "label": "Fancy"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Image",
+        "info": "48 x 48px .png recommended"
+      }
+    ]
+  },
+  {
+    "name": "Amp - Homepage",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Announcement Bar"
+      },
+      {
+        "type": "text",
+        "id": "announcement_message",
+        "label": "Announcement message",
+        "default": "SHOP ABOVE ₹1299 AND GET FREE DELIVERY!"
+      }
+    ]
+  },
+  {
+    "name": "Check devilery message",
+    "settings": [
+      {
+        "type": "text",
+        "id": "cod_available",
+        "label": "Cod available msg",
+        "default": "Delivery within 5-7 Working Days."
+      },
+      {
+        "type": "text",
+        "id": "cod_not_available",
+        "label": "Cod not available msg",
+        "default": "COD not Available"
+      },
+      {
+        "type": "text",
+        "id": "delivery_available",
+        "label": "Delivery available msg",
+        "default": "COD is available at your Pincode."
+      },
+      {
+        "type": "text",
+        "id": "delivery_not_available",
+        "label": "Delivery not available msg",
+        "default": "Prepaid not availbale"
+      },
+      {
+        "type": "text",
+        "id": "service_not_availbale",
+        "label": "Service not available msg",
+        "default": "Sorry. We don’t Available!"
+      },
+      {
+        "type": "text",
+        "id": "zip_empty_error_msg",
+        "label": "Empty zipcode message",
+        "default": "Please Enter a zipcode!"
+      }
+    ]
+  },
+  {
+    "name": "Customer account activation text",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_account_activation",
+        "label": "Enable account activation text",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "account_activation",
+        "label": "Text for account activation"
+      }
+    ]
+  },
+  {
+    "name": "Landing page",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "landing_page_logo",
+        "label": "landing page logo"
+      }
+    ]
+  },
+  {
+    "name": "Theme option for amp pages",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "amp_site_logo",
+        "label": "Select logo image"
+      },
+      {
+        "type": "image_picker",
+        "id": "youtube_icon",
+        "label": "Youtube icon"
+      },
+      {
+        "type": "url",
+        "id": "youtube_url",
+        "label": "Youtube url"
+      },
+      {
+        "type": "image_picker",
+        "id": "facebook_icon",
+        "label": "Facebook icon"
+      },
+      {
+        "type": "url",
+        "id": "facebook_url",
+        "label": "Facebook url"
+      },
+      {
+        "type": "image_picker",
+        "id": "whatsapp_icon",
+        "label": "Whatsapp icon"
+      },
+      {
+        "type": "url",
+        "id": "Whatsapp_url",
+        "label": "Whatsapp url"
+      },
+      {
+        "type": "header",
+        "content": "Footer copyright"
+      },
+      {
+        "type": "text",
+        "id": "copyright_text_line_1",
+        "label": "Copyright text line 1"
+      },
+      {
+        "type": "text",
+        "id": "copyright_text_line_2",
+        "label": "Copyright text line 2"
+      }
+    ]
+  },
+  {
+    "name": "Checkout Customization",
+    "settings": [
+      {
+        "id": "checkout_banner",
+        "label": "Prepaid banner image",
+        "type": "image_picker"
+      },
+      {
+        "id": "phone_field_error",
+        "label": "Enter error message for phone number field",
+        "type": "text",
+        "default": "Please enter your 10 digit Indian mobile number."
+      },
+      {
+        "id": "gst_error",
+        "label": "Enter error message for GST number field",
+        "type": "text",
+        "default": "GST number must be 15 alphanumeric."
+      },
+      {
+        "id": "company_error",
+        "label": "Enter error message for company name field",
+        "type": "text",
+        "default": "Please enter company name."
+      },
+      {
+        "id": "otp_instructions",
+        "label": "Enter OTP instructions",
+        "type": "richtext"
+      },
+      {
+        "id": "enter_otp_text",
+        "label": "Text message for enter OTP number",
+        "type": "richtext",
+        "default": "<p>Please enter OTP number you recieved on your mobile<\/p>"
+      },
+      {
+        "type": "header",
+        "content": "COD Hide"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_cod_outside_india",
+        "label": "Hide COD Outside India",
+        "default": true
+      },
+      {
+        "type": "paragraph",
+        "content": "COD Block States(India)"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_cod_for_states_india",
+        "label": "Hide COD for states",
+        "default": true
+      },
+      {
+        "type":"text",
+        "id":"cod_pincodes_url",
+        "label":"Pincodes file link",
+        "info":"Convert excel file into json from [here](https://beautifytools.com/excel-to-json-converter.php)"
+      },
+      {
+        "id": "india_cod_hide_states",
+        "label": "COD Exclusion States(India)",
+        "type": "textarea",
+        "default": "MH; MP; JK; DL; CG"
+      },
+      {
+        "id": "cod_hide_text",
+        "label": "COD hide text",
+        "type": "richtext",
+        "default": "<p>For selected country\/state COD service disabed<\/p>"
+      },
+      {
+        "type": "header",
+        "content": "Payment Step offer Banner"
+      },
+      {
+        "id": "paymentstep_offer_banner",
+        "label": "Banner",
+        "type": "image_picker"
+      }
+    ]
+  }
+]

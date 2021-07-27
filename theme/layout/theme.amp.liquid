@@ -1,0 +1,21 @@
+<!-- Theme Section Start -->
+<!doctype html>
+<html amp lang="en">
+<head>
+  {%- assign amp_page = true -%}
+  {% include 'head-amp' %}
+{% comment %} 
+{{ content_for_header }} 
+{% endcomment %} 
+</head>
+<body>  
+  <!-- Configure analytics to use gtag -->
+  <amp-analytics type="gtag" data-credentials="include">
+  </amp-analytics>
+
+  {% include 'header-amp' %}
+  {{ content_for_layout }}
+  {% include 'footer-amp' %}
+</body> 
+</html>
+<!-- Theme Section End --> 

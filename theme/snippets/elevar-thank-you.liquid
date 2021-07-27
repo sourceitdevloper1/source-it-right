@@ -1,0 +1,93 @@
+
+{% if first_time_accessed %}
+<script>
+  var elevarLineItems = []
+
+  window.dataLayer = window.dataLayer || [];
+
+  {% if customer %}
+  window.dataLayer.push({
+    "visitorId": "{{ customer.id | remove: "'" }}",
+    "CustomerId": "{{ customer.id | remove: "'" }}",
+    "CustomerEmail": "{{ customer.email }}",
+    "CustomerFirstName": "{{ customer.first_name }}",
+    "CustomerPhone": "{{ customer.default_address.phone }}",
+    "CustomerLastName": "{{ customer.last_name }}",
+    "CustomerCity": "{{ customer.default_address.city }}",
+    "CustomerZip": "{{ customer.default_address.zip }}",
+    "CustomerAddress1": "{{ customer.default_address.address1 }}",
+    "CustomerAddress2": "{{ customer.default_address.address2 }}",
+    "CustomerCountryCode": "{{ customer.default_address.country_code }}",
+    "CustomerProvince": "{{ customer.default_address.province }}",
+    "CustomerOrdersCount": "{{ customer.orders_count }}",
+    "CustomerTotalSpent": "{{ customer.total_spent | divided_by: 100 }}",
+  });
+  {% endif %}
+
+
+  elevarLineItems = {{ order.line_items | json }};
+
+  window.dataLayer.push({
+    "pageType": "purchase",
+    "event": "transactionComplete",
+    "ecommerce": {
+      "currencyCode": "{{ order.currency }}",
+      "purchase": {
+      "actionField": {
+      "id": "{{order.order_number}}",
+      "revenue": "{{total_price | times: 0.01}}",
+      "tax": "{{tax_price | times: 0.01}}",
+      "shipping": "{{shipping_price | times: 0.01}}",
+      "affiliation": "{{ shop.name }}",
+      "discountAmount": "{{ checkout.discounts_amount | money_without_currency | remove: ','  }}",
+      {% if order.discounts %}
+      "coupon": "{{ order.discounts[0].code }}",
+      {% endif %}
+    },
+    "products": elevarLineItems.map(function(item, idx) {
+
+      var divide_unit = 1;
+      item.product.tags = item.product.tags.split(", ");
+      item.product.tags.forEach(function(a){
+        if(a.startsWith("base_unit_min")){
+          divide_unit = a.replace("base_unit_min_", "");
+        }
+      })
+      divide_unit = parseInt(divide_unit);
+      console.log(divide_unit);
+      return {
+        "name": item.product.title,
+        "id": item.sku,
+        "productId": item.product.id,
+        "variantId": item.variant_id,
+        "shopifyId": item.product.id + "_" + item.variant_id,
+        "price": item.price * divide_unit,
+        "brand": item.vendor,
+        "category": item.product.product_type,
+        "variant": item.variant.title,
+        "quantity": item.quantity / divide_unit
+      }
+    })
+  }
+                        }
+                        });
+
+</script>
+{% endif %}
+<noscript>
+  <iframe src='https://www.googletagmanager.com/ns.html?id=GTM-M48JHZZ' height='0' width='0' style='display:none;visibility:hidden'></iframe>
+</noscript>
+
+<!-- Google Tag Manager -->
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":
+                                                new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src=
+        "https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);
+                      })(window,document,"script","dataLayer","GTM-M48JHZZ");
+</script>
+<!-- End Google Tag Manager -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+</script>
+

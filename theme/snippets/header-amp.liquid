@@ -1,0 +1,63 @@
+{% assign cart_count = 0 %}
+<section data-section-id="{{ section.id }}" data-section-type="header" id="header_content">
+ <header class="header" role="banner">
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar_content">
+        <span class="bebas-nue">{{ settings.announcement_message }} </span>
+      </div>
+    </div>
+  </div>
+  <div class="header_content">
+    <div class="header_data flex_view_xs middle">
+      <div class="site_logo icon_wrap">
+        <a href="{{ routes.root_url }}" title="site logo" class="logo_image">
+          {%- assign src_name = settings.amp_site_logo  -%}
+          {%- assign src_alt = settings.amp_site_logo.alt | escape -%}
+          {% assign amp_width = 150 %}
+          {% assign amp_height = 40 %}
+          {% assign src_class = 'menu_icon' %}
+          {% include 'amp-srcset' %}  
+        </a>
+      </div>
+      <div class="header_icons icon_wrap">
+        <div class="icon col-xs-3">
+          <a href="tel:+918141022000">
+            {%- assign src_name = 'phone.svg' -%}
+            {%- assign src_alt = "Phone Icon" -%}
+            {% assign amp_width = 50 %}
+            {% assign amp_height = 50 %}
+            {% assign svg_image = true %}
+            {% include 'amp-srcset' %}  
+          </a>
+        </div>
+        <div class="icon col-xs-3">
+          <a href="/search">
+            {%- assign src_name = 'Asset_1search.svg' -%}
+            {%- assign src_alt = "Search Icon" -%}
+            {% assign amp_width = 50 %}
+            {% assign amp_height = 50 %}
+            {% assign svg_image = true %}
+            {% include 'amp-srcset' %}
+          </a>
+        </div>
+        <div class="icon col-xs-3">
+          <a href="/cart">
+            {%- assign src_name = 'supermarket.svg' -%}
+            {%- assign src_alt = "Cart Icon" -%}
+            {% assign amp_width = 50 %}
+            {% assign amp_height = 50 %}
+            {% assign svg_image = true %}
+            {% include 'amp-srcset' %}
+
+            {% for item in cart.items %}
+            {% assign cart_count = cart_count | plus:1 %}
+            {% endfor %}
+            <span class="header__cart-count">{{ cart_count }}</span>
+          </a> 
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+</section>

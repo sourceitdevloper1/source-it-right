@@ -1,0 +1,42 @@
+{% assign base_unit_min = 1 %}
+{% assign display_unit = '' %}
+{% assign inStock = '' %}
+
+{% for tag in product.tags %}
+{% if tag contains 'base_unit_min' %}
+{% assign base_unit_min = tag | replace:'base_unit_min_' | plus: 0 %}
+{% elsif tag contains 'display_unit' %}
+{% assign display_unit = tag | replace:'display_unit_' %}
+{% elsif tag contains 'base_unit_' %}
+{% assign base_unit = tag | replace:'base_unit_' %}
+{% endif %}
+
+{% endfor %}
+ 
+{% assign new_price = product.selected_or_first_available_variant.price | times:base_unit_min %}
+{% assign new_comp_price = product.selected_or_first_available_variant.compare_at_price | times:base_unit_min %}
+
+
+{% assign display_base_msg = '' %}
+{% if display_unit == 'meter' %}
+{% assign display_base_msg = display_unit %}
+{% elsif display_unit == 'piece' %}
+
+{% assign piece_text = 'piece of Meter' %}
+{% for tag in product.tags %}
+  {% assign unit_tag = tag | slice: 0, 5 %}
+  {% if unit_tag ==  "unit_"%}
+    {% assign piece_text = tag | remove: 'unit_' %}
+  {% endif %}
+{% endfor %}
+
+{% assign display_base_msg = piece_text %}
+{% endif %}
+
+{% assign inStock = product.first_available_variant.inventory_quantity | divided_by:base_unit_min %}
+
+ {% assign variantquantity = selected_variant.inventory_quantity | plus: 0 %}
+{% assign selectedvariantavailability = false %}
+{%- if variantquantity >= base_unit_min -%}
+{% assign selectedvariantavailability = true %}
+{% endif %}

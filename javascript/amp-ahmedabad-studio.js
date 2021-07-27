@@ -1,0 +1,1 @@
+import scss from '../scss/amp-ahmedabad-studio.scss';

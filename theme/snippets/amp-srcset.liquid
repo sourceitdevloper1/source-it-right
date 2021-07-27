@@ -1,0 +1,8 @@
+{% comment %} For AMP website{% endcomment %}
+  {% if svg_image %}
+    <amp-img src="{{ src_name | file_url }}" class="{{ src_class }}" width="{{amp_width}}" height="{{amp_height}}" layout="responsive" alt="{{src_alt}}"></amp-img> 
+  {% elsif file_url%}
+    <amp-img src="{{ src_name | file_img_url:"200x" }}" class="{{ src_class }}" width="{{amp_width}}" height="{{amp_height}}" layout="responsive" alt="{{src_alt}}"></amp-img> 
+  {% else %}
+    <amp-img src="{{ src_name | img_url:'300x'}}" width="{{amp_width}}" class="{{ src_class }}" height="{{amp_height}}" layout="responsive" alt="{{src_alt}}"></amp-img>
+  {% endif %}

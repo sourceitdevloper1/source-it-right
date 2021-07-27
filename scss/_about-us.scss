@@ -1,0 +1,118 @@
+#about-us-page{
+  margin: 15px 0 20px 0;
+  @media(max-width: 768px){
+    margin:0;
+    border-top: 1px solid #ccc;
+  }
+  .main-title{
+    text-align: center;
+    font-size: 50px;
+  }
+  .banner-wrapper{
+    .text-wrapper{
+      position: relative;
+      .banner-text{
+        position: absolute;
+        @include transform(translate(-50%, -50%));  
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        text-align: center;
+        .title{
+          font-size: 40px;
+          color: #fff;
+          @media(max-width: 1024px){
+            font-size: 50px;
+            line-height: 1.2;
+          }
+        }
+      }
+    }
+  }
+  .middle-text{
+    width: 81%;
+    margin: 35px auto;
+    @media(max-width: 1024px){
+      width: 100%;
+    }
+    p{
+      text-align: center;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+  }
+  .our-team-section{
+    background: #faf5f1;
+    .wrap-div{
+      padding: 5% 10%;
+      @media(max-width: 1024px){
+        padding: 3% 4%;
+      }
+    }
+    .text-section{
+      width: 50%;
+      display: inline-block;
+      vertical-align: middle;
+      @media(max-width: 1024px){
+        width: 100%;
+      }
+      .team-title{
+        text-align: center;
+        font-size: 30px;
+        @media(max-width: 1024px){
+          font-size: 40px;
+        }
+      }
+      .team-desc{
+        font-size: 12px;
+        text-align: center;
+        width: 77%;
+        margin: 0 auto;
+        @media(max-width: 1024px){
+          width: 100%;
+        }
+      }
+    }
+    .image-section{
+      width: 49%;
+      display: inline-block;
+      vertical-align: middle;
+      @media(max-width: 1024px){
+        width: 100%;
+        display: block;
+        margin:20px 0;
+      }
+    }
+  } 
+
+  .value-we-create{
+    text-align: center;
+    margin: 0px auto;
+    margin-top: 20px;
+    .wrap-div{
+      padding: 10px 60px;
+      @media(max-width: 767px){
+        padding: 0;
+      }
+    }
+    .title{
+      font-size: 30px;
+      @media(max-width: 767px){
+        font-size: 41px;
+        color: #000;
+      }
+    }
+    .value-text{
+      margin-bottom: 8px;
+      @media(max-width: 767px){
+        margin-bottom: 20px;
+      }
+      strong{
+        font-size: 14px;
+      }
+      p{
+        font-size: 13px;
+      }
+    }
+  }
+}

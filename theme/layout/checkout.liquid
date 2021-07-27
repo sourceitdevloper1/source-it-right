@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+  <meta name="referrer" content="origin">
+
+  <title>{{ page_title }}</title>
+
+  {{ content_for_header }}
+
+  {{ checkout_stylesheets }}
+  {{ checkout_scripts }}
+  {% include 'elevar-head' %}
+
+  <style >
+    .hide {
+      display: none !important;
+    }
+    .cod-warn-text{color: red;padding-top: 0;}
+    .checkout-offer-banner {margin: 15px 0 0;}
+    .checkout-offer-banner img {max-width: 100%;max-height: 250px;display: block;width: 100%;object-fit: cover;height: auto;object-position: center;}
+  </style>
+</head>
+
+<body>
+  {% include 'elevar-checkout-end' %}
+  {{ skip_to_content_link }}
+
+  <header class="banner" data-header role="banner">
+    <div class="wrap">
+      {{ content_for_logo }}
+    </div>
+  </header>
+
+  {{ order_summary_toggle }}
+  <div class="content" data-content>
+    <div class="wrap">
+      <div class="main">
+        <header class="main__header" role="banner">
+          {{ content_for_logo }}
+          {{ breadcrumb }}
+          {{ alternative_payment_methods }}
+        </header>
+        <main class="main__content" role="main">
+          {{ content_for_layout }}
+        </main>
+        <footer class="main__footer" role="contentinfo">
+          {{ content_for_footer }}
+        </footer>
+      </div>
+      <aside class="sidebar" role="complementary">
+        <div class="sidebar__header">
+          {{ content_for_logo }}
+        </div>
+        <div class="sidebar__content">
+          {{ content_for_order_summary }}
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  {{ tracking_code }}
+
+  <div class="line-items-main hide">
+    <table>
+      <tbody data-order-summary-section="line-items">
+        {% for item in checkout.line_items %}
+          {% assign get_quantity = '' %}
+          {% for tag in item.product.tags %}
+            {% if tag contains 'unit_Meter' %}
+              {% assign get_quantity = item.quantity | divided_by: 100 %}
+            {% endif %}
+          {% endfor %}
+          <tr class="product" data-product-id="{{ item.product_id }}" data-variant-id="{{ item.variant_id }}"
+            data-product-type="{{ item.product.type }}" data-customer-ready-visible="">
+            <td class="product__image">
+              <div class="product-thumbnail ">
+                <div class="product-thumbnail__wrapper">
+                  <img alt="{{ item.product.title }}"
+                    class="product-thumbnail__image"
+                    src="{{ item | img_url: '100x100' }}">
+                </div>
+                <span class="product-thumbnail__quantity" aria-hidden="true">
+                  {% if get_quantity == blank %}
+                    {{ item.quantity }}
+                  {% else %}
+                    {{ get_quantity }}
+                  {% endif %}
+                </span>
+              </div>
+            </td>
+            <th class="product__description" scope="row">
+              <span class="product__description__name order-summary__emphasis">{{ item.product.title }}</span>
+              <span class="product__description__variant order-summary__small-text"></span>
+            </th>
+            <td class="product__quantity visually-hidden">
+              {{ item.quantity }}
+            </td>
+            <td class="product__price">
+              <span class="order-summary__emphasis">{{ item.product.price | times: item.quantity | money }}</span>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <input type="hidden" id="pcd_url" value="{{- settings.cod_pincodes_url -}}" />
+  </div>
+
+  <script>
+    window.COD_OBJ = {
+      hideCODEnable: {{- settings.hide_cod_for_states_india | json -}} || false,
+      hideCODStates: {{- settings.india_cod_hide_states | json -}} || [],
+      CODHideText: {{- settings.cod_hide_text | json -}} || '',
+      hideCODForCountry: {{- settings.hide_cod_outside_india | json -}} || false,
+      shipping_address: {{- checkout.shipping_address | json -}} || null,
+      offer_banner: {{- settings.paymentstep_offer_banner | img_url: 'x200' | json -}} || ''
+    }
+  </script>
+
+  <script src="{{ 'jquery-3.5.1.min.js' | asset_url }}" ></script>
+  <script src="{{ 'simply-checkout.js' | asset_url }}" ></script>
+</body>
+
+</html>

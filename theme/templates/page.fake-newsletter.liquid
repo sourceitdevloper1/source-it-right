@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="newsletter_form">
+    <div class="newsletter newsletter--compact">
+      {%- form 'customer', id: newsletter_id, class: 'form newsletter__form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="alert alert--success">{{ 'home_page.newsletter.success' | t }}</p>
+        {%- else -%}
+          {%- if form.errors -%}
+            <p class="alert alert--error">{{ form.errors.messages['email'] }}</p>
+          {%- endif -%}
+
+          <input type="hidden" name="contact[tags]" value="newsletter">
+
+          <div class="form__input-row">
+            <div class="form__input-wrapper form__input-wrapper--labelled">
+              <input type="email" id="newsletter[contact][email]" name="contact[email]" class="form__field form__field--text open-sans" required placeholder="Your Email">
+            </div>
+
+            <button type="submit" class="form__submit button button--primary {% if amp_page %}bebas-nue{% endif %}">{{ 'home_page.newsletter.submit' | t }}</button>
+          </div>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</div>

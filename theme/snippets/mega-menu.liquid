@@ -1,0 +1,60 @@
+{%- if section.settings.desktop_navigation_layout == 'condensed' -%}
+{%- assign is_condensed = true -%}
+{%- else -%}
+{%- assign is_condensed = false -%}
+{%- endif -%}  
+
+{%- assign downcase_title = mega_menu.title | downcase | strip -%}
+{%- assign mega_menu_block = nil -%}
+
+{%- for block in section.blocks -%}
+{%- assign downcase_block_menu_item = block.settings.menu_item | downcase | strip -%}
+
+{%- if downcase_block_menu_item == downcase_title -%}
+{%- assign mega_menu_block = block -%}
+{%- break -%}
+{%- endif -%}
+{%- endfor -%}
+
+
+{%- if mega_menu.links.size > 0 -%}
+<div id="dropdown-{{ index }}" class="mega-menu" role="menu" aria-hidden="true" {{ mega_menu_block.shopify_attributes }}>
+<div class="new-mega-menu container" >
+  <div class="mega_row">
+    <div class="custom_megamenu_navs">
+      <div class="custom-megamenu-navs-wrap">
+      {%- for link in mega_menu.links -%}
+            <div class="mega-menu__column">
+              <span class="mega-menu__title heading"><a href="{{link.url}}">{{ link.title }}</a></span>
+
+              {%- if link.links.size > 0 -%}
+                <ul class="mega-menu__linklist">
+                  {%- for sub_link in link.links -%}
+                    <li class="mega-menu__item {% if forloop.index > 6 %}link_hide hide{% endif %}">
+                      <a href="{{ sub_link.url }}" class="mega-menu__link link"><span>{{ sub_link.title }}</span></a>
+                    </li>
+                  {%- endfor -%}
+                  {% if link.links.size > 6 %}
+                  <li class="mega-menu__item more_item">
+                    <a href="#" class="mega-menu__link link" data-more="Show more..." data-less="Show less..."><span>Show more...</span></a>
+                  </li>
+                  {% endif %}
+                </ul>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+           </div>
+    </div>
+    <div class="custom_megamenu_img">
+        {%- if mega_menu_block.settings.image_1 != blank -%}
+        <div class="mega-menu__image-wrapper">
+            <div class="aspect-ratio" style="padding-bottom: {{ 100.0 | divided_by: mega_menu_block.settings.image_1.aspect_ratio }}%">
+              <img class="lazyload image--blur-up" src="{{ mega_menu_block.settings.image_1 | img_url: '80x' }}" data-src="{{ mega_menu_block.settings.image_1 | img_url: '550x' }}" alt="{{ mega_menu_block.settings.image_1.alt | escape }}">
+            </div>
+          </div>
+        {%- endif -%}
+    </div>
+  </div>
+</div>
+</div>
+{%- endif -%}

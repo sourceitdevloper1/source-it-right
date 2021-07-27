@@ -1,0 +1,301 @@
+{%- if template == 'index.amp' -%}
+{%- assign amp_page = true -%}
+{%- endif -%} 
+
+{% if amp_page %}
+  <div id="amp_products_card">
+    <div class="card_container">
+      <div class="card_wrapper">
+        <div class="flex_view_xs">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'top-product-or-coll' -%}
+              {%- if block.settings.product_block_type_top == 'product' -%}
+                {%- assign product_var = block.settings.product_top -%}
+                {%- assign p_default_img = block.settings.default_img-%}
+                {% unless product_var == blank %}
+                  {% assign product_data = all_products[product_var] %}
+                  <div class="card_wrap">
+                    <div class="product_card product_wrap">
+                      <a class="collection_block" href="{{ product_data.url }} " title="{{ product_data.title }}" tabindex="0">
+                        {% if p_default_img != blank %}
+                          <div class="img p_img">
+                            {%- assign src_name = p_default_img -%}
+                            {%- assign src_alt = p_default_img.title | escape -%}
+                            {% assign amp_width = 200 %}
+                            {% assign amp_height = 250 %}
+                            {% include 'amp-srcset' %} 
+                          </div>
+                          <div class="product_title">
+                            {% if block.settings.product_title != blank %}
+                              <h5>{{ block.settings.product_title }}</h5>
+                            {% else %}
+                              <h5>{{ product_data.title }}</h5>
+                            {% endif %}
+                          </div>
+                        {% else %}
+                          <div class="img">
+                            {%- assign src_name = product_data.featured_image -%}
+                            {%- assign src_alt = product_data.title | escape -%}
+                            {% assign amp_width = 200 %}
+                            {% assign amp_height = 250 %}
+                            {% include 'amp-srcset' %} 
+                          </div>
+                          <div class="product_title">
+                            {% if block.settings.product_title != blank %}
+                              <h5>{{ block.settings.product_title }}</h5>
+                            {% else %}
+                              <h5>{{ product_data.title }}</h5>
+                            {% endif %}
+                          </div>
+                        {% endif %}
+                      </a>
+                    </div>
+                  </div>
+                {% endunless %}
+              {%- elsif block.settings.product_block_type_top == 'collection' -%}
+                {%- assign collection_var = block.settings.collection_top -%}
+                {%- assign p_default_img = block.settings.default_img-%}
+                {% assign collection_data = collections[collection_var] %}
+                <div class="card_wrap">
+                  <div class="product_card collection_wrap">
+                    <a class="collection_block" href="{{ collection_data.url }} " title="{{ collection_data.title }}" tabindex="0">
+                      {% if p_default_img != blank %}
+                        <div class="img p_img">
+                          {%- assign src_name = p_default_img -%}
+                          {%- assign src_alt = p_default_img.title | escape -%}
+                          {% assign amp_width = 200 %}
+                          {% assign amp_height = 250 %}
+                          {% include 'amp-srcset' %} 
+                        </div>
+                        <div class="product_title">
+                          {% if block.settings.collection_title != blank %}
+                            <h5>{{ block.settings.collection_title }}</h5>
+                          {% else %}
+                            <h5>{{ collection_data.title }}</h5>
+                          {% endif %}
+                        </div>
+                      {% else %}
+                        <div class="img">
+                          {%- assign src_name = collection_data.image -%}
+                          {%- assign src_alt = collection_data.title | escape -%}
+                          {% assign amp_width = 200 %}
+                          {% assign amp_height = 250 %}
+                          {% include 'amp-srcset' %} 
+                        </div>
+                        <div class="product_title">
+                          {% if block.settings.collection_title != blank %}
+                            <h5>{{ block.settings.collection_title }}</h5>
+                          {% else %}
+                            <h5>{{ collection_data.title }}</h5>
+                          {% endif %}
+                        </div>
+                      {% endif %}
+                    </a>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endif -%}
+          {% endfor %}
+        </div>
+        <div class="flex_view_xs">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'bottom-product-or-coll' -%}
+              {%- if block.settings.product_block_type_bottom == 'product' -%}
+                {%- assign bottom_product_var = block.settings.product_bottom -%}
+                {%- assign p_bottom_img = block.settings.default_img -%}
+                {% unless bottom_product_var == blank %}
+                  {% assign bottom_prod_data = all_products[bottom_product_var] %}
+                  <div class="card_wrap">
+                    <div class="product_card product_wrap">
+                      <a href="{{ bottom_prod_data.url }}" title="{{ bottom_prod_data.title }}" tabindex="0">
+                        {% if p_bottom_img != blank %}
+                        <div class="img p_img">
+                          {%- assign src_name = p_bottom_img -%}
+                          {%- assign src_alt = p_bottom_img.title | escape -%}
+                          {% assign amp_width = 200 %}
+                          {% assign amp_height = 250 %}
+                          {% include 'amp-srcset' %} 
+                        </div>
+                        <div class="product_title">
+                          {% if block.settings.product_title != blank %}
+                            <h5>{{ block.settings.product_title }}</h5>
+                          {% else %}
+                            <h5>{{ bottom_prod_data.title }}</h5>
+                          {% endif %}
+                        </div>
+                        {% else %}
+                          <div class="img">
+                            {%- assign src_name = bottom_prod_data.featured_image -%}
+                            {%- assign src_alt = bottom_prod_data.title | escape -%}
+                            {% assign amp_width = 200 %}
+                            {% assign amp_height = 250 %}
+                            {% include 'amp-srcset' %} 
+                          </div>
+                          <div class="product_title">
+                            {% if block.settings.product_title != blank %}
+                              <h5>{{ block.settings.product_title }}</h5>
+                            {% else %}
+                              <h5>{{ bottom_prod_data.title }}</h5>
+                            {% endif %}
+                          </div>
+                        {% endif %}
+                      </a>
+                    </div>
+                  </div>
+                {% endunless %}
+              {%- elsif block.settings.product_block_type_bottom == 'collection' -%}
+                {%- assign p_bottom_img = block.settings.default_img -%}
+                {%- assign bottom_collection_var = block.settings.collection_bottom -%}
+                {% assign bottom_coll_data = collections[bottom_collection_var] %}
+                <div class="card_wrap">
+                  <div class="product_card collection_wrap">
+                    <a class="collection_block" href="{{ bottom_coll_data.url }} " title="{{ bottom_coll_data.title }}" tabindex="0">
+                      {% if p_bottom_img != blank %}
+                        <div class="img p_img">
+                          {%- assign src_name = p_bottom_img -%}
+                          {%- assign src_alt = p_bottom_img.alt | escape -%}
+                          {% assign amp_width = 200 %}
+                          {% assign amp_height = 250 %}
+                          {% include 'amp-srcset' %} 
+                        </div>
+                        <div class="product_title">
+                          {% if block.settings.collection_title != blank %}
+                          <h5>{{ block.settings.collection_title }}</h5>
+                          {% else %}
+                          <h5>{{ bottom_coll_data.title }}</h5>
+                          {% endif %}
+                        </div>
+                      {% else %}
+                        <div class="img">
+                          {%- assign src_name = bottom_coll_data.image -%}
+                          {%- assign src_alt = bottom_coll_data.title | escape -%}
+                          {% assign amp_width = 200 %}
+                          {% assign amp_height = 250 %}
+                          {% include 'amp-srcset' %} 
+                        </div>
+                        <div class="product_title">
+                          {% if block.settings.collection_title != blank %}
+                          <h5>{{ block.settings.collection_title }}</h5>
+                          {% else %}
+                          <h5>{{ bottom_coll_data.title }}</h5>
+                          {% endif %}
+                        </div>
+                      {% endif %}
+                    </a>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endif -%}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Amp page products card",
+  "max_blocks": 6,
+  "blocks": [
+  {
+    "type": "top-product-or-coll",
+    "name": "Top product or coll ",
+    "settings": [
+    {
+      "type": "select",
+      "id": "product_block_type_top",
+      "label": "Product block type",
+      "options": [
+      {
+        "value": "product",
+        "label": "Product"
+      },
+      {
+        "value": "collection",
+        "label": "Collection"
+      }
+      ]
+    },
+    {
+      "type":"image_picker",
+      "id"  : "default_img",
+      "label" : "Default product image"
+    },
+    {
+      "type":"product",
+      "id" : "product_top",
+      "label" : "landing page product"
+    },
+    {
+      "type":"text",
+      "id" : "product_title",
+      "label" : "Product title"
+    },
+    {
+      "type":"collection",
+      "id" : "collection_top",
+      "label" : "landing page collection"
+    },
+    {
+      "type":"text",
+      "id" : "collection_title",
+      "label" : "Collection title"
+    }
+    ]
+  },
+  {
+    "type": "bottom-product-or-coll",
+    "name": "Bottom product or coll",
+    "settings": [
+    {
+      "type": "select",
+      "id": "product_block_type_bottom",
+      "label": "Product block type",
+      "options": [
+      {
+        "value": "product",
+        "label": "Product"
+      },
+      {
+        "value": "collection",
+        "label": "Collection"
+      }
+      ]
+    },
+    {
+      "type":"image_picker",
+      "id" : "default_img",
+      "label" : "Default Image"
+    },
+    {
+      "type":"product",
+      "id" : "product_bottom",
+      "label" : "Product bottom"
+    },
+    {
+      "type":"text",
+      "id" : "product_title",
+      "label" : "Product title"
+    },
+    {
+      "type":"collection",
+      "id" : "collection_bottom",
+      "label" : "Collection bottom"
+    },
+    {
+      "type":"text",
+      "id" : "collection_title",
+      "label" : "Collection title"
+    }
+    ]
+  }
+  ],
+  "presets": [
+  {
+    "category": "Amp page Card section",
+    "name": "Card section"
+  }
+  ]
+}
+{% endschema %}

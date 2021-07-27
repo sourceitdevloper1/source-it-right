@@ -1,0 +1,155 @@
+{%- if template == 'index.amp' -%}
+{%- assign amp_page = true -%}
+{%- endif -%}  
+
+{%- case section.settings.text_width -%}
+  {%- when 'narrow' -%}
+    {%- assign container_classes = 'container container--narrow' -%}
+
+  {%- when 'regular' -%}
+    {%- assign container_classes = 'container container--medium' -%}
+
+  {%- when 'wide' -%}
+    {%- assign container_classes = 'container' -%}
+{%- endcase -%}
+
+{% unless amp_page %}
+<style type="text/css">
+  #home_about_us .about_wrapper h2.heading{
+    color: {{ section.settings.heading_color }};
+  }
+  #home_about_us .about_wrapper{
+    background: {{ section.settings.bg_color }};
+  }
+
+  #home_about_us .about_wrapper::after{
+    background: url({{ section.settings.bg_image_one | img_url: 'master' }});
+  }
+
+  #home_about_us .about_wrapper::before{
+    background: url({{ section.settings.bg_image_two | img_url: 'master' }});
+  }
+  @media(max-width: 767px){
+    #home_about_us .about_wrapper::after{
+      background: url({{ section.settings.bg_image_one_xs | img_url: 'master' }});
+    } 
+    #home_about_us .about_wrapper::before{
+      background: url({{ section.settings.bg_image_two_xs | img_url: 'master' }});
+    }
+  }
+</style>
+{% endunless %}
+
+<div id="home_about_us" class="{% if amp_page %}amp_about_us{% endif %}">
+  <section class="section section--text-centered" data-section-id="{{ section.id }}" data-section-type="rich-text">
+    <div class="{{ container_classes }} container--flush">
+
+      <div class="about_wrapper">
+        {%- if section.settings.title != blank -%}
+        <h2 class="heading h1 dacing-font">{{ section.settings.title | escape }}</h2>
+        {%- endif -%}
+
+        <div class="rte about_wrapper_text">
+          {{ section.settings.content }}
+
+          {%- if section.settings.button_link != blank and section.settings.button_text != blank -%}
+          <a href="{{ section.settings.button_link }}" class="button button--primary {% if amp_page %}amp_explore{% endif %}">{{ section.settings.button_text | escape }}</a>
+          {%- endif -%}
+        </div>
+        
+      </div>
+
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Rich text",
+  "settings": [
+    {
+      "type": "select",
+      "id": "text_width",
+      "label": "Text width",
+      "options": [
+        {
+          "value": "narrow",
+          "label": "Narrow"
+        },
+        {
+          "value": "regular",
+          "label": "Regular"
+        },
+        {
+          "value": "wide",
+          "label": "Wide"
+        }
+      ],
+      "default": "narrow"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Your title"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#fbf9f6"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_one",
+      "label": "Background image one"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_one_xs",
+      "label": "Background mobile image one"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_two",
+      "label": "Background image two"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_two_xs",
+      "label": "Background mobile image two"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Text",
+      "default": "<p>Use this text to share information about your brand with your customers.<br>Describe a product, share announcements, or welcome customers to your store.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Our products"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "default": "/collections/all"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Text",
+      "name": "Rich text",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

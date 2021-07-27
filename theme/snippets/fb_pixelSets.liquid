@@ -1,0 +1,33 @@
+
+        <script>
+          window.MFP = {};
+          window.MFP.FbPixelSets = {"myshopifyDomain":"source-it-right.myshopify.com","pixelSets":[]};
+          {% if template contains 'product' %}
+          window.MFP.pageType = "product";
+          window.MFP.collections = {{ product.collections | json }};
+          {% elsif template contains 'cart' %}
+          window.MFP.pageType = "cart";
+          var collections = [];
+          var pageData = {};
+          pageData.content_type = 'product_group';
+          pageData.content_ids = [];
+          pageData.value = {{ cart.total_price }} / 100;
+          pageData.num_items = {{ cart.item_count }};
+          pageData.currency = {{ cart.currency.iso_code | json }};
+          {% for item in cart.items %}
+          pageData.content_ids.push({{ item.product.id }});
+          if ({{ item.product.collections | json }}.length > 0) {
+          collections.push({{ item.product.collections | json }});
+          }
+          {%endfor%}
+          if (collections.length > 0) {
+            // collections = collections.flat(Infinity);
+            collections = [].concat.apply([],collections);
+          }
+          window.MFP.collections = collections;
+          window.MFP.pageData = pageData;
+          {%endif%}
+        </script>
+
+        <script src="https://mfp-hook.hillapps.com/main.js"></script>
+      

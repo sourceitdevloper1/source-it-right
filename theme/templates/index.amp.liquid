@@ -1,0 +1,9 @@
+{% layout 'theme.amp' %}
+{%- assign amp_page = false -%}
+{%- if template == 'index.amp' -%}
+{%- assign amp_page = true -%}
+{%- endif -%}    
+
+<div class="main_wrap">
+  {{ content_for_index }}
+</div> 

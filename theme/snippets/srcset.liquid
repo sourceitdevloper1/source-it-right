@@ -1,0 +1,39 @@
+{% assign sizes = '180,360,480,765,900,1000,1200,1500' | split: "," %}
+
+{% comment %} For normal website{% endcomment %}
+{% if settings.preload_src %}
+	{% assign preload_src = true %}
+	{% assign src_blur = true %}
+{% endif %}
+
+{% if preload_src  %}
+	{% assign base_classes =  "lazyload img_blur blur-up" %}
+{% else %}
+	{% assign base_classes =  "lazyloadscroll img_blur blur-up" %}
+{% endif %}
+
+{%- if asset_url -%}
+
+	<img alt="{{src_alt}}" {%- if src_blur -%} src="{{- src_name | asset_img_url: '30x'  -}}" {%- else -%} src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" {%- endif -%} data-sizes="auto" data-src="{{- src_name | asset_img_url: 'grande' -}}" data-srcset="
+	{%- for size in sizes -%}
+	{%- assign size_x = size| append : 'x' -%}
+	{{- src_name | asset_img_url: size_x   }} {{size | append:'w' -}},
+	{%- endfor -%}" class="{{base_classes}}{% unless src_class == blank %} {{src_class}}{% endunless %}" height="auto" width="auto" {% if src_zoom != blank %}data-zoom="{{ src_zoom }}"{% endif %}>
+
+{% elsif file_url %}
+
+	<img alt="{{src_alt}}" {%- if src_blur -%} src="{{- src_name | file_img_url: '40x' | format:'pjpg' | split:'?v' | first -}}" {%- else -%} {%- unless no_base -%} src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" {%- endunless -%} {%- endif -%} data-sizes="auto" data-src="{{- src_name | file_img_url: 'master' -}}" data-srcset="
+	{%- for size in sizes -%}
+	{%- assign size_x = size| append : 'x' -%}
+	{{- src_name | file_img_url: size_x | format:'pjpg'  }} {{size | append:'w' -}},
+	{%- endfor -%}" class="{{base_classes}} no_blur{% unless src_class == blank %} {{src_class}}{% endunless %}" height="auto" width="auto" {% if src_zoom != blank %}data-zoom="{{ src_zoom }}"{% endif %}>
+
+{%- else -%}
+
+	<img alt="{{src_alt}}" {%- if src_blur -%} src="{{- src_name | img_url: '30x' | format:'pjpg'  -}}" {%- else -%} {%- unless no_base -%} src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" {%- endunless -%} {%- endif -%} data-sizes="auto" data-src="{{- src_name | img_url: 'grande' -}}" data-srcset="
+	{%- for size in sizes -%}
+	{%- assign size_x = size| append : 'x' -%}
+	{{- src_name | img_url: size_x | format:'pjpg'  }} {{size | append:'w' -}},
+	{%- endfor -%}" class="{{base_classes}} no_blur{% unless src_class == blank %} {{src_class}}{% endunless %}" height="auto" width="auto" {% if src_zoom != blank %}data-zoom="{{ src_zoom }}"{% endif %}>
+
+{%- endif -%}

@@ -1,0 +1,146 @@
+<!-- page-about-us -->
+<div id="about-us-page">
+  <div class="container">
+    <div class="page__content row">
+      <div class="main-title dacing-font">{{section.settings.page_title}}</div>
+      <div class="banner-wrapper">
+        <div class="text-wrapper">
+          <div class="banner-image h_none">
+            {% unless section.settings.banner_image_desktop == blank %}
+            <div class="desktop-image xs-hide">
+              {%- assign src_name = section.settings.banner_image_desktop -%}
+              {%- assign src_alt = section.settings.banner_image_desktop | escape  -%}
+              {% render 'srcset',src_name:src_name,src_alt:src_alt,preload_src:false %}
+            </div>
+            {% endunless %}
+            {% unless section.settings.banner_image_mobile == blank %}
+            <div class="mobile-image xs-show">
+              {%- assign src_name = section.settings.banner_image_mobile -%}
+              {%- assign src_alt = section.settings.banner_image_mobile | escape  -%}
+              {% render 'srcset',src_name:src_name,src_alt:src_alt,preload_src:false %}
+            </div>
+            {% endunless %}
+          </div>
+          <div class="banner-text dacing-font">
+            {% unless section.settings.banner_title_text == blank %}
+            <div class="title">{{ section.settings.banner_title_text }}</div>
+            {% endunless %}
+          </div>
+        </div>
+      </div>
+      <div class="middle-text">
+        <div class="wrap-div">
+          {% unless section.settings.middle_text == blank %}
+          <p>{{section.settings.middle_text}}</p>
+          {% endunless %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="our-team-section">
+    <div class="wrap-div">
+      <div class="text-section">
+       {% unless section.settings.title == blank %}
+       <div class="team-title dacing-font">{{section.settings.title}}</div>
+       {% endunless %}
+       {% unless section.settings.team_desc == blank %}
+       <div class="team-desc"><p>{{section.settings.team_desc}}</p></div>
+       {% endunless %}
+     </div>
+     <div class="image-section">
+       {% unless section.settings.our_image == blank %}
+       <div class="our-image">
+        {%- assign src_name = section.settings.our_image -%}
+        {%- assign src_alt = section.settings.our_image | escape  -%}
+        {% render 'srcset',src_name:src_name,src_alt:src_alt,preload_src:false %}
+      </div>
+      {% endunless %}
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="value-we-create">
+      <div class="title dacing-font">{{section.settings.value_title}}</div>
+      <div class="wrap-div">
+        {% for block in section.blocks %}
+        <div class="value-text">
+          {% unless block.settings.value_text == blank %}
+          {{block.settings.value_text}}
+          {% endunless %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+{% schema %}
+{
+  "name": "About-us",
+  "settings": [
+  {
+    "type": "text",
+    "id": "page_title",
+    "label": "Page title"
+  },
+  {
+    "type": "image_picker",
+    "id": "banner_image_desktop",
+    "label": "Banner image(Desktop)"
+  },
+  {
+    "type": "image_picker",
+    "id": "banner_image_mobile",
+    "label": "Banner image(Mobile)"
+  },
+  {
+    "type": "text",
+    "id": "banner_title_text",
+    "label": "Banner title"
+  },
+  {
+    "type": "text",
+    "id": "middle_text",
+    "label": "Below banner text"
+  },
+  {
+    "type": "text",
+    "id": "title",
+    "label": "Our team title"
+  },
+  {
+    "type": "text",
+    "id": "team_desc",
+    "label": "Our team description"
+  },
+  {
+    "type": "image_picker",
+    "id": "our_image",
+    "label": "Our image"
+  },
+  {
+    "type": "text",
+    "id": "value_title",
+    "label": "Value title"
+  }
+  ],
+  "blocks":[
+  {
+    "type": "text",
+    "name": "value-text",
+    "settings": [
+    {
+      "type": "richtext",
+      "id": "value_text",
+      "label": "Bold Text"
+    }
+    ]
+  }
+  ]
+}
+{% endschema %}

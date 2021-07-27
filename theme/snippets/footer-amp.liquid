@@ -1,0 +1,49 @@
+<section class="footer_amp">
+  <div class="container">
+    <div class="footer_logo">
+      <a href="{{ routes.root_url }}" tabindex="0" title="{{ shop.name }}">
+        {%- if settings.amp_site_logo != blank -%}
+        <amp-img src="{{ settings.amp_site_logo | img_url : 'grande' }}" layout="responsive" width="60" height="20" alt="{{ settings.amp_site_logo.alt }}"></amp-img>
+        {%- else -%}
+        <span>{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+    </div>
+
+    {%- unless settings.footer_text == blank-%}
+    <div class="footer_text">
+      <h3 class="dacing-font text-center">{{ settings.footer_text }}</h3>
+    </div>
+    {%- endunless -%}
+
+    <div class="footer_social_icon_wrap flex_view_xs center middle">
+
+      {%- unless settings.youtube_icon == blank -%}
+      <a class="footer_social_icon_anchor" href="{{ settings.youtube_url }}" title="{{ settings.youtube_icon.alt }}" tabindex="0">
+        <amp-img src="{{ settings.youtube_icon | img_url }}" layout="responsive" width="20" height="15" alt="{{ settings.youtube_icon.alt }}"></amp-img>
+      </a>
+      {% endunless %}
+
+      {%- unless settings.facebook_icon == blank -%}
+      <a class="footer_social_icon_anchor" href="{{ settings.facebook_url }}" title="{{ settings.facebook_icon.alt }}" tabindex="0">
+        <amp-img src="{{ settings.facebook_icon | img_url }}" layout="responsive" width="30" height="30" alt="{{ settings.facebook_icon.alt }}"></amp-img>
+      </a>
+      {% endunless %}
+
+      {%- unless settings.whatsapp_icon == blank -%}
+      <a class="footer_social_icon_anchor" href="{{ settings.Whatsapp_url }}" title="{{ settings.whatsapp_icon.alt }}" tabindex="0">
+        <amp-img src="{{ settings.whatsapp_icon | img_url }}" layout="responsive" width="30" height="30" alt="{{ settings.whatsapp_icon.alt }}"></amp-img>
+      </a>
+      {% endunless %}
+
+    </div>
+
+
+  </div>
+
+  <div class="footer_copyright_text">
+    <p>{{ settings.copyright_text_line_1 }}</p>
+    <p>{{ settings.copyright_text_line_2 }}</p>
+  </div>
+
+</section>

@@ -1,0 +1,64 @@
+.template-name-fake-newsletter{
+  .newsletter_form {
+    width: 55%;
+    margin: 30px auto 0;
+
+    @include mq('phone') {
+      width: 90%;
+    }
+
+    @include mq('tablet') {
+      width: 80%;
+    }
+
+    .newsletter {
+      margin-top: 0;
+
+      .alert--success {
+        font-size: 13px;
+        text-align: center;
+      }
+
+      .form__input-row {
+        .form__field {
+          padding: 0 12px;
+          height: 36px;
+          font-size: 12px;
+          border-color: rgba(161,134,190,0.8);
+          @include mq('tablet') {
+            height: 30px;
+          }
+
+          &::placeholder {
+            color: #aeaeae;
+          }
+
+          &::-ms-input-placeholder {
+            color: #aeaeae;
+          }
+
+          &::-webkit-input-placeholder {
+            color: #aeaeae;
+          }
+
+
+        }
+
+        .form__submit {
+          line-height: unset;
+          padding: 4px 25px;
+
+          @include mq('phone') {
+            width: auto;
+            margin: 0 auto;
+            margin-top: 10px;
+          }
+
+          @include mq('tablet') {
+            padding: 0 25px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,147 @@
+<!-- Chanderi landing page collection section -->
+
+<div class="landing_page_two landing-page-slider">
+  <div class="collection_banner_section">
+    <div class="img">
+      {%- unless section.settings.banner_image == blank -%}
+      <div class="desktop_image xs-hide">
+        {% unless section.settings.banner_image == blank %}
+        {%- assign preload_src = true -%}
+        {%- assign src_name = section.settings.banner_image -%}
+        {%- assign src_alt = section.settings.banner_image.alt | escape  -%}
+        {% render 'srcset',src_name:src_name,src_alt:src_alt,preload_src:false %}
+        {% endunless %}
+      </div> 
+      {%- endunless -%}
+
+      {%- unless section.settings.banner_image_mobile == blank -%}
+      <div class="mobile_image xs-show">
+        {% unless section.settings.banner_image_mobile == blank %}
+        {%- assign preload_src = true -%}
+        {%- assign src_name = section.settings.banner_image_mobile -%}
+        {%- assign src_alt = section.settings.banner_image_mobile.alt | escape  -%}
+        {% render 'srcset',src_name:src_name,src_alt:src_alt,preload_src:false %}
+        {% endunless %}
+      </div>
+    </div>
+    {%- endunless -%}
+
+    {%- unless section.settings.banner_title == blank -%} 
+    <div class="collection_banner_title">
+      <h1 class="dacing-font">{{ section.settings.banner_title }}</h1>
+    </div>
+    {%- endunless -%}
+  </div>
+
+  <div class="container ">
+
+    <div class="collection_wrapper">
+
+      {% for block in section.blocks %}
+
+      <div class=" flex_view middle {% if block.settings.collection_product_side == true %} reverse{% endif %}">
+
+        <div class="collection_title_and_content_wrap">
+
+          {%- unless block.settings.title == blank -%}
+          <div class="collection_title">
+            <h3 class="dacing-font">{{ block.settings.title }}</h3>
+          </div>
+          {%- endunless -%}
+
+          {%- unless block.settings.content == blank -%}          
+          <div class="collection_content">
+            {{ block.settings.content }}
+          </div>
+          {%- endunless -%}
+
+        </div>
+
+        <div class="collection_product_wrap scroll_event">
+
+          {%- assign collection_one = collections[block.settings.collection] -%}
+
+          {% for product in collection_one.products %}
+          <div class="product_block">
+            <a href="{{ product.url }}" title="{{ product.title }}" tabindex="0">
+              <div class="img">
+                {% unless product.featured_image == blank %}
+                {%- assign preload_src = true -%}
+                {%- assign src_name = product.featured_image -%}
+                {%- assign src_alt = product.title | escape  -%}
+                {% render 'srcset',src_name:src_name,src_alt:src_alt,preload_src:false %}
+                {% endunless %}
+              </div>
+              <div class="title_wrap"><h4 class="prod_title">{{ product.title }}</h4></div>
+            </a>
+          </div>
+
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+</div>
+
+
+{% schema %}
+{
+  "name": "Landing page collection",
+  "settings" : [
+  {
+    "type": "header",
+    "content": "Collection banner image and title"
+  },
+  {
+    "type": "image_picker",
+    "id": "banner_image",
+    "label": "Banner image"
+  },
+  {
+    "type": "image_picker",
+    "id": "banner_image_mobile",
+    "label": "Banner image mobile"
+  },
+  {
+    "type": "text",
+    "id": "banner_title",
+    "label": "Banner title"
+  }
+  ],
+  "blocks": [
+  {
+    "type": "collection",
+    "name": "collection",
+    "settings": [
+    {
+      "type": "checkbox",
+      "id": "collection_product_side",
+      "label": "Enable collection show left side "
+    },
+    {
+      "type":"text",
+      "id" : "title",
+      "label" : "Collection title"
+    },
+    {
+      "type":"richtext",
+      "id" : "content",
+      "label" : "Collection content"
+    },
+    {
+      "type":"collection",
+      "id" : "collection",
+      "label" : "Collection"
+    }
+    ]
+  } 
+  ]
+}
+{% endschema %}

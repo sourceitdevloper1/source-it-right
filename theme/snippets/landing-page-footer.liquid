@@ -1,0 +1,58 @@
+<!-- landing page footer -->
+
+<div class="landing_page_footer">
+  <div class="footer_top">
+    <div class="container">
+      <div class="flex_view middle">
+        <div class="footer_left_side flex_view middle">
+          {%- unless settings.landing_page_logo == blank -%}
+          <div class="footer_logo">
+            <a href="{{ routes.root_url }}">
+              {%- if settings.landing_page_logo != blank -%}
+              <img src="{{ settings.landing_page_logo | img_url: 'grande' }}"
+              srcset="{{ settings.landing_page_logo | img_url: 'grande' }} 1x, {{ settings.landing_page_logo | img_url: 'grande', scale: 2 }} 2x" alt="{{ settings.landing_page_logo.alt | default: shop.name | escape }}">
+              {%- else -%}
+              <span>{{ shop.name }}</span>
+              {%- endif -%}
+            </a>
+          </div>
+          {%- endunless -%}       
+          {%- unless settings.footer_text == blank -%}
+          <div class="footer_text">
+            <h3 class="heading dacing-font">{{ settings.footer_text }}</h3>
+          </div>
+          {%- endunless -%}
+        </div>
+        <div class="footer_social_icon">
+          <div class="footer_social_icon_wrap flex_view_xs right middle">
+            {%- unless settings.social_youtube == blank -%}
+            <a class="footer_social_icon_anchor" href="{{ settings.social_youtube }}" title="youtube" tabindex="0">
+              <img src="{{ settings.youtube_icon | img_url: 'grande' }}"
+              srcset="{{ settings.youtube_icon | img_url: 'grande' }} 1x, {{ settings.youtube_icon | img_url: 'grande', scale: 2 }} 2x" alt="{{ settings.youtube_icon.alt | default: shop.name | escape }}">
+            </a>
+            {%- endunless -%}
+
+            {%- unless settings.social_facebook == blank -%}
+            <a class="footer_social_icon_anchor" href="{{ settings.social_facebook }}" title="facebook" tabindex="0">
+              <img src="{{ settings.facebook_icon | img_url: 'grande' }}"
+              srcset="{{ settings.facebook_icon | img_url: 'grande' }} 1x, {{ settings.facebook_icon | img_url: 'grande', scale: 2 }} 2x" alt="{{ settings.facebook_icon.alt | default: shop.name | escape }}">
+            </a>
+            {%- endunless -%}
+
+
+            {%- unless settings.social_whatsapp == blank -%}
+            <a class="footer_social_icon_anchor" href="{{ settings.social_whatsapp | replace_first: 'https://', '' | replace_first: 'http://', '' | prepend: 'https://' }}" target="_blank" rel="noopener" aria-label="{{ 'general.social.follow_label' | t: social_media: 'Whatsapp' }}">
+              <img src="{{ settings.whatsapp_icon | img_url: 'grande' }}"
+              srcset="{{ settings.whatsapp_icon | img_url: 'grande' }} 1x, {{ settings.whatsapp_icon | img_url: 'grande', scale: 2 }} 2x" alt="{{ settings.whatsapp_icon.alt | default: shop.name | escape }}">
+            </a>
+            {%- endunless -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer_copyright_text">
+    <h3>{{ settings.copyright_text_line_1 }}</h3>
+    <h3>{{ settings.copyright_text_line_2 }}</h3>
+  </div>
+</div>

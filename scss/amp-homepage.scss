@@ -1,0 +1,380 @@
+/*amp home collection list css start*/
+#home_collection_list{
+  &.xs-hide{
+    display: none;
+  }
+  .amp_container{
+    .collection-list{
+      clear: both;
+      width: 100%;
+      overflow: hidden;
+      overflow-x: scroll;
+      display: flex;
+      padding: 10px 0 15px 0; 
+      margin-bottom: 7px;
+      .collection-item{
+        width: 20%;
+        position: relative;
+        float: left;
+        padding-left: 10px;
+        padding-right: 10px;
+        color: inherit;
+        text-decoration: none;
+        .collection-item__image-wrapper{
+          position: relative;
+          z-index: 0;
+          margin: 10px auto;
+          .mobile_aspect{
+            box-shadow: 1px 5px 4px rgba(0,0,0,0.2);
+            border-radius: 100%;
+            margin: 0 auto;
+            width: 65px;
+            height: 65px;
+            amp-img{
+              width: 65px;
+              height: 65px;
+              border-radius: 100%;
+              box-shadow: 1px 5px 4px rgba(0,0,0,.2);
+            }
+          }
+        }
+        .collection-item__title{
+          font-size: 12px;
+          text-align: center;
+          max-width: 65%;
+          margin: 0 auto;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-transform: uppercase;
+          font-weight: 400;
+          letter-spacing: 1px;
+          svg{
+            max-width: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+/*amp home collection list css end */
+
+/* amp home banner css start */
+.banner_wrapper{
+  position: relative;
+  margin-bottom: 20px;
+  .overlay{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 1;
+  }
+  .banner_content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    z-index: 1;
+    text-align: center;
+    min-width: 80%;
+    .slideshow__title{
+      margin-left: 20%;
+      line-height: 1;
+      font-size: 32px;
+      text-align: left;
+      margin-bottom: 0;
+      font-weight: normal;
+      margin-top: 0;
+      color: #fff;
+    }
+    .slideshow__content{
+      margin: 0 auto;
+      line-height: 1;
+      text-align: center;
+      font-weight: normal;
+      font-size: 42px;
+      color: #fff;
+    }
+    .slideshow__button {
+      margin-top: 30px;
+      line-height: 1;
+      padding: 7px 20px;
+      font-size: 18px;
+      display: inline-block;
+      color: #a287be;
+      background: #ffffff;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+  }
+}
+/* amp home banner css end */
+
+/* amp home collection list css start */
+#home_collection_list_xs{
+  .main_wrapper{
+    &.amp_coll_list{
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      .title_section{
+        .section__title{
+          margin: 0 0 20px 0;
+          text-align: center;
+          font-weight: normal;
+        }
+      }
+      .image_collection_ul{
+        list-style: none;
+        padding: 0;
+        clear: both;
+        overflow:hidden;
+        .image_collection_li{
+          float: left;
+          margin: 5px 3px;
+          amp-img{
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            margin: 0 auto;
+          }
+          a{
+            display: block;
+            color:inherit;
+            text-decoration: none;
+            .text{
+              .h4{
+                font-weight: normal;
+                letter-spacing: 1px;
+                font-size: 12px;
+                text-align: center;
+                margin: 10px 0;
+                letter-spacing: 0;
+                @media(max-width: 360px){
+                  font-size: 10px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+/* amp home collection list css end */
+
+/* amp product card css start */
+#amp_products_card{
+  .card_container{
+    padding: 0 10px;
+    margin:0 auto;
+    .card_wrapper{
+      .card_wrap{
+        width: 50%;
+        .product_card{
+          padding: 0 10px;
+          a{
+            display: block;
+            color: inherit;
+            text-decoration: none;
+            outline: none;
+            amp-img{
+              border-radius: 10px;
+            }
+            .product_title{
+              h5{
+                font-weight: 500;
+                letter-spacing: 0px;
+                margin: 10px 0 15px 0;
+                text-transform: uppercase;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+/* amp product card css start */
+
+/* amp about us css start */
+#home_about_us{
+  &.amp_about_us{
+    .about_wrapper{
+      padding: 30px 20px;
+      background-color: #FBF9F6;
+      margin: 25px 0;
+      position: relative;
+      h2.heading{
+        margin: 0;
+        padding: 5px 0 20px 0;
+        text-align: center;
+        font-size: 26px;
+        font-weight: normal;
+      }
+      .about_wrapper_text{
+        text-align: center;
+        letter-spacing: 0.5px;
+        p{
+          margin: 0;
+          text-align: justify;
+        }
+        .amp_explore{
+          margin: 15px 0 15px 0;
+          display: inline-block;
+          padding: 10px 25px;
+          background-color: #a287be;
+          text-decoration: none;
+          color: #fff;
+          border-radius: 4px;
+          letter-spacing: 0.5px;
+          position: relative;
+          z-index: 100;
+          text-transform: uppercase;
+        }
+      }
+      &:before{
+        content:'';
+        width: 50%;
+        height: 50%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: url(https://cdn.shopify.com/s/files/1/0285/2667/4059/files/Layer_1123.png?v=1578030934);
+        background-position: left bottom;
+        background-size: 100px;
+        background-repeat: no-repeat;
+      }
+      &:after{
+        content:'';
+        width: 50%;
+        height: 50%;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background:url(https://cdn.shopify.com/s/files/1/0285/2667/4059/files/layer_2.png?v=1587490929);
+        background-position: right bottom;
+        background-size: 100px;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+}
+/* home amp about us css start */
+
+/* amp news letter css start */
+#newsletter_section{
+  &.amp_newsletter{
+    .main_wrapper{
+      margin:0 5px;
+      .half_section{
+        position: relative;
+        width: 100%;
+        margin: 10px 0;
+        amp-img{
+          border-radius: 10px;
+        }
+        .content{
+          padding: 20px;
+          text-align: center;
+          .heading{
+            margin: 10px 0;
+            font-size: 36px;
+            font-weight: normal;
+            @media(max-width: 360px){
+               font-size: 34px;
+            }
+          }
+          .promo_txt{
+            font-weight: normal;
+            letter-spacing: 0px;
+          }
+          .newsletter_form{
+            .form__input-wrapper{
+              .form__field{
+                width: 80%;
+                padding: 8px 15px;
+                border: 1px solid #ddd;
+                border-radius: 3px;
+              }
+            }
+            .button{
+              margin: 15px 0 15px 0;
+              display: inline-block;
+              padding: 10px 26px;
+              background-color: #a287be;
+              text-decoration: none;
+              color: #fff;
+              border-radius: 4px;
+              letter-spacing: 0.5px;
+              border: none;
+              text-transform: uppercase;
+              font-size: 16px;
+            }
+          }
+        }
+        .right_section{
+          .newsletter_whatsapp_number{
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            .content{
+              .img{
+                max-width: 75px;
+                margin: 10px auto;
+              }
+              .heading{
+                font-size: 30px;
+              }
+              p{
+                font-weight: 600;
+                font-size: 14px;
+                padding: 0 20px;
+                br{
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+        .left_section.image{
+          background-image: url(//cdn.shopify.com/s/files/1/0285/2667/4059/files/Vector_Smart_Object_copy_41_200x.png?v=1578042430);
+          background-repeat: no-repeat;
+          background-size: cover;
+          border-radius: 15px;
+          .img{
+            display: none;
+          }
+        }
+        .right_section.image{
+         background-image: url(//cdn.shopify.com/s/files/1/0285/2667/4059/files/Vector_Smart_Object_copy_4_200x.png?v=1578042442);
+         background-repeat: no-repeat;
+         background-size: cover;
+         border-radius: 15px;
+         .img{
+          display: none;
+          &.logo_img{
+            display: block;
+          }
+        }
+        }
+      }
+    }
+  }
+}
+
+.img.p_img{
+  img{
+    border-radius: 10px;
+  }
+  amp-img{
+    border-radius: 10px;
+  }
+}
+
+
+/* amp news letter css end */

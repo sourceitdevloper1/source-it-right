@@ -1,0 +1,129 @@
+{%- if template == 'index.amp' -%}
+{%- assign amp_page = true -%}
+{%- endif -%}  
+
+{% unless amp_page %}
+<style type="text/css">
+  #home_collection_list h2.section__title{
+    color: {{ section.settings.heading_color }};
+  }
+</style>
+{% endunless %}
+
+
+<div id="home_collection_list_xs">
+  <section class="section" data-section-id="{{ section.id }}" data-section-type="collection-list">
+    <div class="main_wrapper {% if amp_page %}amp_coll_list{% endif %}">
+      <div class="container">
+        <div class="title_section">
+          <h2 class="section__title heading h3 dacing-font">{{ section.settings.title_sec }}</h2>
+        </div>
+        <ul class="image_collection_ul">
+          {% for block in section.blocks %}
+          <li class="image_collection_li">
+            <a href="{{ block.settings.url }}">
+              <div class="image">
+                {% if amp_page %}
+                <div class="img">
+                  {%- assign src_name = block.settings.image -%}
+                  {%- assign src_alt = block.settings.image.alt | escape -%}
+                  {% assign amp_width = 100 %}
+                  {% assign amp_height = 100 %}
+                  {% include 'amp-srcset' %}
+                </div>
+                {% else %}
+                <div class="img">
+                  <img class ="xs-hide lazyload img_blur blur-up" src="{{ block.settings.image | img_url: '100x100' }}" alt="icon">
+                  <img class ="xs-show lazyload img_blur blur-up" src="{{ block.settings.image | img_url: '50x50' }}" alt="icon">
+                </div>
+                {% endif %}
+              </div>
+              {%- if block.settings.text != blank -%}
+              <div class="text">
+                <h4 class="name h4">{{ block.settings.text }}</h4>
+              </div>
+              {% endif %}
+            </a>
+          </li>
+           {% comment %}
+          {% if forloop.last == true %}
+          <li class="image_collection_li last_li">
+            <a href="{{ section.settings.view_more_url }}">
+              <div class="image">
+                <div class="img">
+                  <img class ="" src="{{ section.settings.view_more_image | img_url: '100x100' }}" alt="icon">
+                </div>
+              </div>
+              <div class="text">
+                <h4 class="name h4">{{ section.settings.view_more }}</h4>
+              </div>
+              
+            </a>
+          </li>
+          {% endif %}
+          {% endcomment %}
+          {% endfor %}
+        </ul>        
+      </div>
+    </div>
+  </section>
+</div>
+
+
+{% schema %}
+{
+  "name": "Mobile collection list",
+  "max_blocks": 5,
+  "settings": [
+  {
+    "type": "text",
+    "id": "title_sec",
+    "label": "Title of the section"
+  },
+  {
+    "type": "text",
+    "id": "view_more",
+    "label": "View more text"
+  },
+  {
+    "type": "url",
+    "id": "view_more_url",
+    "label": "View more url"
+  },
+  {
+    "type": "image_picker",
+    "id": "view_more_image",
+    "label": "View more image"
+  }
+  ],
+  "blocks": [
+  {
+    "type": "collection",
+    "name": "Collection",
+    "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "image"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Url"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Name"
+    }
+    ]
+  }
+  ],
+  "presets": [
+  {
+    "category": "Mobile collection with image",
+    "name": "Collection list"
+  }
+  ]
+}
+{% endschema %}

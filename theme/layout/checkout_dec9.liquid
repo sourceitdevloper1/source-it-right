@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+    <meta name="referrer" content="origin">
+
+    <script>
+      window.simply = window.simply || {};
+      window.cn = function(o){return"undefined"==typeof o||null==o||""==o.toString().trim()};
+      window.cb = function(o){if(o == 'true'){return true}else{return false}};
+      simply.company_name = "{{checkout.attributes['Company Name']}}";
+      simply.gst_number = "{{checkout.attributes['GST Number']}}";
+      simply.service_zip_json_file = "{{settings.service_zip_json_file}}";
+      simply.jsonArrayData = [];
+      simply.gstError = "{{ settings.gst_error}}";
+      simply.gstCompanyError = "{{ settings.company_error}}";
+      {% unless settings.checkout_banner == blank %}
+      simply.checkout_banner='{{settings.checkout_banner | img_url:"master" }}';
+      {% endunless %}
+      simply.phone_error = '{{ settings.phone_field_error }}';
+      simply.enter_otp_text = '{{ settings.enter_otp_text }}';
+    </script>
+
+    <title>{{ page_title }}</title>
+
+    {{ content_for_header }}
+
+    {{ checkout_stylesheets }}
+    {{ 'simply.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'checkout.scss.css' | asset_url | stylesheet_tag }}  
+
+    {{ checkout_scripts }}
+    {% include 'elevar-head' %}
+  </head>
+  <body>
+    {% include 'elevar-checkout-end' %}
+    {{ skip_to_content_link }}
+
+    <header class="banner" data-header role="banner">
+      <div class="wrap">
+        {{ content_for_logo }}
+      </div>
+    </header>
+    {{ order_summary_toggle }}
+    <div class="content" data-content>
+      <div class="wrap">
+        <div class="main">
+          <header class="main__header" role="banner">
+            {{ content_for_logo }}
+            {{ breadcrumb }}
+            {{ alternative_payment_methods }}
+          </header>
+          <main class="main__content" role="main">
+            {{ content_for_layout }}
+          </main>
+          <footer class="main__footer" role="contentinfo">
+            {{ content_for_footer }}
+          </footer>
+        </div>
+        <aside class="sidebar" role="complementary">
+          <div class="sidebar__header">
+            {{ content_for_logo }}
+          </div>
+          <div class="sidebar__content">
+            {{ content_for_order_summary }}
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    {{ tracking_code }}
+    {% include 'line-item-table' %}
+    {{ '//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js' | script_tag }}
+    {{ "simply-checkout.js" | asset_url | script_tag }}
+    <div class="hide otp_instructions">{{ settings.otp_instructions }}</div>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+{% if checkout_html_classes contains 'page--thank-you' %}
+<div class="line-item-products hide">
+  <table>
+    {% for item in order.line_items %}
+    <tr class="product-new product" data-product-id="{{item.id}}" data-variant-id="{{item.variant_id}}" data-product-type="{{item.product_type}}" data-customer-ready-visible="">
+      <td class="product__image">
+        <div class="product-thumbnail">
+          <div class="product-thumbnail__wrapper">
+           <img alt="Brazilian Bronze" class="product-thumbnail__image" src="{{item.image | img_url:'64x'}}">
+         </div>
+         {% assign base_unit_min = item.properties['_base_unit_min'] %}
+         {% assign display_unit = item.properties['_display_unit'] %}
+         {% if base_unit_min == blank %}
+         {% assign base_unit_min = 1  %}
+         {% endif %}
+         {% if display_unit == "meter" %}
+         {% assign base_unit_min = base_unit_min | times: 1.0  %}
+         {% endif %}
+         <span class="product-thumbnail__quantity" aria-hidden="true">{{item.quantity | divided_by:base_unit_min }} {{ display_unit }}</span>
+       </div>
+     </td>
+     <td class="product__description">
+      <span class="product__description__name order-summary__emphasis">
+       {{item.title}}
+     </span>
+     <span class="product__description__variant order-summary__small-text"></span>
+   </td>
+   <td class="product__quantity visually-hidden">
+     {{item.quantity}}
+   </td>
+   <td class="product__price">
+    <span class="order-summary__emphasis">
+      {{ item.line_price | money }}
+    </span>
+  </td>
+</tr>
+
+{% endfor %}
+</table>
+</div>
+{% else %}
+<div class="line-item-products hide">
+  <table>
+    {% for item in checkout.line_items %}
+    <tr class="product-new product" data-product-id="{{item.id}}" data-variant-id="{{item.variant_id}}" data-product-type="{{item.product_type}}" data-customer-ready-visible="">
+      <td class="product__image">
+        <div class="product-thumbnail">
+          <div class="product-thumbnail__wrapper">
+           <img alt="Brazilian Bronze" class="product-thumbnail__image" src="{{item.image | img_url:'64x'}}">
+         </div>
+         {% assign base_unit_min = item.properties['_base_unit_min'] %}
+         {% assign display_unit = item.properties['_display_unit'] %}
+         {% if base_unit_min == blank %}
+         {% assign base_unit_min = 1  %}
+         {% endif %}
+         {% if display_unit == "meter" %}
+         {% assign base_unit_min = base_unit_min | times: 1.0  %}
+         {% endif %}
+         <span class="product-thumbnail__quantity" aria-hidden="true">{{item.quantity | divided_by:base_unit_min }} {{ display_unit }}</span>
+       </div>
+     </td>
+     <td class="product__description">
+      <span class="product__description__name order-summary__emphasis">
+       {{item.title}}
+     </span>
+     <span class="product__description__variant order-summary__small-text"></span>
+   </td>
+   <td class="product__quantity visually-hidden">
+     {{item.quantity}}
+   </td>
+   <td class="product__price">
+    <span class="order-summary__emphasis">
+      {{ item.line_price | money }}
+    </span>
+  </td>
+</tr>
+
+{% endfor %}
+</table>
+</div>
+{% endif %}

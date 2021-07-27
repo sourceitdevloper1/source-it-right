@@ -1,0 +1,24 @@
+{% comment %} Please don’t update this content {% endcomment %}
+
+{% layout none %}
+{
+  "product":
+    {
+      "id":{{ product.id }},
+      "metafields":[
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_display_min = product.metafields.extra["display_min"] %}
+              {% if v_display_min != blank %}
+                {
+                  "namespace": "extra",
+                  "key": "display_min",
+                  "value": {{ v_display_min | json }}
+                },
+              {% endif %}
+        
+      ]
+    }
+}

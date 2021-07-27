@@ -1,0 +1,437 @@
+<style type="text/css">
+  @media(min-width: 768px){
+    footer .footer__wrapper{
+      background: url({{ section.settings.footer_bg | img_url: 'master' }});
+    }
+  }
+  @media(max-width: 767px){
+    footer .footer__wrapper{
+      background: url({{ section.settings.footer_bg_xs | img_url: 'master' }});
+    }
+  }
+
+  .copyright_bar{
+    background-color: {{ section.settings.copyright_bg  }};
+  }
+</style>
+
+{%- capture payment_icons -%}
+<div class="img payment_icon">
+  {%- if section.settings.payment_icon_img -%}
+  {%- capture supported_sizes -%}{%- render 'image-size', sizes: '300,400,500,600,700,800,900,1000,1100,1200', image: section.settings.payment_icon_img -%}{%- endcapture -%}
+  {%- assign image_url = section.settings.payment_icon_img | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+  <img class="lazyload image--fade-in" data-src="{{ image_url }}" data-widths="[{{ supported_sizes }}]" data-sizes="auto" alt="{{ section.settings.payment_icon_img.alt | escape }}">
+
+  <noscript>
+    <img src="{{ section.settings.payment_icon_img | img_url: '800x' }}" alt="{{ section.settings.payment_icon_img.alt | escape }}">
+  </noscript>
+  {%- else -%}
+  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+  {%- endif -%}
+</div>
+{%- endcapture -%}
+
+{%- capture header_logo_icon -%}
+<div class="img">
+  {%- if section.settings.footer_icon -%}
+  {%- capture supported_sizes -%}{%- render 'image-size', sizes: '300,400,500,600,700,800,900,1000,1100,1200', image: section.settings.footer_icon -%}{%- endcapture -%}
+  {%- assign image_url = section.settings.footer_icon | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+  <img class="lazyload image--fade-in" data-src="{{ image_url }}" data-widths="[{{ supported_sizes }}]" data-sizes="auto" alt="{{ section.settings.footer_icon.alt | escape }}">
+
+  <noscript>
+    <img src="{{ section.settings.footer_icon | img_url: '800x' }}" alt="{{ section.settings.footer_icon.alt | escape }}">
+  </noscript>
+  {%- else -%}
+  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+  {%- endif -%}
+</div>
+{%- endcapture -%}
+
+<footer class="footer" data-section-id="{{ section.id }}" data-section-type="footer" role="contentinfo">
+    <div class="footer__wrapper">
+
+      <div class="footer_header">
+        <div class="header_logo flex_view middle center">
+          {{ header_logo_icon }}
+          <div class="text">
+            <h3 class="heading h3 dacing-font">{{ section.settings.header_title }}</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="container container--flush">
+        {%- if section.blocks.size > 0 -%}
+        <div class="footer__block-list">
+          {%- for block in section.blocks -%}
+          {%- case block.type -%}
+          {%- when 'text' -%}
+          <div class="footer__block-item footer__block-item--text" {{ block.shopify_attributes }}>
+            <button class="footer__title heading h6" disabled aria-expanded="false" aria-controls="block-{{ block.id }}" data-action="toggle-collapsible">
+              <h3 class="footer_heading heading h3">{{ block.settings.title | escape }}</h3>
+              <span class="plus-button"></span>
+            </button>
+
+            <div id="block-{{ block.id }}" class="footer__collapsible">
+              <div class="footer__collapsible-content">
+                <div class="rte">
+                  {% comment %}{{ block.settings.content }}{% endcomment %}
+                  <div class="address_txt inner_section flex_view">
+                    <span class="icon">
+                      <img src="{{ 'marker.png' | file_img_url: 'master' }}" alt="location_icon">
+                    </span>
+                    <span class="address text">{{ block.settings.address }}</span>
+                  </div>
+
+                  <div class="phone_txt inner_section">
+                    <span class="icon">
+                      <img src="{{ 'phone.png' | file_img_url: 'master' }}" alt="phone_icon">
+                    </span>
+                    <span class="phone text"><a href="telto:{{ block.settings.phone }}">{{ block.settings.phone }}</a></span>
+                  </div>
+
+                  <div class="email_txt inner_section">
+                    <span class="icon">
+                      <img src="{{ 'send-button.png' | file_img_url: 'master' }}" alt="mail_icon">
+                    </span>
+                    <span class="email text"><a href="mailto:{{ block.settings.mail }}">{{ block.settings.mail }}</a></span>
+                  </div>
+
+                  <div class="gst_txt inner_section">
+                    {{ block.settings.gst_details }}
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {%- when 'links' -%}
+          {%- assign menu = linklists[block.settings.menu] -%}
+
+          {%- unless menu.empty? -%}
+          <div class="footer__block-item footer__block-item--links" {{ block.shopify_attributes }}>
+            <button class="footer__title heading h6" disabled aria-expanded="false" aria-controls="block-{{ block.id }}" data-action="toggle-collapsible">
+              <h3 class="footer_heading heading h3">{{ menu.title }}</h3>
+              <span class="plus-button"></span>
+            </button>
+
+            <div id="block-{{ block.id }}" class="footer__collapsible">
+              <div class="footer__collapsible-content">
+                <ul class="footer__linklist list--unstyled">
+                  {%- for link in menu.links -%}
+                  <li>
+                    <a href="{{ link.url }}" class="footer__link-item link"><span>{{ link.title }}</span></a>
+                  </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            </div>
+          </div>
+          {%- endunless -%}
+
+          {%- when 'newsletter' -%}
+          <div class="footer__block-item footer__block-item--newsletter no_border" {{ block.shopify_attributes }}>
+            <h3 class="footer_heading footer__title heading h3">{{ block.settings.title | escape }}</h3>
+
+            <div class="footer__newsletter-wrapper">
+              {%- if block.settings.subheading != blank -%}
+              <div class="footer__newsletter-text rte">{{ block.settings.subheading }}</div>
+              {%- endif -%}
+
+              {%- form 'customer', id: 'footer-newsletter', class: 'footer__newsletter-form' -%}
+              {%- if form.posted_successfully? -%}
+              <p class="alert alert--success alert--center">{{ 'footer.newsletter.success' | t }}</p>
+              {%- else -%}
+              {%- if form.errors -%}
+              <p class="alert alert--error alert--center">{{ form.errors.messages['email'] }}</p>
+              {%- endif -%}
+
+              <input type="hidden" name="contact[tags]" value="newsletter">
+
+              <div class="form__input-wrapper form__input-wrapper--labelled">
+                <input type="email" id="footer[contact][email]" name="contact[email]" class="form__field form__field--text open-sans" required="" placeholder="Your email">
+                {% comment %}<label for="footer[contact][email]" class="form__floating-label">{{ 'footer.newsletter.input' | t }}</label>{% endcomment %}
+              </div>
+
+              <button type="submit" class="form__submit form__submit--tight button button--primary">{{ 'footer.newsletter.submit' | t }}</button>
+              {%- endif -%}
+              {%- endform -%}
+            </div>
+
+            <div class="shopify_icon">
+              <img src="{{ 'shopify-secure.png' | file_img_url: 'master' }}" class="lazyload img_blur blur-up" alt="shopify_icon">
+            </div>
+
+          </div>
+          {%- endcase -%}
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+      </div>
+
+      {% comment %}<aside class="footer__aside">
+        <div class="footer__aside-item footer__aside-item--copyright">
+          <p>© {{ shop.name }}<br>{{ powered_by_link }}</p>
+        </div>
+
+        {%- if section.settings.show_social_media -%}
+          {%- capture social_media -%}{% render 'social-media', show_social_media_name: false %}{%- endcapture -%}
+
+          {%- if social_media != blank -%}
+            <div class="footer__aside-item footer__aside-item--social">
+              <p class="footer__aside-title">{{ 'footer.general.follow_us' | t }}</p>
+
+              {{ social_media }}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+          <div class="footer__aside-item footer__aside-item--payment">
+            <p class="footer__aside-title">{{ 'footer.general.we_accept' | t }}</p>
+
+            <div class="payment-list">
+              {% for type in shop.enabled_payment_types %}
+                {{ type | payment_type_svg_tag: class: 'payment-list__item' }}
+              {% endfor %}
+            </div>
+          </div>
+        {%- endif -%}
+      </aside>{% endcomment %}
+    </div>
+
+    {% if section.settings.about_page_content %}
+    <div class="footer_txt_wrapper">
+      <div class="container">
+        {{ pages[section.settings.about_page_content].content }}
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="copyright_bar">
+      <div class="container-fluid">
+        <div class="flex_view middle space-around">
+          <div class="col-sm-3">
+            <div class="social_icons">
+              {%- if section.settings.show_social_media -%}
+              {%- capture social_media -%}{% render 'social-media', show_social_media_name: false %}{%- endcapture -%}
+
+              {%- if social_media != blank -%}
+              <div class="footer__aside-item footer__aside-item--social">
+                {{ social_media }}
+              </div>
+              {%- endif -%}
+              {%- endif -%}
+              
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <p class="copyright_txt bebas-nue">
+            <span>{{ section.settings.copyright_txt_first }}</span> <span>{{ section.settings.copyright_txt_second }}</span></p>
+          </div>
+          {%- if section.settings.show_payment_icons -%}
+          <div class="col-sm-3">
+            {{ payment_icons }}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+  {%- comment -%}
+    In order to reduce the number of static sections, we were asked by Shopify team to move the cookie bar to the footer instead of its own
+    section. This feels a bit hacky but it works :).
+  {%- endcomment -%}
+
+  {%- if section.settings.show_cookie_bar -%}
+    <aside class="cookie-bar" aria-hidden="true">
+      <div class="container">
+        <div class="cookie-bar__inner">
+          <div class="cookie-bar__text rte">
+            {{- section.settings.text -}}
+          </div>
+
+          {%- if section.settings.accept_button != blank -%}
+            <button type="button" class="cookie-bar__button button button--secondary" data-action="accept-terms">{{ section.settings.accept_button | escape }}</button>
+          {%- endif -%}
+        </div>
+      </div>
+    </aside>
+  {%- endif -%}
+</footer>
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "footer_bg",
+      "label": "Footer background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_bg_xs",
+      "label": "Footer mobile background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_icon",
+      "label": "Footer header icon"
+    },
+    {
+      "type": "text",
+      "id": "header_title",
+      "label": "Header title"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_media",
+      "label": "Show social media",
+      "info": "Make sure to have properly configured your social media in the theme settings.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Cookie bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cookie_bar",
+      "label": "Show cookie bar",
+      "default": false
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Use this bar to show information about your cookie policy.</p>"
+    },
+    {
+      "type": "text",
+      "id": "accept_button",
+      "label": "Accept button",
+      "default": "Accept"
+    },
+    {
+      "type": "page",
+      "id": "about_page_content",
+      "label": "Select page to show content"
+    },
+    {
+      "type": "text",
+      "id": "copyright_txt_first",
+      "label": "Copyright text first"
+    },
+    {
+      "type": "text",
+      "id": "copyright_txt_second",
+      "label": "Copyright text second"
+    },
+    {
+      "type": "color",
+      "id": "copyright_bg",
+      "label": "Copyright bar backround"
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_icon_img",
+      "label": "Payment icon image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "About our store"
+        },
+        {
+          "type": "richtext",
+          "id": "address",
+          "label": "Address"
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "label": "Phone"
+        },
+        {
+          "type": "text",
+          "id": "mail",
+          "label": "Email"
+        },
+        {
+          "type": "richtext",
+          "id": "gst_details",
+          "label": "Gst details"
+        }
+      ]
+    },
+    {
+      "type": "links",
+      "name": "Links",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "info": "This menu won't show dropdown items."
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Customers who subscribe will have their email address added to the \"accepts marketing\" [customer list](/admin/customers?query=&accepts_marketing=1)."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Newsletter"
+        },
+        {
+          "type": "richtext",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "<p>A short sentence describing what someone will receive by subscribing</p>"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "text",
+        "settings": {}
+      },
+      {
+        "type": "links",
+        "settings": {
+          "menu": "footer"
+        }
+      },
+      {
+        "type": "newsletter",
+        "settings": {}
+      }
+    ]
+  }
+}
+{% endschema %}

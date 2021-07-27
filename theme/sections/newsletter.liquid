@@ -1,0 +1,254 @@
+{%- if template == 'index.amp' -%}
+{%- assign amp_page = true -%}
+{%- endif -%} 
+
+{% unless amp_page %}
+<style type="text/css">
+  #newsletter_section .content h2.heading{
+    color: {{ section.settings.left_heading_color }};
+  }
+  #newsletter_section .right_section h2.heading{
+    color: {{ section.settings.right_heading_color }};
+  }
+
+  #newsletter_section .right_section .content p{
+    color: {{ section.settings.right_txt_color }};
+  }
+
+</style>
+{% endunless %}
+
+<div id="newsletter_section" {% if amp_page %}class="amp_newsletter"{% endif %}>
+{% if amp_page %}
+
+{% capture icon_img %}
+<div class="img logo_img">
+  {%- assign src_name = section.settings.icon_img -%}
+  {%- assign src_alt = section.settings.icon_img.alt | escape -%}
+  {% assign amp_width = 100 %}
+  {% assign amp_height = 100 %}
+  {% include 'amp-srcset' %}
+</div>
+{% endcapture %}
+
+{% else%}
+  {%- capture image_one_desk -%}
+  <div class="img desk_img">
+    {%- if section.settings.bg_image_one -%}
+    {% assign src_name = section.settings.bg_image_one %}
+    {% assign src_alt = section.settings.bg_image_one.alt %}
+    {% render "srcset" ,src_name:src_name,src_alt:src_alt %}
+    {%- else -%}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+  {%- endcapture -%}
+
+  {%- capture image_one_mob -%}
+  <div class="img mob_img">
+    {%- if section.settings.bg_image_one_xs -%}
+    {% assign src_name = section.settings.bg_image_one_xs %}
+    {% assign src_alt = section.settings.bg_image_one_xs.alt %}
+    {% render "srcset" ,src_name:src_name,src_alt:src_alt %}
+    {%- else -%}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+  {%- endcapture -%}
+
+  {%- capture image_two_desk -%}
+  <div class="img desk_img">
+    {%- if section.settings.bg_image_two -%}
+    {% assign src_name = section.settings.bg_image_two %}
+    {% assign src_alt = section.settings.bg_image_two.alt %}
+    {% render "srcset" ,src_name:src_name,src_alt:src_alt %}
+    {%- else -%}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+  {%- endcapture -%}
+
+  {%- capture image_two_mob -%}
+  <div class="img mob_img">
+    {%- if section.settings.bg_image_two_xs -%}
+    {% assign src_name = section.settings.bg_image_two_xs %}
+    {% assign src_alt = section.settings.bg_image_two_xs.alt %}
+    {% render "srcset" ,src_name:src_name,src_alt:src_alt %}
+    {%- else -%}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+  {%- endcapture -%}
+
+  {%- capture icon_img -%}
+  <div class="img">
+    {%- if section.settings.icon_img -%}
+    {% assign src_name = section.settings.icon_img %}
+    {% assign src_alt = section.settings.icon_img.alt %}
+    {% render "srcset" ,src_name:src_name,src_alt:src_alt %}
+    {%- else -%}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+  {%- endcapture -%}
+
+  {% endif %}
+
+  <div class="container container--flush">
+    <div class="main_wrapper flex_view_xs middle center">
+      <div class="half_section">
+        <div class="left_section image">
+          {% unless amp_page %}
+          {{ image_one_desk }}
+          {{ image_one_mob }}
+          {% endunless %}
+
+          <div class="content">
+            <h2 class="heading h2 dacing-font">{{ section.settings.left_heading }}</h2>
+            <h3 class="promo_txt {% if amp_page %}bebas-nue{% endif %}">{{ section.settings.left_subheading }}</h3>
+            <div class="newsletter_form">
+              {%- assign newsletter_id = 'newsletter-' | append: section.id -%}
+
+              <div class="newsletter newsletter--compact">
+                {% if amp_page %}
+
+                <a href="/pages/amp-newsletter" title="{{ 'home_page.newsletter.submit' | t }}" class="subscribe-btn button button--primary {% if amp_page %}bebas-nue{% endif %} ">
+                  {{ 'home_page.newsletter.submit' | t }}
+                </a>
+                
+                {% else %}
+                {%- form 'customer', id: newsletter_id, class: 'form newsletter__form' -%}
+                {%- if form.posted_successfully? -%}
+                <p class="alert alert--success">{{ 'home_page.newsletter.success' | t }}</p>
+                {%- else -%}
+                {%- if form.errors -%}
+                <p class="alert alert--error">{{ form.errors.messages['email'] }}</p>
+                {%- endif -%}
+
+                <input type="hidden" name="contact[tags]" value="newsletter">
+
+                <div class="form__input-row">
+                  <div class="form__input-wrapper form__input-wrapper--labelled">
+                    <input type="email" id="newsletter[contact][email]" name="contact[email]" class="form__field form__field--text open-sans" required placeholder="Your Email">
+                    {% comment %}<label for="newsletter[contact][email]" class="form__floating-label">{{ 'home_page.newsletter.input' | t }}</label>{% endcomment %}
+                  </div>
+
+                  <button type="submit" class="form__submit button button--primary {% if amp_page %}bebas-nue{% endif %}">{{ 'home_page.newsletter.submit' | t }}</button>
+                </div>
+                {%- endif -%}
+                {%- endform -%}
+                {% endif %}
+              </div>
+            </div>
+            <p class="note_txt">{{ section.settings.note_txt }}</p>
+
+          </div>
+        </div>
+      </div>
+      <div class="half_section">
+        <div class="right_section image">
+          <a href="https://api.whatsapp.com/send?phone=+91{{ section.settings.whats_app_number }}" class="newsletter_whatsapp_number" title="Let's Chat" target="_blank">
+            {% unless amp_page %}
+            {{ image_two_desk }}
+            {{ image_two_mob }}
+            {% endunless %}
+
+            <div class="content">
+              {{ icon_img }}
+              <h2 class="heading h2 dacing-font">{{ section.settings.right_heading }}</h2>
+              {{ section.settings.right_txt }}
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image_one",
+      "label": "Background image one"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_one_xs",
+      "label": "Background mobile image one"
+    },
+    {
+      "type": "color",
+      "id": "left_heading_color",
+      "label": "Left heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "right_heading_color",
+      "label": "Left heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "left_heading",
+      "label": "Left heading"
+    },
+    {
+      "type": "text",
+      "id": "left_subheading",
+      "label": "Promo text"
+    },
+    {
+      "type": "text",
+      "id": "note_txt",
+      "label": "Note text"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_two",
+      "label": "Background image two"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_two_xs",
+      "label": "Background mobile image two"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_img",
+      "label": "Whatsapp icon"
+    },
+    {
+      "type": "text",
+      "id": "right_heading",
+      "label": "Right heading"
+    },
+    {
+      "type": "color",
+      "id": "right_txt_color",
+      "label": "Right text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "richtext",
+      "id": "right_txt",
+      "label": "Right text"
+    },
+    {
+      "type": "text",
+      "id": "whats_app_number",
+      "label": "Whats-app number "
+    }
+  ],
+  "presets": [
+    {
+      "category": "Promotional",
+      "name": "Newsletter",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

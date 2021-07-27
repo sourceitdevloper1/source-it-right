@@ -1,0 +1,19 @@
+{% assign display_unit = line_item.properties['_display_unit'] %}
+{% assign base_unit_min = line_item.properties['_base_unit_min'] %}
+{% if display_unit == 'meter' %}
+{% assign base_unit_min = base_unit_min | append:'.00' %}
+{% endif %}
+
+{% assign base_unit = line_item.properties['_base_unit'] %}
+{% assign qty = line_item.quantity | divided_by : base_unit_min %}
+{% assign new_price = line_item.variant.price | times:base_unit_min %}
+
+
+
+{% assign display_base_msg = '' %}
+{% if display_unit == 'meter' %}
+{% assign display_base_msg = display_unit %}
+{% elsif display_unit == 'piece' %}
+{% comment %}' ps.' | append:' of '  | append:line_item.product.metafields.extra.display_min | append:' Mt.'{% endcomment %}
+{% assign display_base_msg =  display_unit %}
+{% endif %}

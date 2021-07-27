@@ -1,0 +1,28 @@
+.instagram-wrapper-section {
+  .insta-title {
+    font-size: 38px;
+    font-weight: 600;
+
+    @media(max-width: 767px) {
+      font-size: 28px;
+    }
+
+  }
+
+
+  .instagram-wrapper-content-text {
+    width: 55%;
+    margin: 15px auto 40px;
+    text-align: center;
+
+    @media(max-width: 767px) {
+      width: 80%;
+      margin: 15px auto 25px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+
+}

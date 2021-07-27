@@ -1,0 +1,240 @@
+{%- if section.blocks.size > 0 -%}
+  <section class="section product-promotion-block" data-section-id="{{ section.id }}" data-section-type="promo-block">
+    <div class="container">
+      {%- capture block_list -%}
+        <div class="block-list">
+          {%- for block in section.blocks -%}
+ 
+            <div id="block-{{ block.id }}" class="block-list__item 1/2--tablet-and-up 1/4--desk" {{ block.shopify_attributes }} >
+              <a {% if block.settings.button_link %}href="{{ block.settings.button_link }}"{% endif %} class="promo-block promo-block--{{ section.settings.section_size }} {% if block.settings.stretch_image %}promo-block__image-wrapper--cover{% endif %}" style="background-repeat: no-repeat;  background: url({{block.settings.image | img_url:'master'}}) no-repeat;background-size: cover;">
+                
+
+                <div class="promo-block__inner promo-block__inner--{{ block.settings.content_position | replace: '_', '-' }}">
+                  {%- if block.settings.title != blank -%}
+                    <p class="promo-block__heading heading h3 dacing-font">{{ block.settings.title | escape }}</p>
+                  {%- endif -%}
+
+                  {%- if block.settings.title != blank -%}
+                    <p class="promo-block__content">{{ block.settings.content | escape | newline_to_br }}</p>
+                  {%- endif -%}
+
+                  {%- if block.settings.button_text != blank -%}
+                    <span class="promo-block__cta button button--floating bebas-nue">{{ block.settings.button_text | escape }}</span>
+                  {%- endif -%}
+                </div>
+
+                <style>
+                  #block-{{ block.id }} .promo-block {
+                    background-color: {{ block.settings.background }};
+                    color: {{ block.settings.text_color }}
+                  }
+
+                  #block-{{ block.id }} .button {
+                    background: {{ block.settings.button_background }};
+                    color: {{ block.settings.button_text_color }};
+                    border: 1px solid {{block.settings.button_border}};
+                    transition: .3s all;
+                  }
+                   #block-{{ block.id }} .button:hover {
+                    background: {{ block.settings.button_background_hover }};
+                    color: {{ block.settings.button_text_color_hover }};
+                    border: 1px solid {{block.settings.button_border_hover}};
+                    transition: .3s all;
+                  }
+
+                </style>
+
+                {%- if block.settings.image -%}
+                  <noscript>
+                    <style>
+                      #block-{{ block.id }} .promo-block__image-wrapper {
+                        background-image: url({% if block.settings.stretch_image %}{{ block.settings.image | img_url: '800x' }}{% else %}{{ block.settings.image | img_url: 'x400' }}{% endif %});
+                      }
+                    </style>
+                  </noscript>
+                {%- endif -%}
+              </a>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endcapture -%}
+
+      {%- if section.settings.stack_mobile -%}
+        {{ block_list }}
+      {%- else -%}
+        <div class="scroller">
+          <div class="scroller__inner">
+            {{ block_list }}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Promotion blocks",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "expand_items",
+      "label": "Expand items to fill row",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "section_size",
+      "label": "Section size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "checkbox",
+      "id": "stack_mobile",
+      "label": "Stack on mobile",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "800 x 800px .png with transparency recommended"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text",
+          "default": "#ffffff"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Your heading"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Text",
+          "default": "Tell more about your product, collection..."
+        },
+        {
+          "type": "select",
+          "id": "content_position",
+          "label": "Content position",
+          "options": [
+            {
+              "value": "top_left",
+              "label": "Top left"
+            },
+            {
+              "value": "top_center",
+              "label": "Top center"
+            },
+            {
+              "value": "top_right",
+              "label": "Top right"
+            },
+            {
+              "value": "middle_left",
+              "label": "Middle left"
+            },
+            {
+              "value": "middle_center",
+              "label": "Middle center"
+            },
+            {
+              "value": "middle_right",
+              "label": "Middle right"
+            },
+            {
+              "value": "bottom_left",
+              "label": "Bottom left"
+            },
+            {
+              "value": "bottom_center",
+              "label": "Bottom center"
+            },
+            {
+              "value": "bottom_right",
+              "label": "Bottom right"
+            }
+          ],
+          "default": "top_left"
+        },
+        {
+          "type": "header",
+          "content": "Button"
+        },
+        {
+          "type": "color",
+          "id": "button_border",
+          "label": "Border",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "button_background",
+          "label": "Background",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Text",
+          "default": "#000000"
+        },
+         {
+          "type": "color",
+          "id": "button_border_hover",
+          "label": "Border hover",
+          "default": "#f69679"
+        },
+        {
+          "type": "color",
+          "id": "button_background_hover",
+          "label": "Background hover",
+          "default": "#f69679"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color_hover",
+          "label": "Text hover",
+          "default": "#fff"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Text",
+          "default": "Learn more"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,85 @@
+{%- if section.settings.show_section -%}
+<div id="icon_section">
+  <section class="section section--tight cart_margin_zero" data-section-id="{{ section.id }}" data-section-type="text-with-icons">
+    <div class="container container--flush">
+      <div class="text-with-icons {% if section.settings.stack_mobile %}text-with-icons--stacked{% endif %}">
+        {%- for block in section.blocks -%}
+        <div class="text-with-icons__item"  data-block-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <div class="text-with-icons__icon-wrapper">
+            {%- if block.settings.custom_icon != blank -%}
+            <img src="{{ block.settings.custom_icon | img_url: '60x' }}" alt="{{ block.settings.custom_icon.alt | escape }}" class="lazyload img_blur blur-up">
+            {%- else -%}
+            {%- render 'icon', icon: block.settings.icon, stroke_width: 1.5 -%}
+            {%- endif -%}
+          </div>
+
+          {%- if block.settings.title != blank or block.settings.content != blank -%}
+          <div class="text-with-icons__content-wrapper">
+            {%- if block.settings.title != blank -%}
+            <h3 class="text-with-icons__title text--strong color_grey">{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+
+            {%- if block.settings.content != blank -%}
+            <div class="text-with-icons__content rte">
+              {{ block.settings.content  }}
+            </div>
+            {%- endif -%}
+          </div>
+          {%- endif -%}
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+<div class="yotpo yotpo-reviews-carousel" 
+ data-background-color="transparent" 
+ data-mode="top_rated" 
+ data-type="both" 
+ data-count="9" 
+ data-show-bottomline="1" 
+ data-autoplay-enabled="1" 
+ data-autoplay-speed="3000" 
+ data-show-navigation="1">&nbsp;</div><br>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Text with icons",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "stack_mobile",
+      "label": "Stack on mobile",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Custom icon",
+          "info": "60 x 60px .png with transparency recommended"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Your title"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

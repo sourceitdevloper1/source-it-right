@@ -1,0 +1,53 @@
+<!-- landing page header -->
+
+<div class="landing_page_header">
+  <div class="container">
+    <div class="flex_view_xs middle">
+      <div class="header_logo">
+        <a href="{{ routes.root_url }}" tabindex="0" title="{{ shop.name }}">
+          {%- if settings.landing_page_logo != blank -%}
+          <img src="{{ settings.landing_page_logo | img_url: 'grande' }}"
+          srcset="{{ settings.landing_page_logo | img_url: 'grande' }} 1x, {{ settings.landing_page_logo | img_url: 'grande', scale: 2 }} 2x"
+          alt="{{ settings.landing_page_logo.alt | default: shop.name | escape }}">
+          {%- else -%}
+          <span>{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+      <div class="landing_page_menu">
+        <ul class="landing_page_menu_ul flex_view_xs middle right">
+
+          {%- unless settings.call_number == blank  -%}
+          <li class="landing_page_menu_li">
+            <a class="landing_page_menu_anchor flex_view_xs middle" href="tel:{{ settings.call_number }}" title="{{ settings.call_number }}" tabindex="0">
+              <span class="landing_page_menu_anchor_icon phone_call_icon">
+                {%- render 'icon', icon: 'phone-call' -%}
+              </span>
+              <span class="landing_page_menu_anchor_title">{{ settings.call_number}}</span>
+            </a>
+          </li>
+          {%- endunless -%}
+
+          {%- unless settings.search_title == blank  -%}
+          <li class="landing_page_menu_li">
+            <a class="landing_page_menu_anchor flex_view_xs middle" href="{{ settings.search_url }}" title="{{ settings.search_title }}" tabindex="0">
+              <span class="landing_page_menu_anchor_icon">
+                {% render 'icon', icon: 'search' %}
+              </span>
+              <span class="landing_page_menu_anchor_title">{{ settings.search_title }}</span>
+            </a>
+          </li>
+          {%- endunless -%}
+
+          <li class="landing_page_menu_li">
+            <a class="landing_page_menu_anchor flex_view_xs middle" href="{{ settings.home_url }}" title="{{ settings.settings.home_title }}" tabindex="0">
+              <span class="landing_page_menu_anchor_icon home_icon">
+                {%- render 'icon', icon: 'home-icon' -%}
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
