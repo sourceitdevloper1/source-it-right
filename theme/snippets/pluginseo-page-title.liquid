@@ -97,7 +97,27 @@
     {%- assign pageTitleIsDefault = true -%}
   {%- endif -%}
 
-  {%- if settings.pluginseo_pageTitleTemplateApplyToAll == true %}
+  <!-- default to true -->
+  {%- assign pageTitleTruncateApplicable = true -%}
+  {%- assign pageTitleTruncatePages = "collection,product,page,blog,article" | split:"," -%}
+  {%- if pageTitleTruncatePages contains rootTemplate -%}
+    <!-- Contain template-->
+    {%- assign pageTitleTruncateSuffix = rootTemplate | capitalize | append: "s" -%}
+    {%- assign pageTitleTruncateField = "pluginseo_pageTitleTruncateEnableFor" | append: pageTitleTruncateSuffix -%}
+    <!-- setting name: {{pageTitleTruncateField}}-->
+    <!-- setting value: {{settings[pageTitleTruncateField]}} -->
+    {%- assign pageTitleTruncateApplicable = settings[pageTitleTruncateField] -%}
+  {%- endif -%}
+
+  <!-- pageTitleTemplate: {{pageTitleTemplate}} -->
+  <!-- pageTitleToParse": {{pageTitleToParse}} -->
+  <!-- pageTitleTruncateApplicable: {{pageTitleTruncateApplicable}} -->
+
+  <!-- pluginseo_pageTitleTemplateApplyToAll: {{settings.pluginseo_pageTitleTemplateApplyToAll}} -->
+  <!-- pageTitleTruncateApplicable: {{pageTitleTruncateApplicable}} -->
+
+  {%- if settings.pluginseo_pageTitleTemplateApplyToAll == true and pageTitleTruncateApplicable == true -%}
+    <!-- Custom page title: Yes -->
     {%- if pageTitleTemplate != blank %}
       {%- assign pTF = pTF | append: pTFTemp -%}
       {%- capture pageTitle -%}{% include 'pluginseo-parse' template:pageTitleTemplate %}{%- endcapture -%}
@@ -106,10 +126,11 @@
       {%- capture pageTitle -%}{% include 'pluginseo-parse' template:pageTitleToParse %}{%- endcapture -%}
     {%- endif -%}
   {%- else -%}
+    <!-- Custom page title: No -->
     {%- if pageTitleIsDefault != true and shopifyHasTitleAndSeoOverride == true %}
       {%- assign pTF = pTF | append: '-me' -%}
       {%- capture pageTitle -%}{% include 'pluginseo-parse' template:pageTitleToParse %}{%- endcapture -%}
-    {%- elsif pageTitleTemplate != blank -%}
+    {%- elsif pageTitleTemplate != blank and pageTitleTruncateApplicable == true -%}
       {%- assign pTF = pTF | append: pTFTemp -%}
       {%- capture pageTitle -%}{% include 'pluginseo-parse' template:pageTitleTemplate %}{%- endcapture -%}
     {%- else -%}

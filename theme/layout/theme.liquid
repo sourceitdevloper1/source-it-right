@@ -11,7 +11,7 @@
   {% comment %} <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> {% endcomment %}
   <meta name="theme-color" content="{{ settings.accent_color }}">
   {% if template contains 'index' %}
-  <meta name="google-site-verification" content="CqVw63eS_hH9oYPMXaTicEbpsO42FYlBPHIIeE731sE" />
+  <meta name="google-site-verification" content="zeIsssY911RlYZQRHI__qheZLqaTKIx20EGAAlYlMO8" />
   {% endif %}
   {%- capture seo_page_title -%}
   {%- if template contains 'search' -%}
@@ -211,5 +211,6 @@
     <script src="{{ 'bundle.js' | asset_url }}" defer></script>
     {% include 'elevar-body-end' %}
     
-  </body>
+  {% include 'adroll' %}
+</body>
 </html> 
