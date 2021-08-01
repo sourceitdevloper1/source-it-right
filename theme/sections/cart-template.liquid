@@ -117,9 +117,6 @@
                               <div class="extra_property color_grey">
                                 <h6>{{ 'cart.general.item_material' | t }}</h6> <h6>{{ line_item.properties._generic }}</h6>
                               </div>
-                              <div class="extra_property color_grey">
-                                <span>{{ 'cart.general.item_note' | t }}: </span><span>{{ line_item.properties._line_item_extra_msg }}</span>
-                              </div>
 
                               {%- unless line_item.properties == blank -%}
                                 <ul class="line-item__property-list">

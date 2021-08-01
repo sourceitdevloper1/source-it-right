@@ -845,6 +845,12 @@
       },
       {
         "type": "checkbox",
+        "id": "open_mini_cart",
+        "label": "Enable Mini cart",
+        "info": "Enable Mini cart popup"
+      },
+      {
+        "type": "checkbox",
         "label": "Enable add cart popup",
         "id": "add_cart_popup",
         "default": true,

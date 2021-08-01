@@ -172,7 +172,7 @@
     {%- form 'product', product, class: 'product-form' -%}
     {% if material_found %}
     <input type="hidden" name="properties[_generic]" value="{{material_tag}}">
-    <input class="line-item-extra-msg" type="hidden" name="properties[_line_item_extra_msg]" value="{{ line_item_extra_msg }}"/>
+    <input class="line-item-extra-msg" type="hidden" name="properties[Note]" value="{{ line_item_extra_msg }}"/>
     {% endif %}
     {%- unless product.has_only_default_variant -%}
     <div class="product-form__variants">
@@ -417,7 +417,6 @@
           <input data-qty="{{base_unit_min}}" type="text" id="Quantity-{{ section.id }}-{{ product.id }}-quantity" name="unit_quantity" value="{% if display_unit == "meter" %}1.0{% else %}1{% endif %}" min="1" class="product-form__quantity product-form__input unit_quantity {% if display_unit == 'piece' %}piece_input_qty{% endif %}" inputmode="text" pattern="\d*" data-display="{{display_unit}}">
           <label>{{display_unit}}</label>
           <input type="hidden" name="properties[_display_unit]" value="{{display_unit}}"/>
-          <input type="hidden" name="properties[_line_item_extra_msg]" value="{{ line_item_extra_msg }}"/>
           <input type="hidden" class="min_qty_input" name="properties[_base_unit_min]" value="{{base_unit_min}}"/>
           <input type="hidden" name="properties[_base_unit]" value="{{base_unit}}"/>
           <input type="hidden" id="Quantity-{{ section.id }}" name="quantity" data-base-unit-min="{{base_unit_min}}" value="{{base_unit_min}}" min="{{base_unit_min}}" class="actual_qty">
