@@ -182,27 +182,52 @@ simply.productStickyBtn = function(btn){
 };
 
 simply.someMatchesProduct = function(){
-  $(".tabbed-content").on('init', function () {
-    simply.productItemBlockWrap();
-    $(this).removeClass('hidden');
-  });
-  $(".tabbed-content").slick({
-    speed: 300,
-    infinite: false,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    arrows : false,
-    dots : false,
-    responsive: [
-      {
-        breakpoint: 800,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2
+  if($("#shopify-section-product-template .product-block-list__item--info".length > 0)){
+    $("#shopify-section-product-template .product-block-list__item--info .tabbed-content").on('init', function () {
+      simply.productItemBlockWrap();
+      $(this).removeClass('hidden');
+    });
+    $("#shopify-section-product-template .product-block-list__item--info .tabbed-content").slick({
+      speed: 300,
+      infinite: false,
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      arrows : false,
+      dots : false,
+      responsive: [
+        {
+          breakpoint: 800,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
         }
-      }
-    ]
-  });
+      ]
+    });
+  }
+  if($("#shopify-section-product-some-matches-section .product-some-matches-section").length > 0){
+    $("#shopify-section-product-some-matches-section .product-some-matches-section .tabbed-content").on('init', function () {
+      simply.productItemBlockWrap();
+      $(this).removeClass('hidden');
+    });
+    $("#shopify-section-product-some-matches-section .product-some-matches-section .tabbed-content").slick({
+      speed: 300,
+      infinite: false,
+      slidesToShow: 5,
+      slidesToScroll: 5,
+      arrows : false,
+      dots : false,
+      responsive: [
+        {
+          breakpoint: 800,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        }
+      ]
+    });
+  }
 }
 
 simply.productInit = function(){

@@ -1,0 +1,45 @@
+<!-- sections/product-some-matches-section -->
+{%- if section.settings.enable_section -%}
+{%- comment -%} :: here-are-some-matches-product :: {%- endcomment -%}
+{% assign collection = collections.all %}
+{%- assign tabbed_one = false -%}
+{%- assign tabbed_second = false -%}
+{%- assign tabbed_third = false -%}
+{% for product in collections.all.products %}
+  {%- for product_tags in product.tags -%}
+    {%- if product_tags contains 'usage_Skirt' -%}
+      {%- assign tabbed_one = true -%}
+    {%- endif -%}
+    {%- if product_tags contains 'usage_Kurta' -%}  
+      {%- assign tabbed_second = true -%}
+    {%- endif -%}
+    {%- if product_tags contains 'usage_Kurti' -%}  
+      {%- assign tabbed_third = true -%}
+    {%- endif -%}
+  {% endfor %}
+{% endfor %}
+  <section class="product-some-matches-section">
+    <div class="container ">
+      <div class="here-are-some-matches-product-wrapper">
+        <h4 class="block-heading">
+          Here are some matches
+        </h4>
+        {%- comment -%} :: some-matches-product-items :: {%- endcomment -%}
+        {%- include 'some-matches-product-items' -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Some matches product",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_section",
+      "label": "Enable some matches product "
+    }
+  ]
+}
+{% endschema %}

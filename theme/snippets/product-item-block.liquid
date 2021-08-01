@@ -17,7 +17,7 @@
     {%- else -%}
       <span class="bebas-nue price" data-money-convertible>{{ new_price | money }}</span>
     {%- endif -%}
-    <form method="post" action="/cart/add" id="product_{{ product.id }}" accept-charset="UTF-8" class="product-form" enctype="multipart/form-data">
+    {%- form 'product', product, class: product_form_classes -%}
       <div class="product-form__info-item product-form__info-item--quantity custom_qty_wrap">
         <label for="{{ section.id }}-{{ product.id }}-quantity" class="product-form__info-title text--strong">{{ 'product.form.quantity' | t }}:</label>
         <div class="product-form__info-content">
@@ -33,6 +33,6 @@
       {%- else -%}
         <button type="submit" class="product-form__add-button button button--disabled" disabled>{{ 'product.form.sold_out' | t }}</button>
       {%- endif -%}
-    </form>
+    {%- endform -%}
   </div>
 </div>
