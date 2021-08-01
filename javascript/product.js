@@ -28,6 +28,14 @@ simply.productEvents = function(){
   $(".exit-popup__close.modal_close").click(function(){
     $(this).closest(".modal").attr("aria-hidden",true);
   });
+
+  // tabbed-item
+  $(document).on("click", ".tabbed-item", function(){
+    $(this).addClass('active').siblings().removeClass('active');
+    var targetElement = $(this).data("value"),
+        productItemSelected = parseInt($('.here-are-some-matches-product-wrapper').find('.tabbed-content .slick-slide[data-targat="'+targetElement+'"]:first').attr("data-slick-index"));
+    $(".tabbed-content").slick('slickGoTo',productItemSelected);
+  })
 };
 
 simply.adjustQuantity = function(e,that){
@@ -74,6 +82,10 @@ simply.popupError = function(title){
  var msg_text = "We don't have as many "+title+" as you requested. We only have "+product_qty+".";
  $(".error_content",err_pop).html(msg_text);
  $(".modal",err_pop).attr("aria-hidden","false");
+};
+
+simply.matchesProductDataUpdate = function(){
+  console.log("this is matches Product Data Update function!");
 };
 
 simply.addCartPopupEnable = function(data){
@@ -151,6 +163,13 @@ simply.productFormatMoney = function(t, e) {
   return a.replace(n, r)
 };
 
+simply.productItemBlockWrap = function(){
+  $(".here-are-some-matches-product-wrapper .tabbed-content.slick-initialized .slick-slide").each(function(){
+    var dataHandle = $(this).find(".product-item-block-wrap").data("tag");
+    $(this).attr("data-targat",dataHandle);
+  })
+}
+
 simply.productStickyBtn = function(btn){
   var windowTop = $(window).scrollTop();
   var btn_wrap = $('.template-product .custom_qty_wrap.sticky_button_wrap');
@@ -162,8 +181,33 @@ simply.productStickyBtn = function(btn){
   }
 };
 
+simply.someMatchesProduct = function(){
+  $(".tabbed-content").on('init', function () {
+    simply.productItemBlockWrap();
+    $(this).removeClass('hidden');
+  });
+  $(".tabbed-content").slick({
+    speed: 300,
+    infinite: false,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    arrows : false,
+    dots : false,
+    responsive: [
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      }
+    ]
+  });
+}
+
 simply.productInit = function(){
   simply.productEvents();
+  simply.someMatchesProduct();
   if ($(".template-product").length > 0 && screen.width < 768) {
     var stickyTop = $('.template-product .product-form__payment-container').offset().top + 60;
     simply.productStickyBtn(stickyTop); 

@@ -1191,5 +1191,34 @@
         "type": "image_picker"
       }
     ]
+  },
+  {
+    "name": "Product line item Message",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "product_piece_msg_enable",
+        "label": "Product piece message enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "product_piece_msg",
+        "label": "Product piece message",
+        "default": "Product piece message"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_meter_msg_enable",
+        "label": "Product meter message enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "product_meter_msg",
+        "label": "Product Meter message",
+        "default": "Product meter message"
+      }
+    ]
   }
 ]

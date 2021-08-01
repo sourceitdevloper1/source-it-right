@@ -1,0 +1,41 @@
+<!-- snippest/here-are-some-matches-product -->
+{% assign collection = collections.all %}
+{%- assign tabbed_one = false -%}
+{%- assign tabbed_second = false -%}
+{%- assign tabbed_third = false -%}
+{% for product in collections.all.products %}
+  {%- for product_tags in product.tags -%}
+    {%- if product_tags contains 'usage_Skirt' -%}
+      {%- assign tabbed_one = true -%}
+    {%- endif -%}
+    {%- if product_tags contains 'usage_Kurta' -%}  
+      {%- assign tabbed_second = true -%}
+    {%- endif -%}
+    {%- if product_tags contains 'usage_Kurti' -%}  
+      {%- assign tabbed_third = true -%}
+    {%- endif -%}
+  {% endfor %}
+{% endfor %}
+<div class="here-are-some-matches-product-wrapper">
+  <h4 class="block-heading">
+    Here are some matches
+  </h4>
+  <div class="item-block-wrapper">
+    <div class="img">
+      {%- if product.featured_image.src != blank -%}
+        {%- assign preload_src = true -%}
+        {%- assign src_name = product.featured_image.src -%}
+        {%- assign src_alt = product.title | escape  -%}
+        {%- render 'srcset', src_name:src_name, src_alt:src_alt, preload_src:false -%}
+      {%- endif -%}
+    </div>
+    <div class="product-info-wrapper">
+      <span class="product-id bebas-nue">Product Id: <span class="material_text bebas-nue">{{ product.id | escape }}</span></span>
+      {% if material_found %} 
+        <span class="material_type bebas-nue">{{ 'product.general.material' | t }} <span class="material_text bebas-nue">{{material_tag}}</span></span>
+      {% endif %}
+    </div>
+  </div>
+  {%- comment -%} :: some-matches-product-items :: {%- endcomment -%}
+  {%- include 'some-matches-product-items' -%}
+</div>
