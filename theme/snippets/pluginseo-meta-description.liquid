@@ -95,7 +95,38 @@
     {%- assign metaDescriptionIsDefault = true -%}
   {%- endif -%}
 
-  {%- if settings.pluginseo_metaDescriptionTemplateApplyToAll == true %}
+  {%- assign metaDescTruncatePages = "collection,product,page,blog,article" | split:"," -%}
+  {%- if metaDescTruncatePages contains rootTemplate -%}
+    {%- assign metaDescTruncateSuffix = rootTemplate | capitalize |  append: "s" -%}
+    {%- assign metaDesTrancateField = "pluginseo_metaDescriptionTruncateEnableFor" | append: metaDescTruncateSuffix -%}
+    {%- assign metaDescTruncateApplicable = settings[metaDesTrancateField] -%}
+  {%- else -%}
+    {%- assign metaDescTruncateApplicable = true -%}
+  {%- endif -%}
+
+
+
+  <!-- default to true -->
+  {%- assign metaDescriptionTruncateApplicable = true -%}
+  {%- assign metaDescriptionTruncatePages = "collection,product,page,blog,article" | split:"," -%}
+  {%- if metaDescriptionTruncatePages contains rootTemplate -%}
+    <!-- Contain template-->
+    {%- assign metaDescriptionTruncateSuffix = rootTemplate | capitalize | append: "s" -%}
+    {%- assign metaDescriptionTruncateField = "pluginseo_metaDescriptionTruncateEnableFor" | append: metaDescriptionTruncateSuffix -%}
+    <!-- setting name: {{metaDescriptionTruncateField}}-->
+    <!-- setting value: {{settings[metaDescriptionTruncateField]}} -->
+    {%- assign metaDescriptionTruncateApplicable = settings[metaDescriptionTruncateField] -%}
+  {%- endif -%}
+
+  <!-- metaDescriptionTemplate: {{metaDescriptionTemplate}} -->
+  <!-- metaDescriptionToParse": {{metaDescriptionToParse}} -->
+  <!-- metaDescriptionTruncateApplicable: {{metaDescriptionTruncateApplicable}} -->
+
+  <!-- pluginseo_metaDescriptionTemplateApplyToAll: {{settings.pluginseo_metaDescriptionTemplateApplyToAll}} -->
+  <!-- metaDescriptionTruncateApplicable: {{metaDescriptionTruncateApplicable}} -->
+
+  {%- if settings.pluginseo_metaDescriptionTemplateApplyToAll == true and metaDescriptionTruncateApplicable == true -%}
+    <!-- Yes -->
     {%- if metaDescriptionTemplate != blank %}
       {%- assign mDF = mDF | append: mDFTemp -%}
       {%- capture metaDescription -%}{% include 'pluginseo-parse' template:metaDescriptionTemplate %}{%- endcapture -%}
@@ -104,12 +135,17 @@
       {%- capture metaDescription -%}{% include 'pluginseo-parse' template:metaDescriptionToParse %}{%- endcapture -%}
     {%- endif -%}
   {%- else -%}
+    <!-- No-->
     {%- if metaDescriptionIsDefault != true and shopifyHasMetaDescriptionAndSeoOverride == true %}
+      <!--1-->
       {%- assign mDF = mDF | append: '-me' -%}
       {%- capture metaDescription -%}{% include 'pluginseo-parse' template:metaDescriptionToParse %}{%- endcapture -%}
     {%- elsif metaDescriptionTemplate != blank -%}
+      <!--2-->
+
       {%- capture metaDescription -%}{% include 'pluginseo-parse' template:metaDescriptionTemplate %}{%- endcapture -%}
     {%- else -%}
+      <!--3-->
       {%- assign mDF = mDF | append: '-me' -%}
       {%- capture metaDescription -%}{% include 'pluginseo-parse' template:metaDescriptionToParse %}{%- endcapture -%}
     {%- endif -%}
