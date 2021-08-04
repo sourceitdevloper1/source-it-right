@@ -69,6 +69,7 @@
         cartType: {{ settings.cart_type | json }},
         cartPopup: {{ settings.add_cart_popup | json }}
       };
+
       window.languages = {
         collectionOnSaleLabel: {{ 'collection.product.discount_html' | t | json }},
         productFormUnavailable: {{ 'product.form.unavailable' | t | json }},
@@ -80,6 +81,7 @@
         shippingEstimatorErrors: {{ 'cart.shipping_estimator.errors' | t | json }},
         minQuantityMessage: {{ 'general.popup.min_qty_text' | t | json }}
       };
+
       window.lazySizesConfig = {
         loadHidden: false,
         hFac: 0.8,
@@ -90,6 +92,7 @@
           '--lap': '(min-width: 1024px)'
         }
       };
+
       document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
     </script>
 
