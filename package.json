@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --mode development & cd theme && theme open && theme deploy && theme watch",
     "watch": "webpack --mode development & cd theme && theme open && theme watch",
-    "deploy": "webpack && cd theme && theme open && theme deploy",
+    "deploy": "webpack && cd theme && theme open --env=production && theme deploy --env=production",
     "build": "webpack --mode production && cd theme && theme deploy"
   },
   "author": "",
