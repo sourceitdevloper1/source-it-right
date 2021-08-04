@@ -34,8 +34,6 @@ simply.miniHeightFunction = function(){
 // product Page Mini-Height function
 simply.productPageMiniHeight = function(){
   simply.miniHeight(".section.product-promotion-block .block-list__item .promo-block__heading",".section.product-promotion-block .block-list__item .promo-block__heading");
-  simply.miniHeight(".section.product-promotion-block .block-list__item .promo-block__content",".section.product-promotion-block .block-list__item .promo-block__content");
-  simply.miniHeight(".here-are-some-matches-product-wrapper .tabbed-content .product-item-block-wrap .product-title",".here-are-some-matches-product-wrapper .tabbed-content .product-item-block-wrap .product-title");
 };
 
 

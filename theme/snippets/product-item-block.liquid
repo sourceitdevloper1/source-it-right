@@ -23,7 +23,7 @@
         <div class="product-form__info-content">
           <div class="select-wrapper select-wrapper--small select-wrapper--primary">
             <input data-qty="{{base_unit_min}}" type="text" id="Quantity-{{ section.id }}-{{ product.id }}-quantity" name="unit_quantity" value="{% if display_unit == "meter" %}1.0{% else %}1{% endif %}" min="1" class="product-form__quantity product-form__input unit_quantity {% if display_unit == 'piece' %}piece_input_qty{% endif %}" inputmode="text" pattern="\d*" data-display="{{display_unit}}">
-            <label>{{display_unit}}</label>
+            {%- comment -%}<label>{{display_unit}}</label>{%- endcomment -%}
             <input type="hidden" id="Quantity-{{ section.id }}" name="quantity" data-base-unit-min="{{base_unit_min}}" value="{{base_unit_min}}" min="{{base_unit_min}}" class="actual_qty">
           </div>
         </div>

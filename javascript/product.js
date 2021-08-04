@@ -84,8 +84,31 @@ simply.popupError = function(title){
  $(".modal",err_pop).attr("aria-hidden","false");
 };
 
-simply.matchesProductDataUpdate = function(){
-  console.log("this is matches Product Data Update function!");
+simply.showMixAndMatchesBlock = function(){
+  debugger;
+  simply.someMatchesProduct();
+  simply.miniHeight(".section.product-promotion-block .block-list__item .promo-block__content",".section.product-promotion-block .block-list__item .promo-block__content");
+  simply.miniHeight(".here-are-some-matches-product-wrapper .tabbed-content .product-item-block-wrap .product-title",".here-are-some-matches-product-wrapper .tabbed-content .product-item-block-wrap .product-title");
+}
+
+simply.matchesProductDataUpdate = function(data){
+  var pop_variant_id = data.detail.variant.id;
+  $.get('/cart.json',function(cartJson){
+    debugger;
+    var items = cartJson.items;
+    var cart_pop_total_price = cartJson.total_price;
+    $(items).each(function(i){
+      if(items[i].id == pop_variant_id){
+        $(".here-are-some-matches-product-wrapper .item-block-wrapper .img img").attr('src',items[i].image);
+        $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-id-wrap .product-id").text(items[i].id);
+        $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-generic-wrap .product-generic").text(items[i].properties._generic);        
+        return false;
+      }
+    });
+    $(".checkout-price-wrapper .price-wrap .order-price").html(simply.productFormatMoney(cart_pop_total_price,window.theme.moneyFormat));
+  });
+  $(".here-are-some-matches-product-wrapper").addClass('active').fadeIn();
+  simply.showMixAndMatchesBlock();
 };
 
 simply.addCartPopupEnable = function(data){
@@ -182,57 +205,30 @@ simply.productStickyBtn = function(btn){
 };
 
 simply.someMatchesProduct = function(){
-  if($("#shopify-section-product-template .product-block-list__item--info".length > 0)){
-    $("#shopify-section-product-template .product-block-list__item--info .tabbed-content").on('init', function () {
-      simply.productItemBlockWrap();
-      $(this).removeClass('hidden');
-    });
-    $("#shopify-section-product-template .product-block-list__item--info .tabbed-content").slick({
-      speed: 300,
-      infinite: false,
-      slidesToShow: 3,
-      slidesToScroll: 3,
-      arrows : false,
-      dots : false,
-      responsive: [
-        {
-          breakpoint: 800,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2
-          }
+  var tabbedItemSliderElm = $("#shopify-section-product-template .product-block-list__item--info .tabbed-content");
+  tabbedItemSliderElm.removeClass('hidden');
+  tabbedItemSliderElm.slick({
+    speed: 300,
+    infinite: false,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    arrows : false,
+    dots : false,
+    responsive: [
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
         }
-      ]
-    });
-  }
-  if($("#shopify-section-product-some-matches-section .product-some-matches-section").length > 0){
-    $("#shopify-section-product-some-matches-section .product-some-matches-section .tabbed-content").on('init', function () {
-      simply.productItemBlockWrap();
-      $(this).removeClass('hidden');
-    });
-    $("#shopify-section-product-some-matches-section .product-some-matches-section .tabbed-content").slick({
-      speed: 300,
-      infinite: false,
-      slidesToShow: 5,
-      slidesToScroll: 5,
-      arrows : false,
-      dots : false,
-      responsive: [
-        {
-          breakpoint: 800,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2
-          }
-        }
-      ]
-    });
-  }
+      }
+    ]
+  });
+  simply.productItemBlockWrap();
 }
 
 simply.productInit = function(){
   simply.productEvents();
-  simply.someMatchesProduct();
   if ($(".template-product").length > 0 && screen.width < 768) {
     var stickyTop = $('.template-product .product-form__payment-container').offset().top + 60;
     simply.productStickyBtn(stickyTop); 
@@ -247,5 +243,4 @@ simply.productInit = function(){
 
 $(document).ready(function() {
   simply.productInit();
-  
 });
