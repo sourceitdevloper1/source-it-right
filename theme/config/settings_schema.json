@@ -53,36 +53,6 @@
         "default": true
       },
       {
-        "type": "checkbox",
-        "id": "pluginseo_pageTitleTruncateEnableForCollections",
-        "label": "Apply To Collections",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "pluginseo_pageTitleTruncateEnableForProducts",
-        "label": "Apply To Products",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "pluginseo_pageTitleTruncateEnableForPages",
-        "label": "Apply To Pages",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "pluginseo_pageTitleTruncateEnableForArticles",
-        "label": "Apply To Articles",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "pluginseo_pageTitleTruncateEnableForBlogs",
-        "label": "Apply To Blogs",
-        "default": true
-      },
-      {
         "type": "text",
         "id": "pluginseo_pageTitleDefaultTemplate",
         "label": "Default",
@@ -173,36 +143,6 @@
         "type": "checkbox",
         "id": "pluginseo_metaDescriptionTemplateApplyToAll",
         "label": "Also apply templates to manually entered meta descriptions?",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "pluginseo_metaDescriptionTruncateEnableForCollections",
-        "label": "Apply To Collections",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "pluginseo_metaDescriptionTruncateEnableForProducts",
-        "label": "Apply To Products",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "pluginseo_metaDescriptionTruncateEnableForPages",
-        "label": "Apply To Pages",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "pluginseo_metaDescriptionTruncateEnableForArticles",
-        "label": "Apply To Articles",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "pluginseo_metaDescriptionTruncateEnableForBlogs",
-        "label": "Apply To Blogs",
         "default": true
       },
       {
@@ -845,12 +785,6 @@
       },
       {
         "type": "checkbox",
-        "id": "open_mini_cart",
-        "label": "Enable Mini cart",
-        "info": "Enable Mini cart popup"
-      },
-      {
-        "type": "checkbox",
         "label": "Enable add cart popup",
         "id": "add_cart_popup",
         "default": true,
@@ -1170,10 +1104,10 @@
         "default": true
       },
       {
-        "type": "text",
-        "id": "cod_pincodes_url",
-        "label": "Pincodes file link",
-        "info": "Convert excel file into json from [here](https:\/\/beautifytools.com\/excel-to-json-converter.php)"
+        "type":"text",
+        "id":"cod_pincodes_url",
+        "label":"Pincodes file link",
+        "info":"Convert excel file into json from [here](https://beautifytools.com/excel-to-json-converter.php)"
       },
       {
         "id": "india_cod_hide_states",
@@ -1195,35 +1129,6 @@
         "id": "paymentstep_offer_banner",
         "label": "Banner",
         "type": "image_picker"
-      }
-    ]
-  },
-  {
-    "name": "Product line item Message",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "product_piece_msg_enable",
-        "label": "Product piece message enable",
-        "default": true
-      },
-      {
-        "type": "text",
-        "id": "product_piece_msg",
-        "label": "Product piece message",
-        "default": "Product piece message"
-      },
-      {
-        "type": "checkbox",
-        "id": "product_meter_msg_enable",
-        "label": "Product meter message enable",
-        "default": true
-      },
-      {
-        "type": "text",
-        "id": "product_meter_msg",
-        "label": "Product Meter message",
-        "default": "Product meter message"
       }
     ]
   }
