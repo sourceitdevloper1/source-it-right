@@ -23,13 +23,11 @@
   <div class="item-block-wrapper">
     <div class="img">
       {%- if product.featured_image.src != blank -%}
-        {%- assign preload_src = true -%}
-        {%- assign src_name = product.featured_image.src -%}
-        {%- assign src_alt = product.title | escape  -%}
-        {%- render 'srcset', src_name:src_name, src_alt:src_alt, preload_src:false -%}
+      <img alt="50 Gram Pure Silk White Colour Dyeble Fabric" src="//cdn.shopify.com/s/files/1/0285/2667/4059/products/1044_1_grande.jpg?v=1612522103" />
       {%- endif -%}
     </div>
     <div class="product-info-wrapper">
+      <span class="product-title-wrap bebas-nue">{{ product.title | escape }}</span>
       <span class="product-id-wrap bebas-nue">Product Id: <span class="product-id bebas-nue">{{ product.id | escape }}</span></span>
       {% if material_found %} 
         <span class="product-generic-wrap bebas-nue">{{ 'product.general.material' | t }} <span class="product-generic bebas-nue">{{material_tag}}</span></span>
