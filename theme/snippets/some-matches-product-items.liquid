@@ -1,37 +1,37 @@
 <div class="product-list-wrapper">
-    <ul class="tabbed-header">
-      {%- if tabbed_one -%}
-        <li class="tabbed-item active" role="tab" data-value="usage_skirt">One</li>
-      {%- endif -%}
-      {%- if tabbed_second -%}
-        <li class="tabbed-item" role="tab" data-value="usage_kurta">Second</li>
-      {%- endif -%}
-      {%- if tabbed_third -%}
-        <li class="tabbed-item" role="tab" data-value="usage_kurti">Third</li>
-      {%- endif -%}
-    </ul>
-    <!-- snippets/product-item-block -->
-    <div class="tabbed-content hidden">
-      {% for product in collections.all.products %}
-        {%- for product_tags in product.tags -%}
-          {%- if product_tags contains 'usage_Skirt' -%}
-            {%- include 'product-item-block' -%}
-          {%- endif -%}
-        {% endfor %}
+  <ul class="tabbed-header">
+    {%- if tabbed_one -%}
+      <li class="tabbed-item active" role="tab" data-value="usage_skirt">One</li>
+    {%- endif -%}
+    {%- if tabbed_second -%}
+      <li class="tabbed-item" role="tab" data-value="usage_kurta">Second</li>
+    {%- endif -%}
+    {%- if tabbed_third -%}
+      <li class="tabbed-item" role="tab" data-value="usage_kurti">Third</li>
+    {%- endif -%}
+  </ul>
+  <!-- snippets/product-item-block -->
+  <div class="tabbed-content hidden">
+    {% for product in collections.all.products %}
+      {%- for product_tags in product.tags -%}
+        {%- if product_tags contains 'usage_Skirt' -%}
+          {%- include 'product-item-block' -%}
+        {%- endif -%}
       {% endfor %}
-      {% for product in collections.all.products %}
-        {%- for product_tags in product.tags -%}
-          {%- if product_tags contains 'usage_Kurta' -%}
-            {%- include 'product-item-block' -%}
-          {%- endif -%}
-        {% endfor %}
+    {% endfor %}
+    {% for product in collections.all.products %}
+      {%- for product_tags in product.tags -%}
+        {%- if product_tags contains 'usage_Kurta' -%}
+          {%- include 'product-item-block' -%}
+        {%- endif -%}
       {% endfor %}
-      {% for product in collections.all.products %}
-        {%- for product_tags in product.tags -%}
-          {%- if product_tags contains 'usage_Kurti' -%}
-            {%- include 'product-item-block' -%}
-          {%- endif -%}
-        {% endfor %}
+    {% endfor %}
+    {% for product in collections.all.products %}
+      {%- for product_tags in product.tags -%}
+        {%- if product_tags contains 'usage_Kurti' -%}
+          {%- include 'product-item-block' -%}
+        {%- endif -%}
       {% endfor %}
-    </div>
+    {% endfor %}
   </div>
+</div>

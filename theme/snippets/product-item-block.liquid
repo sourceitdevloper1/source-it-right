@@ -1,3 +1,38 @@
+{%- assign selected_variant = product.selected_or_first_available_variant -%}
+{% assign selectedvariantavailability = false %}
+{% assign base_unit_min = 1 %}
+{% assign display_unit = '' %}
+{% assign inStock = '' %}
+{% for tag in product.tags %}
+  {% if tag contains 'base_unit_min' %}
+    {% assign base_unit_min = tag | replace:'base_unit_min_' | plus: 0 %}
+  {% elsif tag contains 'display_unit' %}
+    {% assign display_unit = tag | replace:'display_unit_' %}
+  {% elsif tag contains 'base_unit_' %}
+    {% assign base_unit = tag | replace:'base_unit_' %}
+  {% endif %}
+{% endfor %}
+{% assign new_price = product.selected_or_first_available_variant.price | times:base_unit_min %}
+{% assign new_comp_price = product.selected_or_first_available_variant.compare_at_price | times:base_unit_min %}
+{% assign display_base_msg = '' %}
+{% if display_unit == 'meter' %}
+  {% assign display_base_msg = display_unit %}
+{% elsif display_unit == 'piece' %}
+  {% assign piece_text = 'piece of Meter' %}
+  {% for tag in product.tags %}
+    {% assign unit_tag = tag | slice: 0, 5 %}
+    {% if unit_tag ==  "unit_"%}
+      {% assign piece_text = tag | remove: 'unit_' %}
+    {% endif %}
+  {% endfor %}
+  {% assign display_base_msg = piece_text %}
+{% endif %}
+{% assign inStock = product.first_available_variant.inventory_quantity | divided_by:base_unit_min %}
+{% assign variantquantity = selected_variant.inventory_quantity | plus: 0 %}
+{% assign selectedvariantavailability = false %}
+{%- if variantquantity >= base_unit_min -%}
+{% assign selectedvariantavailability = true %}
+{% endif %}
 {% assign material_found = false %}
 {% for tag in product.tags %}
   {% if tag contains 'generic-name_' %}
@@ -27,18 +62,47 @@
     {%- endif -%}
     
     <form method="post" action="/cart/add" data-product-id={{ product.id }}>
-      <div class="form-wrap">
-        <label for="{{ section.id }}-{{ product.id }}-quantity" class="product-form__info-title text--strong">{{ 'product.form.quantity' | t }}:</label>
-        <input data-qty="{{base_unit_min}}" type="text" id="Quantity-{{ section.id }}-{{ product.id }}-quantity" name="unit_quantity" value="{% if display_unit == "meter" %}1.0{% else %}1{% endif %}" min="1" class="product-form__quantity product-form__input unit_quantity {% if display_unit == 'piece' %}piece_input_qty{% endif %}" inputmode="text" pattern="\d*" data-display="{{display_unit}}">
-      </div>
       {% if material_found %}
         <input type="hidden" name="properties[_generic]" value="{{material_tag}}">
-      {% endif %}
-      <input type="hidden" id="Quantity-{{ section.id }}" name="quantity" data-base-unit-min="{{base_unit_min}}" value="{{base_unit_min}}" min="{{base_unit_min}}" class="actual_qty">
-      <input name="id" id="item-vid" value="{{ product.variants.first.id }}" type="hidden" />
-      <input type="hidden" name="quantity" value="1" class="unit_quantity">
-      <!-- <input name="add" value="ORDER NOW" type="submit" /> -->
-      <button type="submit" class="product-form-addToCart button button--primary">{{ 'product.form.add_to_cart' | t }}</button>
+      {% endif %}    
+      <div class="product-form__info-list">
+        {% assign prod_instock =  product.first_available_variant.inventory_quantity | divided_by:base_unit_min | plus:0 %}
+        {% assign prod_instock_last =  product.first_available_variant.inventory_quantity | modulo:base_unit_min | plus:0 %}
+        {% assign unit_min = base_unit_min %}
+        {% if display_unit == 'meter' %}
+          {% assign unit_min = base_unit_min | plus:0.0 %}
+        {% endif %}
+        {% assign prod_instock_last =  prod_instock_last | divided_by:unit_min %}
+        {% assign prod_instock = prod_instock | plus:prod_instock_last %}
+        <input type="hidden" id="product_in_stock" value="{{prod_instock}} {{ display_unit }}"/>
+        {%- if section.settings.show_instock_quantity and prod_instock <= 5 -%}
+          <div class="product-form__info-item">
+            <span class="product-form__info-title text--strong bebas-nue">{{ 'product.form.in_stock_avaialble' | t }}:</span>
+            <span class="bebas-nue inventory--low">{{ prod_instock }} {{ display_unit }}</span>
+          </div>
+        {%- endif -%}
+        <div class="product-form__info-item product-form__info-item--quantity custom_qty_wrap">
+          <label for="{{ section.id }}-{{ product.id }}-quantity" class="product-form__info-title text--strong">{{ 'product.form.quantity' | t }}:</label>
+          <div class="product-form__info-content">
+            <div class="select-wrapper select-wrapper--small select-wrapper--primary">
+              <input data-qty="{{base_unit_min}}" type="text" id="Quantity-{{ section.id }}-{{ product.id }}-quantity" name="unit_quantity" value="{% if display_unit == "meter" %}1.0{% else %}1{% endif %}" min="1" class="product-form__quantity product-form__input unit_quantity {% if display_unit == 'piece' %}piece_input_qty{% endif %}" inputmode="text" pattern="\d*" data-display="{{display_unit}}">
+              <label>{{display_unit}}</label>
+              <input type="hidden" name="item-vid" data-sku="{{ selected_variant.sku }}" value="{{ selected_variant.id }}">
+              <input type="hidden" name="properties[_display_unit]" value="{{display_unit}}"/>
+              <input type="hidden" class="min_qty_input" name="properties[_base_unit_min]" value="{{base_unit_min}}"/>
+              <input type="hidden" name="properties[_base_unit]" value="{{base_unit}}"/>
+              <input type="hidden" name="quantity" data-base-unit-min="{{base_unit_min}}" value="{{base_unit_min}}" min="{{base_unit_min}}" class="actual_qty">
+            </div>
+          </div>
+        </div>
+        <div class="add_to_cart_wrap">
+          {%- if selectedvariantavailability -%}
+            <button type="submit" class="product-form__add-button button button--primary" data-action="add-to-cart-btn">{{ 'product.form.add_to_cart' | t }}</button>
+          {%- else -%}
+            <button type="submit" class="product-form__add-button button button--disabled" disabled>{{ 'product.form.sold_out' | t }}</button>
+          {%- endif -%}
+        </div>
+      </div>
     </form>
   </div>
 </div>

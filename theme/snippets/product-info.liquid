@@ -2,18 +2,6 @@
 {% assign selectedvariantavailability = false %}
 {% include 'price-logic' %}
 
-{%- comment -%} :: Properties line item message  :: {%- endcomment -%}
-{%- assign product_tag_val = product.tags | join : ',' -%}
-{%- if settings.product_piece_msg_enable and product_tag_val contains 'display_unit_piece' -%}
-  {%- assign line_item_extra_msg = ''-%}
-  {%- assign line_item_extra_msg = settings.product_piece_msg -%}
-{%- endif -%}
-{%- if settings.product_meter_msg_enable and product_tag_val contains 'display_unit_meter' -%}
-  {%- assign line_item_extra_msg = ''-%}
-  {%- assign line_item_extra_msg = settings.product_meter_msg -%}
-{%- endif -%}
-{%- comment -%} :: Properties line item message  :: {%- endcomment -%}
-
 {% assign material_found = false %}
 {% for tag in product.tags %}
 {% if tag contains 'generic-name_' %}
@@ -172,7 +160,6 @@
     {%- form 'product', product, class: 'product-form' -%}
     {% if material_found %}
     <input type="hidden" name="properties[_generic]" value="{{material_tag}}">
-    <input class="line-item-extra-msg" type="hidden" name="properties[Note]" value="{{ line_item_extra_msg }}"/>
     {% endif %}
     {%- unless product.has_only_default_variant -%}
     <div class="product-form__variants">
