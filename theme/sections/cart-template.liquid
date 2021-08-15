@@ -175,7 +175,7 @@
                                       {%- assign allow_to_add_more = false -%}
                                     {%- endif -%}
                                     <input type="hidden" value="{{ line_item.variant.inventory_quantity | divided_by:base_unit_min | minus: qty }}" data-val="{{ line_item.variant.inventory_quantity | divided_by:base_unit_min }}" class="line_inventory"/>
-                                    <input data-min-qty="{{base_unit_min}}" class="cart_unit_quantity" type="number" name="dummyqtymob" pattern="[0-9]*" min="1" value="{{qty | replace: '.0' }}" data-line-id="{{ line_item.id }}" line-title="{{line_item.title}}" data-display="{{display_base_msg}}">
+                                    <input data-min-qty="{{base_unit_min}}" class="cart_unit_quantity" type="number" name="dummyqtymob" pattern="[0-9]*" min="1" value="{{ qty }}" data-line-id="{{ line_item.id }}" line-title="{{line_item.title}}" data-display="{{display_base_msg}}">
                                       {%  comment %}
                                     <input  type="hidden" aria-label="{{ 'product.form.quantity' | t }}" class="quantity-selector__value actual_qty" pattern="[0-9]*" data-current-value="{{ line_item.quantity }}" data-line-id="{{ line_item.id }}" value="{{ base_unit_min }}" size="{{ line_item.quantity | append: '' | size | at_least: 2 }}">
                                        {% endcomment %}
@@ -216,7 +216,7 @@
 
                              <input type="hidden" value="{{ line_item.variant.inventory_quantity | divided_by:base_unit_min | minus: qty }}" data-val="{{ line_item.variant.inventory_quantity | divided_by:base_unit_min }}" class="line_inventory"/>
 
-                              <input data-min-qty="{{base_unit_min}}" class="cart_unit_quantity" type="number" name="dummyqtydesktop" pattern="[0-9]*" min="1" value="{{qty | replace: '.0' }}" data-line-id="{{ line_item.id }}" line-title="{{line_item.title}}" data-display="{{display_base_msg}}">
+                              <input data-min-qty="{{base_unit_min}}" class="cart_unit_quantity" type="number" name="dummyqtydesktop" pattern="[0-9]*" min="1" value="{{ qty }}" data-line-id="{{ line_item.id }}" line-title="{{line_item.title}}" data-display="{{display_base_msg}}">
                               {% comment %}
                               <input  type="hidden" aria-label="{{ 'product.form.quantity' | t }}" class="quantity-selector__value actual_qty" pattern="[0-9]*" data-current-value="{{ line_item.quantity }}" data-line-id="{{ line_item.id }}" value="{{ base_unit_min }}" size="{{ line_item.quantity | append: '' | size | at_least: 2 }}">
                             {% endcomment %}
