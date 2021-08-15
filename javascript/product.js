@@ -234,26 +234,26 @@ simply.productStickyBtn = function(btn){
 simply.productSomeMatchesSection = function(){
   var tabbedItemSliderElm = $("#shopify-section-product-some-matches-section .product-some-matches-section .tabbed-content");
   tabbedItemSliderElm.removeClass('hidden');
-  // tabbedItemSliderElm.slick({
-  //   speed: 300,
-  //   infinite: false,
-  //   slidesToShow: 5,
-  //   slidesToScroll: 1,
-  //   arrows : true,
-  //   dots : false,
-  //   prevArrow:'<button type="button" class="slick-prev"><svg class="button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button>',
-  //   nextArrow:'<button type="button" class="slick-next"><svg class="button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>',
-  //   responsive: [
-  //     {
-  //       breakpoint: 800,
-  //       settings: {
-  //         arrows : false,
-  //         slidesToShow: 2,
-  //         slidesToScroll: 1
-  //       }
-  //     }
-  //   ]
-  // });
+  tabbedItemSliderElm.slick({
+    speed: 300,
+    infinite: false,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    arrows : true,
+    dots : false,
+    prevArrow:'<button type="button" class="slick-prev"><svg class="button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button>',
+    nextArrow:'<button type="button" class="slick-next"><svg class="button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>',
+    responsive: [
+      {
+        breakpoint: 800,
+        settings: {
+          arrows : false,
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  });
   simply.productItemBlockWrap();
   simply.miniHeight("#shopify-section-product-some-matches-section .here-are-some-matches-product-wrapper .tabbed-content .product-item-block-wrap .product-title","#shopify-section-product-some-matches-section .here-are-some-matches-product-wrapper .tabbed-content .product-item-block-wrap .product-title");
   $("#shopify-section-product-some-matches-section .product-some-matches-section .tabbed-content").removeClass("hidden");
@@ -262,26 +262,26 @@ simply.productSomeMatchesSection = function(){
 simply.someMatchesProduct = function(){
   var tabbedItemSliderElm = $("#shopify-section-product-template .product-block-list__item--info .tabbed-content");
   tabbedItemSliderElm.removeClass('hidden');
-  // tabbedItemSliderElm.slick({
-  //   speed: 300,
-  //   infinite: false,
-  //   slidesToShow: 3,
-  //   slidesToScroll: 3,
-  //   arrows : true,
-  //   dots : false,
-  //   prevArrow:'<button type="button" class="slick-prev"><svg class="button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button>',
-  //   nextArrow:'<button type="button" class="slick-next"><svg class="button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>',
-  //   responsive: [
-  //     {
-  //       breakpoint: 800,
-  //       settings: {
-  //         arrows : false,
-  //         slidesToShow: 2,
-  //         slidesToScroll: 2
-  //       }
-  //     }
-  //   ]
-  // });
+  tabbedItemSliderElm.slick({
+    speed: 300,
+    infinite: false,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    arrows : true,
+    dots : false,
+    prevArrow:'<button type="button" class="slick-prev"><svg class="button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button>',
+    nextArrow:'<button type="button" class="slick-next"><svg class="button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>',
+    responsive: [
+      {
+        breakpoint: 800,
+        settings: {
+          arrows : false,
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      }
+    ]
+  });
   simply.productItemBlockWrap();
 }
 
