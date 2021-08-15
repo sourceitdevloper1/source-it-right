@@ -76,11 +76,11 @@
         {% assign prod_instock = prod_instock | plus:prod_instock_last %}
         <input type="hidden" id="product_in_stock" value="{{prod_instock}} {{ display_unit }}"/>
         <div class="product-form__info-item product-form__info-item--quantity custom_qty_wrap">
-          <label for="{{ section.id }}-{{ product.id }}-quantity" class="product-form__info-title text--strong" style="display:none ;">{{ 'product.form.quantity' | t }}:</label>
+          <label for="{{ section.id }}-{{ product.id }}-quantity" class="product-form__info-title text--strong">Qty</label>
           <div class="product-form__info-content">
             <div class="select-wrapper select-wrapper--small select-wrapper--primary">
-              <input data-qty="{{base_unit_min}}" type="text" id="Quantity-{{ section.id }}-{{ product.id }}-quantity" name="unit_quantity" value="{% if display_unit == "meter" %}1.0{% else %}1{% endif %}" min="1" class="product-form__quantity product-form__input unit_quantity {% if display_unit == 'piece' %}piece_input_qty{% endif %}" inputmode="text" pattern="\d*" data-display="{{display_unit}}">
-              <label>{{display_unit}}</label>
+              <input data-qty="{{base_unit_min}}" type="text" id="Quantity-{{ section.id }}-{{ product.id }}-quantity" name="unit_quantity" value="{% if display_unit == "meter" %}1.0{% else %}1{% endif %}" min="1" class="product-form__quantity product-form__input unit_quantity {% if display_unit == 'piece' %}piece_input_qty{% endif %}" inputmode="text" pattern="\d*" data-display="{{display_unit}}" />
+              {%- comment-%}<label>{{display_unit}}</label>{%- endcomment-%}
               <input type="hidden" name="id" data-sku="{{ selected_variant.sku }}" value="{{ selected_variant.id }}">
               <input type="hidden" name="properties[_display_unit]" value="{{display_unit}}"/>
               <input type="hidden" class="min_qty_input" name="properties[_base_unit_min]" value="{{base_unit_min}}"/>

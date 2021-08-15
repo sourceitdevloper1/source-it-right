@@ -1,5 +1,4 @@
 $(document).on('change','.custom_qty_wrap .unit_quantity',function(event) {
-  debugger;
   /* Act on the event */
   var parent = $(this).closest('.custom_qty_wrap');
   if($('.template-product').length > 0){

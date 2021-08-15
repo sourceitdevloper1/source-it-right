@@ -133,8 +133,8 @@ simply.matchesProductItemDataUpdates = function(line_item){
       }
     });
     $(".checkout-price-wrapper .price-wrap .order-price").html(simply.productFormatMoney(cart_pop_total_price,window.theme.moneyFormat));
+    $(".here-are-some-matches-product-wrapper").addClass('active').fadeIn();
   });
-  $(".here-are-some-matches-product-wrapper").addClass('active').fadeIn();
   simply.showmixAndMatchesBlock();
 };
 
@@ -298,36 +298,8 @@ simply.productInit = function(){
   });
 };
 
-simply.mixAndMaxProductAddToCart = function(){
-  $(document).on('click','[data-action="add-to-cart"]', function(e){
-    e.preventDefault();
-    debugger;
-    var parent = $(this).closest(".product-item-block-wrap");
-    var formVid = parent.find("#item-vid").val();
-    var formQty = parent.find(".actual_qty").val();
-    data = {
-      "id": formVid,
-      "qty": formQty
-    }
-    jQuery.ajax({
-      type: 'POST',
-      url: '/cart/add.js',
-      data: data,
-      dataType: 'json',
-      success: function(line_item) { 
-        console.log(line_item);
-        simply.matchesProductItemDataUpdates(line_item);
-      },
-      error: function(XMLHttpRequest, textStatus) {
-        Shopify.onError(XMLHttpRequest, textStatus);
-      }
-    });
-  });
-}
-
 $(document).ready(function() {
   simply.productInit();
-  simply.mixAndMaxProductAddToCart();
   if($(".product-some-matches-section").length > 0){
     simply.productSomeMatchesSection();
     // tabbed-item
