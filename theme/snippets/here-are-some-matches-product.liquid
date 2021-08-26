@@ -16,7 +16,7 @@
     {%- endif -%}
   {% endfor %}
 {% endfor %}
-<div class="here-are-some-matches-product-wrapper">
+<div class="here-are-some-matches-product-wrapper" id="here-are-some-matches-product-wrapper">
   <h4 class="block-heading">
     Here are some matches
   </h4>
@@ -39,12 +39,16 @@
   {%- comment -%} :: some-matches-product-items :: {%- endcomment -%}
   <div class="checkout-price-wrapper">
     <div class="price-wrap">
-      Total : <span class="order-price">Rs. 713.00</span>
+      <div class="total-price-wrap">Total : <span class="order-price">Rs. 713.00</span></div>
+      <div class="cart-count-wrap">Cart Item : <span class="cart-count">1</span></div>
     </div>
     <div class="checkout-button">
-      <button type="button" class="button button--primary">
+      <form method="post" action="/cart" novalidate="novalidate" data-item-count="200" class="checkout-button-bottom">
+        <button type="submit" name="checkout" class="cart-recap__checkout button button--primary button--full button--large">Checkout</button>
+      </form>
+      {%- comment -%}<button type="button" class="button button--primary">
         Checkout
-      </button>
+      </button>{%- endcomment -%}
     </div>
   </div>
 </div>

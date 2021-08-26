@@ -53,15 +53,8 @@
     {%- endif -%}
   </div>
   <div class="product-item-block-details">
-    <h4 class="product-title">{{ product.title}}</h4>
-    {%- if new_comp_price > new_price -%}
-      <span class="bebas-nue price price--highlight" data-money-convertible>{{ new_price | money }}</span>
-      <span class="bebas-nue price price--compare" data-money-convertible>{{ new_comp_price | money }}</span>
-    {%- else -%}
-      <span class="bebas-nue price" data-money-convertible>{{ new_price | money }}</span>
-    {%- endif -%}
-    
-    <form method="post" action="/cart/add" data-product-id={{ product.id }}>
+    <h4 class="product-title">{{ product.title}}</h4>    
+    <form method="post" action="/cart/add" id="{{ product.id }}" accept-charset="UTF-8" class="product-form" enctype="multipart/form-data">
       {% if material_found %}
         <input type="hidden" name="properties[_generic]" value="{{material_tag}}">
       {% endif %}    
@@ -75,25 +68,33 @@
         {% assign prod_instock_last =  prod_instock_last | divided_by:unit_min %}
         {% assign prod_instock = prod_instock | plus:prod_instock_last %}
         <input type="hidden" id="product_in_stock" value="{{prod_instock}} {{ display_unit }}"/>
-        <div class="product-form__info-item product-form__info-item--quantity custom_qty_wrap">
-          <label for="{{ section.id }}-{{ product.id }}-quantity" class="product-form__info-title text--strong">Qty</label>
-          <div class="product-form__info-content">
-            <div class="select-wrapper select-wrapper--small select-wrapper--primary">
-              <input data-qty="{{base_unit_min}}" type="text" id="Quantity-{{ section.id }}-{{ product.id }}-quantity" name="unit_quantity" value="{% if display_unit == "meter" %}1.0{% else %}1{% endif %}" min="1" class="product-form__quantity product-form__input unit_quantity {% if display_unit == 'piece' %}piece_input_qty{% endif %}" inputmode="text" pattern="\d*" data-display="{{display_unit}}" />
-              {%- comment-%}<label>{{display_unit}}</label>{%- endcomment-%}
-              <input type="hidden" name="id" data-sku="{{ selected_variant.sku }}" value="{{ selected_variant.id }}">
-              <input type="hidden" name="properties[_display_unit]" value="{{display_unit}}"/>
-              <input type="hidden" class="min_qty_input" name="properties[_base_unit_min]" value="{{base_unit_min}}"/>
-              <input type="hidden" name="properties[_base_unit]" value="{{base_unit}}"/>
-              <input type="hidden" name="quantity" data-base-unit-min="{{base_unit_min}}" value="{{base_unit_min}}" min="{{base_unit_min}}" class="actual_qty">
+        <div class="price-and-qty-wrap">
+          {%- if new_comp_price > new_price -%}
+            <span class="bebas-nue price price--highlight" data-money-convertible>{{ new_price | money }}</span>
+            <span class="bebas-nue price price--compare" data-money-convertible>{{ new_comp_price | money }}</span>
+          {%- else -%}
+            <span class="bebas-nue price" data-money-convertible>{{ new_price | money }}</span>
+          {%- endif -%}
+          <div class="product-form__info-item product-form__info-item--quantity custom_qty_wrap">
+            <label for="{{ section.id }}-{{ product.id }}-quantity" class="product-form__info-title text--strong">Qty</label>
+            <div class="product-form__info-content">
+              <div class="select-wrapper select-wrapper--small select-wrapper--primary">
+                <input data-qty="{{base_unit_min}}" type="text" id="Quantity-{{ product.id }}-quantity" name="unit_quantity" value="{% if display_unit == "meter" %}1.0{% else %}1{% endif %}" min="1" class="product-form__quantity product-form__input unit_quantity {% if display_unit == 'piece' %}piece_input_qty{% endif %}" inputmode="text" pattern="\d*" data-display="{{display_unit}}" />
+                {%- comment-%}<label>{{display_unit}}</label>{%- endcomment-%}
+                <input type="hidden" name="id" data-sku="{{ selected_variant.sku }}" value="{{ selected_variant.id }}">
+                <input type="hidden" name="properties[_display_unit]" value="{{display_unit}}"/>
+                <input type="hidden" class="min_qty_input" name="properties[_base_unit_min]" value="{{base_unit_min}}"/>
+                <input type="hidden" name="properties[_base_unit]" value="{{base_unit}}"/>
+                <input type="hidden" name="quantity" data-base-unit-min="{{base_unit_min}}" value="{{base_unit_min}}" min="{{base_unit_min}}" class="actual_qty">
+              </div>
             </div>
           </div>
         </div>
         <div class="add_to_cart_wrap">
           {%- if selectedvariantavailability -%}
-            <button type="submit" class="product-form__add-button button button--primary" data-action="add-to-cart">{{ 'product.form.add_to_cart' | t }}</button>
+            <button type="button" class="product-form__add-button button button--primary" data-text="Adding...">{{ 'product.form.add_to_cart' | t }}</button>
           {%- else -%}
-            <button type="submit" class="product-form__add-button button button--disabled" disabled>{{ 'product.form.sold_out' | t }}</button>
+            <button type="button" class="product-form__add-button button button--disabled" disabled>{{ 'product.form.sold_out' | t }}</button>
           {%- endif -%}
         </div>
       </div>

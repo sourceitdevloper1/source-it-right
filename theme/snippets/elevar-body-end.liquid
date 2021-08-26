@@ -85,7 +85,7 @@ window.addEventListener('load', function(){
             }
         })
         divide_unit = parseInt(divide_unit);
-        console.log(divide_unit);
+        // console.log(divide_unit);
 
         var variant = getCurrentVariant();
 
@@ -302,7 +302,7 @@ window.addEventListener('load', function(){
             {% if item.object_type == 'product' %}
                 collection.push({{ item | json }});
             {% endif %}
-            console.log('{{ item.object_type }}');
+            // console.log('{{ item.object_type }}');
         {% endfor %}
 
         if (!collection.length) collection= [];
@@ -374,7 +374,7 @@ window.addEventListener('load', function(){
             })
             divide_unit = parseInt(divide_unit);
 
-            console.log('tatata', divide_unit);
+            // console.log('tatata', divide_unit);
             return {
                 name: product.title.replace("'", ''),
                 id: product.variants[0].sku,
