@@ -183,14 +183,14 @@ simply.matchesProductDataUpdate = function(data){
   $.get('/cart.json',function(cartJson){
     var items = cartJson.items;
     var cart_pop_total_price = cartJson.total_price;
-    $(items).each(function(i){
-      if(items[i].id == pop_variant_id){
-        $(".here-are-some-matches-product-wrapper .item-block-wrapper .img img").attr('src',items[i].image);
-        $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-id-wrap .product-id").text(items[i].id);
-        $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-generic-wrap .product-generic").text(items[i].properties._generic);        
-        return false;
-      }
-    });
+    // $(items).each(function(i){
+    //   if(items[i].id == pop_variant_id){
+    //     $(".here-are-some-matches-product-wrapper .item-block-wrapper .img img").attr('src',items[i].image);
+    //     $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-id-wrap .product-id").text(items[i].id);
+    //     $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-generic-wrap .product-generic").text(items[i].properties._generic);        
+    //     return false;
+    //   }
+    // });
     $(".checkout-price-wrapper .price-wrap .order-price").html(simply.productFormatMoney(cart_pop_total_price,window.theme.moneyFormat));
     $(".checkout-price-wrapper .price-wrap .cart-count").text(items.length);
   });
@@ -206,14 +206,14 @@ simply.matchesProductDataUpdateCustom = function(data){
   $.get('/cart.json',function(cartJson){
     var items = cartJson.items;
     var cart_pop_total_price = cartJson.total_price;
-    $(items).each(function(i){
-      if(items[i].id == last_item_variant_id){
-        $(".here-are-some-matches-product-wrapper .item-block-wrapper .img img").attr('src',items[i].image);
-        $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-id-wrap .product-id").text(items[i].id);
-        $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-generic-wrap .product-generic").text(items[i].properties._generic);        
-        return false;
-      }
-    });
+    // $(items).each(function(i){
+    //   if(items[i].id == last_item_variant_id){
+    //     $(".here-are-some-matches-product-wrapper .item-block-wrapper .img img").attr('src',items[i].image);
+    //     $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-id-wrap .product-id").text(items[i].id);
+    //     $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-generic-wrap .product-generic").text(items[i].properties._generic);        
+    //     return false;
+    //   }
+    // });
     $(".checkout-price-wrapper .price-wrap .order-price").html(simply.productFormatMoney(cart_pop_total_price,window.theme.moneyFormat));
     $(".checkout-price-wrapper .price-wrap .cart-count").text(items.length);
   });
@@ -229,23 +229,23 @@ simply.matchesProductItemDataUpdates = function(line_item){
   $.get('/cart.json',function(cartJson){
     var items = cartJson.items, itemImgSrc, itemTitle, itemId;
     var cart_pop_total_price = cartJson.total_price;
-    $(items).each(function(i){
-      if(items[i].id == line_item_id){
-        itemId = items[i].id;
-        itemTitle = items[i].title;
-        itemImgSrc = items[i].image;
-        $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-title-wrap").text(itemTitle);
-        $(".here-are-some-matches-product-wrapper .item-block-wrapper .img img").attr({
-          'src':itemImgSrc,
-          'alt':itemTitle
-        });
-        $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-id-wrap .product-id").text(itemId);
-        if(items[i].properties != null ) {
-          $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-generic-wrap .product-generic").text(items[i].properties._generic);        
-        }
-        return false;
-      }
-    });
+    // $(items).each(function(i){
+    //   if(items[i].id == line_item_id){
+    //     itemId = items[i].id;
+    //     itemTitle = items[i].title;
+    //     itemImgSrc = items[i].image;
+    //     $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-title-wrap").text(itemTitle);
+    //     $(".here-are-some-matches-product-wrapper .item-block-wrapper .img img").attr({
+    //       'src':itemImgSrc,
+    //       'alt':itemTitle
+    //     });
+    //     $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-id-wrap .product-id").text(itemId);
+    //     if(items[i].properties != null ) {
+    //       $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-generic-wrap .product-generic").text(items[i].properties._generic);        
+    //     }
+    //     return false;
+    //   }
+    // });
     $(".checkout-price-wrapper .price-wrap .order-price").html(simply.productFormatMoney(cart_pop_total_price,window.theme.moneyFormat));
     $(".here-are-some-matches-product-wrapper").addClass('active').fadeIn();
   });
@@ -274,7 +274,8 @@ simply.mixAndMaxProductAddToCart = function(){
             simply.matchesProductDataUpdateCustom(cartdata);
           }
         });
-        button.text("Added To cart");         
+        button.text("Added To cart");
+        button.addClass("disable");   
       },                        
       error: function(data){
         button.text("Add To cart");
@@ -300,8 +301,7 @@ simply.productSomeMatchesSection = function(){
         breakpoint: 800,
         settings: {
           arrows : false,
-          slidesToShow: 2,
-          slidesToScroll: 1
+          slidesToShow: 1
         }
       }
     ]
@@ -334,8 +334,7 @@ simply.someMatchesProduct = function(){
         breakpoint: 800,
         settings: {
           arrows : false,
-          slidesToShow: 2,
-          slidesToScroll: 2
+          slidesToShow: 2
         }
       }
     ]
