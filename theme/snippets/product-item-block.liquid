@@ -41,7 +41,7 @@
     {% break %}
   {% endif %}
 {% endfor %}
-<div class="product-item-block-wrap" data-tag="{%- if product_tags contains 'usage_Skirt' -%}usage_skirt{% elsif product_tags contains 'usage_Kurta' %}usage_kurta{% elsif product_tags contains 'usage_Kurti' %}usage_kurti{% else %}{%endif %}">
+<div class="product-item-block-wrap" data-product-vendor="{{ product.vendor }}" data-index-count_number="{{ count_number }}" data-product-handle="{{ product.title }}"  data-tag="{%- if product_tags contains 'usage_Skirt' -%}usage_skirt{% elsif product_tags contains 'usage_Kurta' %}usage_kurta{% elsif product_tags contains 'usage_Kurti' %}usage_kurti{% else %}2304{%endif %}">
   <div class="img">
     {%- if product.featured_image.src != blank -%}
       <a class="img-block" href="{{ product.url }}" tabindex="0" title="{{ product.title }}">

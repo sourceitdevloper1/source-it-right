@@ -1131,5 +1131,15 @@
         "type": "image_picker"
       }
     ]
+  },
+  {
+    "name": "Mix and Max product functionality",
+    "settings": [
+      {
+        "id": "enable_mix_and_max_product",
+        "label": "Enable Mix and Max",
+        "type": "image_picker"
+      }
+    ]
   }
 ]

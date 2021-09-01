@@ -1,13 +1,19 @@
 <div class="product-list-wrapper">
+  <h4 class="block-heading dacing-font heading">
+    Here are some matches
+  </h4>
   <ul class="tabbed-header">
     {%- if tabbed_one -%}
-      <li class="tabbed-item active" role="tab" data-value="usage_skirt">One</li>
+      <li class="tabbed-item active" role="tab" data-value="usage_skirt">Skirt</li>
     {%- endif -%}
     {%- if tabbed_second -%}
-      <li class="tabbed-item" role="tab" data-value="usage_kurta">Second</li>
+      <li class="tabbed-item" role="tab" data-value="usage_kurta">Kurta</li>
     {%- endif -%}
     {%- if tabbed_third -%}
-      <li class="tabbed-item" role="tab" data-value="usage_kurti">Third</li>
+      <li class="tabbed-item" role="tab" data-value="usage_kurti">Kurti</li>
+    {%- endif -%}
+    {%- if tabbed_fourth -%}
+      <li class="tabbed-item" role="tab" data-value="2304">Collection</li>
     {%- endif -%}
   </ul>
   <!-- snippets/product-item-block -->
@@ -32,6 +38,15 @@
           {%- include 'product-item-block' -%}
         {%- endif -%}
       {% endfor %}
+    {% endfor %}
+    {% assign count_number = 0 %}
+    {% for product in collections.all.products %}
+    =={{ product.vendor }}==
+      {% if product.vendor == '2304' %}
+        <!-- Collection product -->
+        {%- include 'product-item-block' -%}
+      {% endif %}
+      {% assign count_number = count_number | plus : 1 %}
     {% endfor %}
   </div>
 </div>

@@ -301,7 +301,7 @@ simply.productSomeMatchesSection = function(){
         breakpoint: 800,
         settings: {
           arrows : false,
-          slidesToShow: 1
+          slidesToShow: 2
         }
       }
     ]

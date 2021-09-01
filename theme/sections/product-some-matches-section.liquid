@@ -5,6 +5,7 @@
 {%- assign tabbed_one = false -%}
 {%- assign tabbed_second = false -%}
 {%- assign tabbed_third = false -%}
+{%- assign tabbed_fourth = false -%}
 {% for product in collections.all.products %}
   {%- for product_tags in product.tags -%}
     {%- if product_tags contains 'usage_Skirt' -%}
@@ -16,14 +17,14 @@
     {%- if product_tags contains 'usage_Kurti' -%}  
       {%- assign tabbed_third = true -%}
     {%- endif -%}
+    {%- if product_tags contains 'id_9820' -%}  
+      {%- assign tabbed_fourth = true -%}
+    {%- endif -%}
   {% endfor %}
 {% endfor %}
   <section class="product-some-matches-section">
     <div class="container ">
       <div class="here-are-some-matches-product-wrapper">
-        <h4 class="block-heading dacing-font card__title heading">
-          Here are some matches
-        </h4>
         {%- comment -%} :: some-matches-product-items :: {%- endcomment -%}
         {%- include 'some-matches-product-items' -%}
       </div>

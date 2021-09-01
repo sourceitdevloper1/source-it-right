@@ -3,6 +3,7 @@
 {%- assign tabbed_one = false -%}
 {%- assign tabbed_second = false -%}
 {%- assign tabbed_third = false -%}
+{%- assign tabbed_fourth = false -%}
 {% for product in collections.all.products %}
   {%- for product_tags in product.tags -%}
     {%- if product_tags contains 'usage_Skirt' -%}
@@ -14,12 +15,12 @@
     {%- if product_tags contains 'usage_Kurti' -%}  
       {%- assign tabbed_third = true -%}
     {%- endif -%}
+    {%- if product_tags contains 'id_9820' -%}  
+      {%- assign tabbed_fourth = true -%}
+    {%- endif -%}
   {% endfor %}
 {% endfor %}
 <div class="here-are-some-matches-product-wrapper" id="here-are-some-matches-product-wrapper">
-  <h4 class="block-heading">
-    Here are some matches
-  </h4>
   <div class="item-block-wrapper">
     <div class="img">
       {%- if product.featured_image.src != blank -%}
@@ -27,11 +28,11 @@
       {%- endif -%}
     </div>
     <div class="product-info-wrapper">
-      <span class="product-title-wrap bebas-nue">{{ product.title | escape }}</span>
+      <div class="product-title-wrap bebas-nue">{{ product.title | escape }} : <div style="color : #f69679">1.5 meter Added to cart</div> </div>
       {% if material_found %} 
       <span class="product-generic-wrap bebas-nue">{{ 'product.general.material' | t }} <span class="product-generic bebas-nue">{{material_tag}}</span></span>
       {% endif %}
-      <span class="alert-success-msg bebas-nue">{{ section.settings.alert_success_msg }}</span>
+      <div class="alert-success-msg bebas-nue">{{ section.settings.alert_success_msg }}</div>
     </div>
   </div>
   {%- comment -%} :: some-matches-product-items :: {%- endcomment -%}
@@ -46,9 +47,6 @@
       <form method="post" action="/cart" novalidate="novalidate" data-item-count="200" class="checkout-button-bottom">
         <button type="submit" name="checkout" class="cart-recap__checkout button button--primary button--full button--large">Checkout</button>
       </form>
-      {%- comment -%}<button type="button" class="button button--primary">
-        Checkout
-      </button>{%- endcomment -%}
     </div>
   </div>
 </div>
