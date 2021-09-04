@@ -224,6 +224,9 @@ $color--orange: #f69679;
                   padding: 0;
                   width: 40px;
                   vertical-align: initial;
+                  @media(max-width : 767px){
+                    width : 100px;
+                  }
                 }
                 label {
                   font-size: 14px;

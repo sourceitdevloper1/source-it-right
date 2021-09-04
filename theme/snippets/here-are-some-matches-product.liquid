@@ -39,7 +39,7 @@
     <div class="product-info-wrapper">
       <div class="product-title-wrap bebas-nue">{{ product.title | escape }}<span style="color : #f69679;"> : <span class="product-qty"></span> Added to cart</span> </div>
       {% if material_found %} 
-      <span class="product-generic-wrap bebas-nue">{{ 'product.general.material' | t }} <span class="product-generic bebas-nue">{{material_tag}}</span></span>
+      <span class="product-generic-wrap bebas-nue" style="display: none;">{{ 'product.general.material' | t }} <span class="product-generic bebas-nue">{{material_tag}}</span></span>
       {% endif %}
       <div class="alert-success-msg bebas-nue">{{ section.settings.alert_success_msg }}</div>
     </div>
