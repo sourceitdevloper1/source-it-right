@@ -1,5 +1,12 @@
 <!-- sections/product-some-matches-section -->
-{%- if section.settings.enable_section -%}
+{%- if settings.enable_mix_and_max_product -%}
+  {%- assign hideMixAndMax = false -%}
+  {% for productTagVal in product.tags %}
+    {%- if productTagVal contains 'MM1_' or productTagVal contains 'MM2_' -%}
+      {%- assign hideMixAndMax = true -%}
+      {% break %}
+    {%- endif -%}
+  {% endfor %}
 {%- comment -%} :: here-are-some-matches-product :: {%- endcomment -%}
 {% comment %}
 {% assign collection = collections.all %}
@@ -24,7 +31,7 @@
   {% endfor %}
 {% endfor %}
 {% endcomment %}
-  <section class="product-some-matches-section">
+  <section class="product-some-matches-section{% unless hideMixAndMax %} hide{% endunless %}">
     <div class="container ">
       <div class="here-are-some-matches-product-wrapper">
         {%- comment -%} :: some-matches-product-items :: {%- endcomment -%}
@@ -33,16 +40,3 @@
     </div>
   </section>
 {%- endif -%}
-
-{% schema %}
-{
-  "name": "Some matches product",
-  "settings": [
-    {
-      "type": "checkbox",
-      "id": "enable_section",
-      "label": "Enable some matches product "
-    }
-  ]
-}
-{% endschema %}

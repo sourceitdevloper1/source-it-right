@@ -60,6 +60,12 @@ $color--orange: #f69679;
         color: #f69679;
         display: block;
       }
+      .product-title-wrap{
+        font-weight: bold;
+      }
+      .product-qty{
+        font-weight: bold;
+      }
     }
   }
   .product-list-wrapper {
@@ -99,6 +105,9 @@ $color--orange: #f69679;
         }
         &:last-child {
           margin-right: 0 !important;
+        }
+        &:first-child {
+          margin-left: 0 !important;
         }
         &.active,
         &:hover {

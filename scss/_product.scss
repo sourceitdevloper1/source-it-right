@@ -756,3 +756,20 @@ input[type=number]::-webkit-outer-spin-button {
   }
 }
 /*add to cart custom popup css end */
+
+/* custom checkout button css start */
+.mobile-custom-checkout-button{
+  @media(min-width: 768px){
+    display: none;
+  }
+  position: fixed;
+  top: 115px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 9;
+  &.scroll{
+    top : 75px;
+  }
+}
+/* custom checkout button css end */

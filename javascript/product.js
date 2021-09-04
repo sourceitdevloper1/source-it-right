@@ -37,6 +37,15 @@ simply.productEvents = function(){
     $(".product-block-list__item--info .tabbed-content").slick('slickGoTo',productItemSelected);
   })
 
+  $('.tabbed-content').on('afterChange', function(event, slick, currentSlide, nextSlide){
+    var list_wrapper = $(this).closest(".product-list-wrapper");
+    var dataTarget = $(this).find(".slick-current.slick-active").attr("data-targat");
+    var curtab = $(".tabbed-header .tabbed-item[data-value='"+dataTarget+"']",list_wrapper);
+    if(!curtab.hasClass("active")){
+      $(".tabbed-header .tabbed-item",list_wrapper).removeClass("active");
+      curtab.addClass("active");
+    }
+  });
 };
 
 simply.adjustQuantity = function(e,that){
@@ -183,18 +192,27 @@ simply.matchesProductDataUpdate = function(data){
   $.get('/cart.json',function(cartJson){
     var items = cartJson.items;
     var cart_pop_total_price = cartJson.total_price;
-    // $(items).each(function(i){
-    //   if(items[i].id == pop_variant_id){
-    //     $(".here-are-some-matches-product-wrapper .item-block-wrapper .img img").attr('src',items[i].image);
-    //     $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-id-wrap .product-id").text(items[i].id);
-    //     $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-generic-wrap .product-generic").text(items[i].properties._generic);        
-    //     return false;
-    //   }
-    // });
+    var dataQty = data.detail.quantity,
+        dataUnit = items[0].properties._display_unit;
+    if(dataUnit == "meter" ) {
+      dataQty = data.detail.quantity / 100;
+    }
+    $(items).each(function(i){
+      if(items[i].id == pop_variant_id){
+        // $(".here-are-some-matches-product-wrapper .item-block-wrapper .img img").attr('src',items[i].image);
+        // $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-id-wrap .product-id").text(items[i].id);
+        // $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-generic-wrap .product-generic").text(items[i].properties._generic);
+        $(".here-are-some-matches-product-wrapper .item-block-wrapper .product-qty").text(dataQty+' '+items[i].properties._display_unit);        
+        return false;
+      }
+    });
     $(".checkout-price-wrapper .price-wrap .order-price").html(simply.productFormatMoney(cart_pop_total_price,window.theme.moneyFormat));
     $(".checkout-price-wrapper .price-wrap .cart-count").text(items.length);
   });
   $(".here-are-some-matches-product-wrapper").addClass('active').fadeIn();
+  if($(window).width()<768){
+    $("#shopify-section-product-template").css("padding-top", "55px");
+  }
   simply.showmixAndMatchesBlock();
   $('html, body').animate({
     scrollTop: $("#here-are-some-matches-product-wrapper").offset().top - $("#shopify-section-header").height()
@@ -218,6 +236,9 @@ simply.matchesProductDataUpdateCustom = function(data){
     $(".checkout-price-wrapper .price-wrap .cart-count").text(items.length);
   });
   $(".here-are-some-matches-product-wrapper").addClass('active').fadeIn();
+  if($(window).width()<768){
+    $("#shopify-section-product-template").css("padding-top", "55px");
+  }
   simply.showmixAndMatchesBlock();
   $('html, body').animate({
     scrollTop: $("#here-are-some-matches-product-wrapper").offset().top - $("#shopify-section-header").height()
@@ -248,6 +269,9 @@ simply.matchesProductItemDataUpdates = function(line_item){
     // });
     $(".checkout-price-wrapper .price-wrap .order-price").html(simply.productFormatMoney(cart_pop_total_price,window.theme.moneyFormat));
     $(".here-are-some-matches-product-wrapper").addClass('active').fadeIn();
+    if($(window).width()<768){
+      $("#shopify-section-product-template").css("padding-top", "55px");
+    }
   });
   simply.showmixAndMatchesBlock();
 };
@@ -271,7 +295,7 @@ simply.mixAndMaxProductAddToCart = function(){
           dataType: 'json',
           success: function(cartdata){
             $('.header__cart-count').html(cartdata.items.length);
-            simply.matchesProductDataUpdateCustom(cartdata);
+            // simply.matchesProductDataUpdateCustom(cartdata);
           }
         });
         button.text("Added To cart");
@@ -287,25 +311,27 @@ simply.mixAndMaxProductAddToCart = function(){
 simply.productSomeMatchesSection = function(){
   var tabbedItemSliderElm = $("#shopify-section-product-some-matches-section .product-some-matches-section .tabbed-content");
   tabbedItemSliderElm.removeClass('hidden');
-  tabbedItemSliderElm.slick({
-    speed: 300,
-    infinite: false,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    arrows : true,
-    dots : false,
-    prevArrow:'<button type="button" class="slick-prev"><svg class="button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button>',
-    nextArrow:'<button type="button" class="slick-next"><svg class="button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>',
-    responsive: [
-      {
-        breakpoint: 800,
-        settings: {
-          arrows : false,
-          slidesToShow: 2
+  if(!tabbedItemSliderElm.hasClass("slick-initialized")){
+    tabbedItemSliderElm.slick({
+      speed: 300,
+      infinite: false,
+      slidesToShow: 5,
+      slidesToScroll: 1,
+      arrows : true,
+      dots : false,
+      prevArrow:'<button type="button" class="slick-prev"><svg class="button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button>',
+      nextArrow:'<button type="button" class="slick-next"><svg class="button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>',
+      responsive: [
+        {
+          breakpoint: 800,
+          settings: {
+            arrows : false,
+            slidesToShow: 2
+          }
         }
-      }
-    ]
-  });
+      ]
+    });
+  }
   simply.productItemBlockWrap();
   simply.miniHeight("#shopify-section-product-some-matches-section .here-are-some-matches-product-wrapper .tabbed-content .product-item-block-wrap .product-title","#shopify-section-product-some-matches-section .here-are-some-matches-product-wrapper .tabbed-content .product-item-block-wrap .product-title");
   $("#shopify-section-product-some-matches-section .product-some-matches-section .tabbed-content").removeClass("hidden");
@@ -320,25 +346,27 @@ simply.showmixAndMatchesBlock = function(){
 simply.someMatchesProduct = function(){
   var tabbedItemSliderElm = $("#shopify-section-product-template .product-block-list__item--info .tabbed-content");
   tabbedItemSliderElm.removeClass('hidden');
-  tabbedItemSliderElm.slick({
-    speed: 300,
-    infinite: false,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    arrows : true,
-    dots : false,
-    prevArrow:'<button type="button" class="slick-prev"><svg class="button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button>',
-    nextArrow:'<button type="button" class="slick-next"><svg class="button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>',
-    responsive: [
-      {
-        breakpoint: 800,
-        settings: {
-          arrows : false,
-          slidesToShow: 2
+  if(!tabbedItemSliderElm.hasClass("slick-initialized")){
+    tabbedItemSliderElm.slick({
+      speed: 300,
+      infinite: false,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      arrows : true,
+      dots : false,
+      prevArrow:'<button type="button" class="slick-prev"><svg class="button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button>',
+      nextArrow:'<button type="button" class="slick-next"><svg class="button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>',
+      responsive: [
+        {
+          breakpoint: 800,
+          settings: {
+            arrows : false,
+            slidesToShow: 2
+          }
         }
-      }
-    ]
-  });
+      ]
+    });
+  }
   simply.productItemBlockWrap();
 }
 

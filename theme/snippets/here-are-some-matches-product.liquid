@@ -1,4 +1,12 @@
 <!-- snippest/here-are-some-matches-product -->
+{%- assign hideMixAndMax = false -%}
+  {% for productTagVal in product.tags %}
+    {%- if productTagVal contains 'MM1_' or productTagVal contains 'MM2_' -%}
+      {%- assign hideMixAndMax = true -%}
+      {% break %}
+    {%- endif -%}
+  {% endfor %}
+{% comment %}
 {% assign collection = collections.all %}
 {%- assign tabbed_one = false -%}
 {%- assign tabbed_second = false -%}
@@ -20,6 +28,7 @@
     {%- endif -%}
   {% endfor %}
 {% endfor %}
+{% endcomment %}
 <div class="here-are-some-matches-product-wrapper" id="here-are-some-matches-product-wrapper">
   <div class="item-block-wrapper">
     <div class="img">
@@ -28,7 +37,7 @@
       {%- endif -%}
     </div>
     <div class="product-info-wrapper">
-      <div class="product-title-wrap bebas-nue">{{ product.title | escape }} : <div style="color : #f69679">1.5 meter Added to cart</div> </div>
+      <div class="product-title-wrap bebas-nue">{{ product.title | escape }}<span style="color : #f69679;"> : <span class="product-qty"></span> Added to cart</span> </div>
       {% if material_found %} 
       <span class="product-generic-wrap bebas-nue">{{ 'product.general.material' | t }} <span class="product-generic bebas-nue">{{material_tag}}</span></span>
       {% endif %}
@@ -36,17 +45,18 @@
     </div>
   </div>
   {%- comment -%} :: some-matches-product-items :: {%- endcomment -%}
-  {%- include 'some-matches-product-items' -%}
+  <div class="{% unless hideMixAndMax %} hide{% endunless %}">
+    {%- include 'some-matches-product-items' -%}
+  </div>
   {%- comment -%} :: some-matches-product-items :: {%- endcomment -%}
   <div class="checkout-price-wrapper">
     <div class="price-wrap">
       <div class="total-price-wrap">Total : <span class="order-price">Rs. 713.00</span></div>
       <div class="cart-count-wrap">Cart Item : <span class="cart-count">1</span></div>
     </div>
-    <div class="checkout-button">
-      <form method="post" action="/cart" novalidate="novalidate" data-item-count="200" class="checkout-button-bottom">
-        <button type="submit" name="checkout" class="cart-recap__checkout button button--primary button--full button--large">Checkout</button>
-      </form>
-    </div>
+    {% render 'custom-checkout-btn' %}
+  </div>
+  <div class="mobile-custom-checkout-button">
+    {% render 'custom-checkout-btn' %}
   </div>
 </div>
