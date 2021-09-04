@@ -1,5 +1,11 @@
 {%- comment -%} :: Product get using Product handle :: {% endcomment %}
   {%- comment -%} :: Product data get using tag :: {%- endcomment -%}
+    {% assign mm2TagisNotAvailable = false %}
+    {%- for productTagMM2 in product.tags -%}
+      {%- if productTagMM2 contains 'MM2' -%}
+        {% assign mm2TagisNotAvailable = true %}
+      {%- endif -%}
+    {%- endfor -%}
     {%- capture mm2_tabbed_title -%}
       {%- for productTag in product.tags -%}
         {%- if productTag contains 'MM2' -%}
@@ -55,7 +61,7 @@
 
 {%- comment -%} :: Product get using Collection handle :: {% endcomment %}
   {%- comment -%} :: Product data get using tag :: {%- endcomment -%}
-    {%- capture mm1_tabbed_title -%}
+  {%- capture mm1_tabbed_title -%}
     {%- for tags in product.tags -%}
       {%- assign tab_title_tag = '' -%}
       {%- if tags contains 'MM1_' -%}
@@ -68,7 +74,7 @@
   {%- assign newValMM1TabTitleVal = newValMM1TabTitle | uniq -%}
   {%- capture tabbedTitleCollection -%}
     {%- for mm1_tab_title_val in newValMM1TabTitleVal -%}
-      <li class="tabbed-item" role="tab" data-value="{{ mm1_tab_title_val }}">{{ mm1_tab_title_val }}</li>
+      <li class="tabbed-item{% unless mm2TagisNotAvailable %}{% if forloop.index == 1 %} active{% endif %}{% endunless %}" role="tab" data-value="{{ mm1_tab_title_val }}">{{ mm1_tab_title_val }}</li>
     {%- endfor -%}
   {%- endcapture -%}
   {%- comment -%} :: Product data get using tag :: {%- endcomment -%}
@@ -91,16 +97,35 @@
 
     {%- assign newValMM1 = mm1_collection_handle | split : "," -%}
     {%- capture collectionHandleItem -%}
+      {% for collection_tag_title in product.tags %}
+        {%- if collection_tag_title contains 'MM1' -%}
+          {%- capture mm1_collection_handle_tag -%}
+            {{mm1_collection_handle_tag}}
+            {%- if mm1_collection_handle_tag == blank -%}
+              {%- assign collectionHandle_tag_title =  collection_tag_title | split : '_' | last | split : ':' | first -%}
+              {{ collectionHandle_tag_title }}
+            {%- else -%}
+              {%- assign collectionHandle_tag_title =  collection_tag_title | split : '_' | last | split : ':' | first -%}
+              ,{{ collectionHandle_tag_title }}
+            {%- endif -%}
+          {%- endcapture -%}
+        {%- endif -%}
+      {% endfor %}
       {%- for mm1_collection_handle_val in newValMM1 -%}
-        {%- assign prod_type = '' -%}
-        {% for prod_types in product.tags %}
-          {%- if prod_types contains 'MM1' -%}
-            {%- assign coll_handle = prod_types | split : '_' | last | split: ':' | first  -%}
-          {%- endif -%}
-        {% endfor %}
+        {%- assign collection_tag_title = '' -%}
         {%- assign collectionHandleVal = mm1_collection_handle_val | strip -%}
         {%- for product in collections[collectionHandleVal].products limit : 15 -%}
-          {%- render 'product-item-block' , product : product, dataTag:coll_handle -%}
+          {%- assign prod_type = '' -%}
+          {% for coll_handle_value in product.tags %}
+            {% if coll_handle_value contains 'MM1' %}
+              {%- assign curr_handle = coll_handle_value | split : '_' | last | split : ':' | last -%}
+              {%- if coll_handle_value contains 'MM1' and collectionHandleVal == curr_handle -%}
+                {%- assign coll_handle_title_value =  coll_handle_value | split : ':' | first | remove : 'MM1_' -%}
+                {% break %}
+              {%- endif -%}
+            {%- endif -%}
+          {% endfor %}
+          {%- render 'product-item-block' , product : product, dataTag:coll_handle_title_value -%}
         {%- endfor -%}
       {%- endfor -%}
     {%- endcapture -%}
