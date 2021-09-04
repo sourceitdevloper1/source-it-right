@@ -70,19 +70,17 @@ $color--orange: #f69679;
     }
     .tabbed-header {
       list-style: none;
-      @media(max-width:767px) {
-        padding: 0 15px;
-        padding-bottom: 20px;
-        margin-bottom: -20px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        -ms-scroll-snap-type: x mandatory;
-        scroll-snap-type: x mandatory;
-        white-space: nowrap;
-        &::-webkit-scrollbar {
-          display: none;
-        }
+      padding: 0 15px;
+      padding-bottom: 20px;
+      margin-bottom: -20px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      -ms-scroll-snap-type: x mandatory;
+      scroll-snap-type: x mandatory;
+      white-space: nowrap;
+      &::-webkit-scrollbar {
+        display: none;
       }
       .tabbed-item {
         display: inline-block;
@@ -203,7 +201,7 @@ $color--orange: #f69679;
               margin-bottom: 10px;
             }
             .product-form__info-title {
-              padding: 0;
+              padding: 0; 
               display: inline-block;
               font-size: 14px;
             }

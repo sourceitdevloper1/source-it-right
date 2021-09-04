@@ -1,52 +1,82 @@
+{%- comment -%} :: Product data get using tag :: {%- endcomment -%}
+{%- capture mm2_tabbed_title -%}
+  {%- for productTag in product.tags -%}
+    {%- if productTag contains 'MM2' -%}
+      {%- assign title_tag =  productTag | split : '_' | last | split : ':' | first -%}
+      {{ title_tag }}{%- unless forloop.last -%},{%- endunless -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture%}
+{%- assign newValMM2TabTitle = mm2_tabbed_title | split : "," -%}
+{%- assign newValMM2TabTitleVal = newValMM2TabTitle | uniq -%}
+{%- capture tabbedTitle -%}
+  {%- for mm2_tab_title_val in newValMM2TabTitleVal -%}
+    <li class="tabbed-item{% if forloop.index == 1 %} active{%- endif -%}" role="tab" data-value="{{ mm2_tab_title_val }}">{{ mm2_tab_title_val }}</li>
+  {%- endfor -%}
+{%- endcapture -%}
+{%- comment -%} :: Product data get using tag :: {%- endcomment -%}
+
+{%- comment -%} :: Product data get using tag :: {%- endcomment -%}
+{%- for productHandle in product.tags -%}
+  {%- if productHandle contains 'MM2' -%}
+    {%- capture mm2_product_handle -%}
+      {{mm2_product_handle}}
+      {%- if mm2_product_handle == blank -%}
+        {%- assign productHandle_tag =  productHandle | split : '_' | last | split : ':' | last -%}
+        {{ productHandle_tag }}
+      {%- else -%}
+        {%- assign productHandle_tag =  productHandle | split : '_' | last | split : ':' | last -%}
+        ,{{ productHandle_tag }}
+      {%- endif -%}
+    {%- endcapture -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign newValMM2 = mm2_product_handle | split : "," -%}
+{%- capture productHandleItem -%}
+  {%- for mm2_product_handle_val in newValMM2 -%}
+    {%- assign product_option = mm2_product_handle_val | strip -%}
+    {%- render 'product-item-block' , product : all_products[product_option] -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- comment -%} :: Product data get using tag :: {%- endcomment -%}
+
+{%- comment -%} :: Product data get using collection handle :: {%- endcomment -%}
+{%- assign collectionValue = '' -%}
+{%- for collectionHandle in product.tags -%}
+  {%- if collectionHandle contains 'MM1' -%}
+    {%- assign collectionHandleTabTitle =  collectionHandle | split : '_' | last | split : ':' | first -%}
+  {%- endif -%}
+  {%- if collectionHandle contains 'MM1' -%}
+    {%- assign collectionHandleVal =  collectionHandle | split : '_' | last | split : ':' | last -%}
+    {%- assign collectionValue = collectionHandleVal -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- comment -%} :: Product data get using collection handle :: {%- endcomment -%}
+
+{%- comment -%} :: Product data get using collection handle :: {%- endcomment -%}
+{%- capture tabbedCollectionTitle -%}
+  <li class="tabbed-item" role="tab" data-value="{{ collectionHandleTabTitle }}">{{ collectionHandleTabTitle }}</li>
+{%-endcapture -%}
+{%- comment -%} :: Product data get using collection handle :: {%- endcomment -%}
+
+{%- comment -%} :: Product data get using collection handle :: {%- endcomment -%}
+{%- capture collectiontHandleItem -%}
+  {%- for product in collections[collectionValue].products -%}
+    {%- render 'product-item-block' , product : product -%}
+  {%- endfor -%}
+{%-endcapture -%}
+
 <div class="product-list-wrapper">
   <h4 class="block-heading dacing-font heading">
     Here are some matches
   </h4>
   <ul class="tabbed-header">
-    {%- if tabbed_one -%}
-      <li class="tabbed-item active" role="tab" data-value="usage_skirt">Skirt</li>
-    {%- endif -%}
-    {%- if tabbed_second -%}
-      <li class="tabbed-item" role="tab" data-value="usage_kurta">Kurta</li>
-    {%- endif -%}
-    {%- if tabbed_third -%}
-      <li class="tabbed-item" role="tab" data-value="usage_kurti">Kurti</li>
-    {%- endif -%}
-    {%- if tabbed_fourth -%}
-      <li class="tabbed-item" role="tab" data-value="2304">Collection</li>
-    {%- endif -%}
+    {{ tabbedTitle }}
+    {{ tabbedCollectionTitle }}
   </ul>
   <!-- snippets/product-item-block -->
   <div class="tabbed-content hidden">
-    {% for product in collections.all.products %}
-      {%- for product_tags in product.tags -%}
-        {%- if product_tags contains 'usage_Skirt' -%}
-          {%- include 'product-item-block' -%}
-        {%- endif -%}
-      {% endfor %}
-    {% endfor %}
-    {% for product in collections.all.products %}
-      {%- for product_tags in product.tags -%}
-        {%- if product_tags contains 'usage_Kurta' -%}
-          {%- include 'product-item-block' -%}
-        {%- endif -%}
-      {% endfor %}
-    {% endfor %}
-    {% for product in collections.all.products %}
-      {%- for product_tags in product.tags -%}
-        {%- if product_tags contains 'usage_Kurti' -%}
-          {%- include 'product-item-block' -%}
-        {%- endif -%}
-      {% endfor %}
-    {% endfor %}
-    {% assign count_number = 0 %}
-    {% for product in collections.all.products %}
-    =={{ product.vendor }}==
-      {% if product.vendor == '2304' %}
-        <!-- Collection product -->
-        {%- include 'product-item-block' -%}
-      {% endif %}
-      {% assign count_number = count_number | plus : 1 %}
-    {% endfor %}
+    {{ productHandleItem }}
+    {{ collectiontHandleItem }}
   </div>
 </div>
