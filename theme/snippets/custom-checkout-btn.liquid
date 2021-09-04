@@ -1,5 +1,13 @@
+{% comment %}
 <div class="checkout-button">
     <form method="post" action="/cart" novalidate="novalidate" data-item-count="200" class="checkout-button-bottom">
       <button type="submit" name="checkout" class="cart-recap__checkout button button--primary button--full button--large">Checkout</button>
     </form>
+</div>
+{% endcomment %}
+
+<div class="checkout-button">
+    <button type="type" name="checkout" class="cart-recap__checkout button button--primary button--full button--large">
+      <a href="/cart" tabindex="0" title="Procced to checkout">Procced to checkout</a>
+    </button>
 </div>

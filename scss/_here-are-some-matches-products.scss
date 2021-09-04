@@ -287,14 +287,38 @@ $color--orange: #f69679;
     -moz-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+    @media(max-width:767px){
+      display: block;
+    }
     .price-wrap,
     .checkout-button{
       flex: 1 1 50%;
       min-width: 50%;
     }
+    .price-wrap{
+      @media(max-width : 767px){
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -moz-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-bottom: 15px;
+        > div{
+          flex : 1 1 50%;
+          width: 50%;
+        }
+      }
+    }
     .checkout-button{
       .button{
         width: 100%;
+        padding: 0 5px;
       }
     }
   }
