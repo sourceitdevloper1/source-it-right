@@ -41,7 +41,8 @@
     {% break %}
   {% endif %}
 {% endfor %}
-<div class="product-item-block-wrap" data-tag="{{ dataTag }}">
+{%- if product.available -%}
+<div class="product-item-block-wrap" data-tag="{{ dataTag }}" data-available={{ product.available }}>
   <div class="img">
     {%- if product.featured_image.src != blank -%}
       <a class="img-block" href="{{ product.url }}" tabindex="0" title="{{ product.title }}">
@@ -101,3 +102,4 @@
     </form>
   </div>
 </div>
+{%- endif -%}
