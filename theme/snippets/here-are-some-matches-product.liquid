@@ -1,0 +1,62 @@
+<!-- snippest/here-are-some-matches-product -->
+{%- assign hideMixAndMax = false -%}
+  {% for productTagVal in product.tags %}
+    {%- if productTagVal contains 'MM1_' or productTagVal contains 'MM2_' -%}
+      {%- assign hideMixAndMax = true -%}
+      {% break %}
+    {%- endif -%}
+  {% endfor %}
+{% comment %}
+{% assign collection = collections.all %}
+{%- assign tabbed_one = false -%}
+{%- assign tabbed_second = false -%}
+{%- assign tabbed_third = false -%}
+{%- assign tabbed_fourth = false -%}
+{% for product in collections.all.products %}
+  {%- for product_tags in product.tags -%}
+    {%- if product_tags contains 'usage_Skirt' -%}
+      {%- assign tabbed_one = true -%}
+    {%- endif -%}
+    {%- if product_tags contains 'usage_Kurta' -%}  
+      {%- assign tabbed_second = true -%}
+    {%- endif -%}
+    {%- if product_tags contains 'usage_Kurti' -%}  
+      {%- assign tabbed_third = true -%}
+    {%- endif -%}
+    {%- if product_tags contains 'id_9820' -%}  
+      {%- assign tabbed_fourth = true -%}
+    {%- endif -%}
+  {% endfor %}
+{% endfor %}
+{% endcomment %}
+<div class="here-are-some-matches-product-wrapper" id="here-are-some-matches-product-wrapper">
+  <div class="item-block-wrapper">
+    <div class="img">
+      {%- if product.featured_image.src != blank -%}
+        <img alt="{{ product.title }}" src="{{ product.featured_image.src | img_url: 'medium'}}" />
+      {%- endif -%}
+    </div>
+    <div class="product-info-wrapper">
+      <div class="product-title-wrap bebas-nue">{{ product.title | escape }}<span style="color : #f69679;"> : <span class="product-qty"></span> Added to cart</span> </div>
+      {% if material_found %} 
+      <span class="product-generic-wrap bebas-nue" style="display: none;">{{ 'product.general.material' | t }} <span class="product-generic bebas-nue">{{material_tag}}</span></span>
+      {% endif %}
+      <div class="alert-success-msg bebas-nue">{{ section.settings.alert_success_msg }}</div>
+    </div>
+  </div>
+  {%- comment -%} :: some-matches-product-items :: {%- endcomment -%}
+  <div class="{% unless hideMixAndMax %} hide{% endunless %}">
+    {%- include 'some-matches-product-items' -%}
+  </div>
+  {%- comment -%} :: some-matches-product-items :: {%- endcomment -%}
+  <div class="checkout-price-wrapper">
+    <div class="price-wrap">
+      <div class="total-price-wrap">Total : <span class="order-price">Rs. 713.00</span></div>
+      <div class="cart-count-wrap">Cart Item : <span class="cart-count">1</span></div>
+    </div>
+    {% render 'custom-checkout-btn' %}
+  </div>
+  <div class="mobile-custom-checkout-button">
+    {% render 'custom-checkout-btn' %}
+  </div>
+</div>

@@ -8,7 +8,10 @@ If the product contains the special __gift tag, we prevent it to be completely a
   </script>
 {%- else -%}
   {% section 'product-template' %}
+  {%- comment -%}
   {% section 'product-recommendations' %}
-  {% section 'static-promotion-list' %}
+  {%- endcomment -%}
+  {%- section 'product-some-matches-section' -%}
+  {%- section 'static-promotion-list' -%}
   {% section 'static-recently-viewed-products' %}
 {%- endif -%}

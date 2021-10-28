@@ -389,7 +389,7 @@ https://help.shopify.com/themes/customization/navigation/add-breadcrumbs
                "@type": "ProductModel",
                "@id": "{{- canonical_url | append: '#productModel=' | append: variant.id -}}",
                "url": "{{- shop.url -}}{{- variant.url -}}",
-               "name": "{{- productTitle | append: " " | append: variant.title | escape -}}",
+               "name": "{{- productTitle | append: " " | append: variant.title | replace: "\", "\\\" | replace: '"', '\"' -}}",
                "mpn": "{{- variant.id -}}",
                {%- if variant.sku -%}
                  "sku": "{{- variant.sku -}}",
@@ -429,7 +429,8 @@ https://help.shopify.com/themes/customization/navigation/add-breadcrumbs
                  {%- assign optionName = productOption.name -%}
                  {%- assign optionNameDowncased = optionName | downcase %}
                  {%- assign optionKey = "option%1" |  replace: "%1", productOption.position -%}
-                 {%- assign value = variant[optionKey] -%}
+                 {% comment %} `replace: "\", "\\\"` is actually replacing single backlash with double backlash. Don't know why it needs to be writtern like this {% endcomment %}
+                 {%- assign value = variant[optionKey] | replace: "\", "\\\" | replace: '"', '\"' -%}
 
                  {%- if colorFound != true and colorVariations contains optionNameDowncased -%}
                    {%- assign colorFound = true -%}
@@ -467,7 +468,6 @@ https://help.shopify.com/themes/customization/navigation/add-breadcrumbs
             }{%- unless forloop.last -%},{%- endunless -%}
           {%- endfor -%}
         ]
-      }
       {%- else -%}
         {%- assign product_or_variant = product.selected_or_first_available_variant -%}
         {%- if product_or_variant.sku -%}

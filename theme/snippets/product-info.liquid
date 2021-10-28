@@ -2,8 +2,6 @@
 {% assign selectedvariantavailability = false %}
 {% include 'price-logic' %}
 
-
-
 {% assign material_found = false %}
 {% for tag in product.tags %}
 {% if tag contains 'generic-name_' %}
@@ -576,4 +574,8 @@
   {%- endif -%}
 }
 </script>
+
+{%- comment -%} :: here-are-some-matches-product :: {%- endcomment -%}
+{%- include 'here-are-some-matches-product' -%}
+
 </div>

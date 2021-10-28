@@ -53,6 +53,36 @@
         "default": true
       },
       {
+        "type": "checkbox",
+        "id": "pluginseo_pageTitleTruncateEnableForCollections",
+        "label": "Apply To Collections",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pluginseo_pageTitleTruncateEnableForProducts",
+        "label": "Apply To Products",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pluginseo_pageTitleTruncateEnableForPages",
+        "label": "Apply To Pages",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pluginseo_pageTitleTruncateEnableForArticles",
+        "label": "Apply To Articles",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pluginseo_pageTitleTruncateEnableForBlogs",
+        "label": "Apply To Blogs",
+        "default": true
+      },
+      {
         "type": "text",
         "id": "pluginseo_pageTitleDefaultTemplate",
         "label": "Default",
@@ -143,6 +173,36 @@
         "type": "checkbox",
         "id": "pluginseo_metaDescriptionTemplateApplyToAll",
         "label": "Also apply templates to manually entered meta descriptions?",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pluginseo_metaDescriptionTruncateEnableForCollections",
+        "label": "Apply To Collections",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pluginseo_metaDescriptionTruncateEnableForProducts",
+        "label": "Apply To Products",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pluginseo_metaDescriptionTruncateEnableForPages",
+        "label": "Apply To Pages",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pluginseo_metaDescriptionTruncateEnableForArticles",
+        "label": "Apply To Articles",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pluginseo_metaDescriptionTruncateEnableForBlogs",
+        "label": "Apply To Blogs",
         "default": true
       },
       {
@@ -1104,10 +1164,10 @@
         "default": true
       },
       {
-        "type":"text",
-        "id":"cod_pincodes_url",
-        "label":"Pincodes file link",
-        "info":"Convert excel file into json from [here](https://beautifytools.com/excel-to-json-converter.php)"
+        "type": "text",
+        "id": "cod_pincodes_url",
+        "label": "Pincodes file link",
+        "info": "Convert excel file into json from [here](https:\/\/beautifytools.com\/excel-to-json-converter.php)"
       },
       {
         "id": "india_cod_hide_states",
@@ -1129,6 +1189,23 @@
         "id": "paymentstep_offer_banner",
         "label": "Banner",
         "type": "image_picker"
+      }
+    ]
+  },
+  {
+    "name": "Mix and Max product functionality",
+    "settings": [
+      {
+        "id": "enable_mix_and_max_product",
+        "label": "Enable Mix and Max",
+        "type": "checkbox",
+        "default" : true
+      },
+      {
+        "id": "mix_and_max_heading",
+        "label": "Heading",
+        "type": "text",
+        "default" : "Mix & Match Fabrics"
       }
     ]
   }

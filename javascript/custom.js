@@ -34,7 +34,6 @@ simply.miniHeightFunction = function(){
 // product Page Mini-Height function
 simply.productPageMiniHeight = function(){
   simply.miniHeight(".section.product-promotion-block .block-list__item .promo-block__heading",".section.product-promotion-block .block-list__item .promo-block__heading");
-  simply.miniHeight(".section.product-promotion-block .block-list__item .promo-block__content",".section.product-promotion-block .block-list__item .promo-block__content");
 };
 
 
@@ -87,6 +86,16 @@ simply.checkoutScrollEvent =function(){
     }
     else{
       $(".checkout-btn").removeClass("fixed-pos");
+    }
+    if($(".template-name-product").length > 0) {
+      if (scroll >= 50) {
+        $(".mobile-custom-checkout-button").addClass("scroll");
+        $("#shopify-section-product-template").css("padding-top", "55px");
+      }
+      else{
+        $(".mobile-custom-checkout-button").removeClass("scroll");
+        $("#shopify-section-product-template").css("padding-top", "0");
+      } 
     }
   });
 };

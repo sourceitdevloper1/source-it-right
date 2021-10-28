@@ -436,7 +436,7 @@
           {%- endif -%}
 
           <div class="header__action-item header__action-item--cart">
-            <a class="header__action-item-link header__cart-toggle" href="{{ routes.cart_url }}" {% if settings.cart_type == 'drawer' and template != 'cart' %}aria-controls="mini-cart" aria-expanded="false" data-action="toggle-mini-cart"{% endif %}>
+            <a class="header__action-item-link header__cart-toggle" href="{{ routes.cart_url }}" {% if settings.cart_type == 'drawer' and template != 'cart' %}aria-controls="mini-cart" aria-expanded="false" {% if settings.open_mini_cart %}data-action="toggle-mini-cart"{% endif %}{% endif %}>
               <div class="header__action-item-content">
                 <div class="header__cart-icon icon-state" aria-expanded="false">
                   <span class="icon-state__primary">

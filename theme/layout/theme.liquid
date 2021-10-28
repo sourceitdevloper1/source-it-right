@@ -3,7 +3,7 @@
 <html class="no-js" lang="{{ request.locale.iso_code }}">
 <head>
 
-{% include 'fb_pixelSets' %}
+
   <meta name="facebook-domain-verification" content="cuou50veghl6w0i2tjyn9proctughu" />
   <meta charset="utf-8"> 
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -11,7 +11,9 @@
   {% comment %} <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> {% endcomment %}
   <meta name="theme-color" content="{{ settings.accent_color }}">
   {% if template contains 'index' %}
-  <meta name="google-site-verification" content="CqVw63eS_hH9oYPMXaTicEbpsO42FYlBPHIIeE731sE" />
+  <meta name="google-site-verification" content="r4P8y05_8yb43a6CZLCtyAwDSFeiLksNxAzd7UGtPeU" />
+  <meta name="google-site-verification" content="zeIsssY911RlYZQRHI__qheZLqaTKIx20EGAAlYlMO8" />
+  <meta name="google-site-verification" content="_uLj2MIztPD1DK7P29r48beUCRYmRAnA_MHfYl6CHaI" />
   {% endif %}
   {%- capture seo_page_title -%}
   {%- if template contains 'search' -%}
@@ -211,5 +213,6 @@
     <script src="{{ 'bundle.js' | asset_url }}" defer></script>
     {% include 'elevar-body-end' %}
     
-  </body>
+  {% include 'adroll' %}
+</body>
 </html> 
